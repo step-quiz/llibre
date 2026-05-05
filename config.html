@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Config · Nou Tema · Step Quiz</title>
+  <title>Config · Step Quiz</title>
   <style>
     :root {
       --bg:       #f5f5f7;
@@ -15,518 +15,448 @@
       --red:      #ff3b30;
       --green:    #34c759;
       --orange:   #ff9500;
+      --purple:   #af52de;
       --divider:  rgba(0,0,0,.07);
       --sh:       0 2px 8px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
       --sh-md:    0 6px 24px rgba(0,0,0,.09), 0 2px 6px rgba(0,0,0,.05);
       --radius:   16px;
-      --ease:     cubic-bezier(.4,0,.2,1);
       --spring:   cubic-bezier(.34,1.56,.64,1);
+      --ease:     cubic-bezier(.4,0,.2,1);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
       min-height: 100%;
       font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      background: var(--bg); color: var(--text);
       -webkit-font-smoothing: antialiased;
     }
     @keyframes fade-up {
       from { opacity:0; transform:translateY(12px) scale(.99); }
       to   { opacity:1; transform:translateY(0) scale(1); }
     }
+    @keyframes fade-in { from { opacity:0; } to { opacity:1; } }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    .page {
-      max-width: 1060px;
-      margin: 0 auto;
-      padding: 48px 20px 80px;
+    .page { max-width: 1060px; margin: 0 auto; padding: 48px 20px 80px; }
+
+    /* Header */
+    .header { margin-bottom: 28px; animation: fade-up .5s var(--spring) both; }
+    .header h1 { font-size: 28px; font-weight: 700; letter-spacing: -.03em; margin-bottom: 6px; }
+    .header p  { font-size: 14px; color: var(--text-2); line-height: 1.5; }
+
+    /* ── CSV LOADER ── */
+    .csv-loader {
+      background: var(--surface); border-radius: var(--radius);
+      box-shadow: var(--sh-md); padding: 20px 24px; margin-bottom: 16px;
+      animation: fade-up .45s var(--spring) both; animation-delay: .04s;
+    }
+    .csv-loader-top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .csv-loader-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .07em; color: var(--text-3); white-space: nowrap;
+    }
+    .drop-zone {
+      flex: 1; min-width: 200px; height: 40px;
+      border: 1.5px dashed var(--divider); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      cursor: pointer; font-size: 13px; color: var(--text-2);
+      transition: border-color .15s, background .15s, color .15s;
+      position: relative; user-select: none;
+    }
+    .drop-zone:hover, .drop-zone.dragover {
+      border-color: var(--accent); background: rgba(0,113,227,.04); color: var(--accent);
+    }
+    .drop-zone input[type=file] {
+      position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+    }
+    .csv-loaded-badge {
+      display: none; align-items: center; gap: 8px;
+      background: rgba(52,199,89,.1); border-radius: 10px; padding: 8px 14px;
+      font-size: 13px; color: var(--green); font-weight: 500; flex: 1;
+    }
+    .csv-loaded-badge.visible { display: flex; }
+    .csv-clear-btn {
+      margin-left: auto; font-size: 11px; font-weight: 600;
+      padding: 3px 9px; border-radius: 7px; border: none;
+      background: rgba(255,59,48,.1); color: var(--red);
+      cursor: pointer; transition: background .12s;
+    }
+    .csv-clear-btn:hover { background: rgba(255,59,48,.2); }
+
+    /* Subject picker */
+    .subject-picker {
+      display: none; margin-top: 16px;
+      border-top: 1px solid var(--divider); padding-top: 16px;
+    }
+    .subject-picker.visible { display: block; animation: fade-in .25s var(--ease) both; }
+    .picker-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .07em; color: var(--text-3); margin-bottom: 10px;
+    }
+    .subject-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .subject-pill {
+      height: 34px; padding: 0 16px; border-radius: 980px;
+      border: 1.5px solid var(--divider); background: var(--bg);
+      font-size: 13px; font-weight: 500; color: var(--text-2); cursor: pointer;
+      transition: border-color .12s, color .12s, background .12s, transform .1s var(--spring);
+      white-space: nowrap;
+    }
+    .subject-pill:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,113,227,.04); }
+    .subject-pill.active { border-color: var(--accent); background: var(--accent); color: #fff; font-weight: 600; transform: scale(1.03); }
+    .subject-pill.new-pill { border-style: dashed; color: var(--text-3); }
+    .subject-pill.new-pill:hover { border-color: var(--accent); color: var(--accent); }
+    .subject-pill.new-pill.active { border-style: solid; }
+
+    /* Mode banner */
+    .mode-banner {
+      display: none; align-items: center; gap: 10px;
+      border-radius: 10px; padding: 10px 16px; margin-bottom: 14px;
+      font-size: 13px; font-weight: 500;
+    }
+    .mode-banner.edit-mode {
+      display: flex; background: rgba(175,82,222,.08); color: var(--purple);
+      border: 1px solid rgba(175,82,222,.18);
+      animation: fade-in .2s var(--ease);
+    }
+    .mode-banner.new-mode {
+      display: flex; background: rgba(0,113,227,.07); color: var(--accent);
+      border: 1px solid rgba(0,113,227,.15);
+      animation: fade-in .2s var(--ease);
     }
 
-    /* ── Header ── */
-    .header { margin-bottom: 32px; animation: fade-up .5s var(--spring) both; }
-    .header h1 {
-      font-size: 28px; font-weight: 700;
-      letter-spacing: -.03em;
-      margin-bottom: 6px;
-    }
-    .header p { font-size: 14px; color: var(--text-2); line-height: 1.5; }
-
-    /* ── Subject row ── */
+    /* Subject row */
     .subject-row {
       display: flex; align-items: center; gap: 14px;
-      background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--sh-md);
-      padding: 20px 24px;
-      margin-bottom: 16px;
-      animation: fade-up .45s var(--spring) both;
-      animation-delay: .05s;
+      background: var(--surface); border-radius: var(--radius);
+      box-shadow: var(--sh-md); padding: 20px 24px; margin-bottom: 16px;
+      animation: fade-up .45s var(--spring) both; animation-delay: .08s;
     }
     .subject-label {
-      font-size: 11px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .07em;
-      color: var(--text-3); white-space: nowrap;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .07em; color: var(--text-3); white-space: nowrap;
     }
     .subject-input {
-      flex: 1; height: 42px;
-      border: 1.5px solid var(--divider);
-      border-radius: 10px;
-      padding: 0 14px;
-      font-size: 16px; font-weight: 600;
-      font-family: inherit;
-      color: var(--text);
-      background: var(--bg);
-      outline: none;
+      flex: 1; height: 42px; border: 1.5px solid var(--divider); border-radius: 10px;
+      padding: 0 14px; font-size: 16px; font-weight: 600;
+      font-family: inherit; color: var(--text); background: var(--bg); outline: none;
       transition: border-color .15s;
     }
     .subject-input:focus { border-color: var(--accent); background: var(--surface); }
     .subject-input::placeholder { color: var(--text-3); font-weight: 400; font-size: 14px; }
-    .subject-preview {
-      font-size: 12px; color: var(--text-2);
-      white-space: nowrap;
-    }
+    .subject-preview { font-size: 12px; color: var(--text-2); white-space: nowrap; }
     .subject-preview code {
       background: var(--bg); border-radius: 5px;
       padding: 2px 6px; font-size: 11px; color: var(--accent);
     }
 
-    /* ── API key card ── */
+    /* API card */
     .api-card {
-      background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--sh);
-      padding: 16px 24px;
-      margin-bottom: 20px;
-      display: flex; align-items: center; gap: 12px;
-      flex-wrap: wrap;
-      animation: fade-up .45s var(--spring) both;
-      animation-delay: .1s;
+      background: var(--surface); border-radius: var(--radius); box-shadow: var(--sh);
+      padding: 14px 24px; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      animation: fade-up .45s var(--spring) both; animation-delay: .12s;
     }
     .api-card .card-title { margin-bottom: 0; white-space: nowrap; }
     .api-input {
-      flex: 1; min-width: 240px;
-      height: 36px;
-      border: 1.5px solid var(--divider);
-      border-radius: 8px;
-      padding: 0 12px;
-      font-size: 13px; font-family: monospace;
-      color: var(--text);
-      background: var(--bg);
-      outline: none;
-      transition: border-color .15s;
+      flex: 1; min-width: 240px; height: 36px;
+      border: 1.5px solid var(--divider); border-radius: 8px;
+      padding: 0 12px; font-size: 13px; font-family: monospace;
+      color: var(--text); background: var(--bg); outline: none; transition: border-color .15s;
     }
     .api-input:focus { border-color: var(--accent); }
     .api-input::placeholder { font-family: -apple-system, sans-serif; color: var(--text-3); }
-    .api-badge {
-      font-size: 11px; font-weight: 600;
-      padding: 4px 10px; border-radius: 980px;
-      white-space: nowrap;
-    }
+    .api-badge { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 980px; white-space: nowrap; }
     .api-badge.free   { background: rgba(255,149,0,.12); color: var(--orange); }
-    .api-badge.active { background: rgba(52,199,89,.12);  color: var(--green); }
+    .api-badge.active { background: rgba(52,199,89,.12); color: var(--green); }
 
-    /* ── 3-col grid ── */
+    /* Grid */
     .grid {
-      display: grid;
-      grid-template-columns: 280px 1fr 1fr;
-      gap: 16px;
-      align-items: start;
-      animation: fade-up .45s var(--spring) both;
-      animation-delay: .15s;
+      display: grid; grid-template-columns: 280px 1fr 1fr;
+      gap: 16px; align-items: start;
+      animation: fade-up .45s var(--spring) both; animation-delay: .16s;
     }
-    @media (max-width: 800px) {
-      .grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
 
-    /* ── Card ── */
+    /* Card */
     .card {
-      background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--sh-md);
-      padding: 18px 18px 20px;
+      background: var(--surface); border-radius: var(--radius);
+      box-shadow: var(--sh-md); padding: 18px 18px 20px;
     }
-    .card + .card { margin-top: 12px; }
     .card-title {
-      font-size: 10px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .07em;
-      color: var(--text-3); margin-bottom: 12px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .07em; color: var(--text-3); margin-bottom: 12px;
       display: flex; align-items: center; gap: 7px;
     }
-    .dot {
-      width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
-    }
+    .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
     .dot-pdf    { background: #6e6e73; }
     .dot-theory { background: #0071e3; }
     .dot-solved { background: #30d158; }
     .dot-lock   { background: #ff9500; }
     .dot-quiz   { background: #ff375f; }
 
-    /* ── URL input ── */
+    /* URL input */
     .url-input {
-      width: 100%;
-      height: 38px;
-      border: 1.5px solid var(--divider);
-      border-radius: 9px;
-      padding: 0 12px;
-      font-size: 13px;
-      font-family: inherit;
-      color: var(--text);
-      background: var(--bg);
-      outline: none;
-      transition: border-color .15s;
+      width: 100%; height: 38px; border: 1.5px solid var(--divider); border-radius: 9px;
+      padding: 0 12px; font-size: 13px; font-family: inherit;
+      color: var(--text); background: var(--bg); outline: none; transition: border-color .15s;
     }
     .url-input:focus { border-color: var(--accent); background: var(--surface); }
     .url-input::placeholder { color: var(--text-3); }
 
-    /* ── Step Quiz link list ── */
-    .sq-item {
-      display: flex; align-items: center; gap: 8px;
-      margin-bottom: 8px;
-    }
+    /* Step Quiz */
+    .sq-item { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
     .sq-item .url-input { flex: 1; }
     .sq-remove {
-      width: 28px; height: 28px;
-      border: none; background: transparent;
-      color: var(--text-3); font-size: 16px;
-      cursor: pointer; border-radius: 6px;
+      width: 28px; height: 28px; border: none; background: transparent;
+      color: var(--text-3); font-size: 16px; cursor: pointer; border-radius: 6px;
       display: flex; align-items: center; justify-content: center;
-      transition: background .12s, color .12s;
-      flex-shrink: 0;
+      transition: background .12s, color .12s; flex-shrink: 0;
     }
     .sq-remove:hover { background: rgba(255,59,48,.1); color: var(--red); }
     .add-btn {
-      font-size: 12px; font-weight: 600;
-      padding: 6px 12px; border-radius: 8px;
-      border: 1.5px dashed var(--divider);
-      background: transparent; color: var(--text-2);
+      font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 8px;
+      border: 1.5px dashed var(--divider); background: transparent; color: var(--text-2);
       cursor: pointer; width: 100%; margin-top: 4px;
       transition: border-color .12s, color .12s, background .12s;
     }
     .add-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,113,227,.04); }
 
-    /* ── Video section ── */
-    .playlist-row {
-      display: flex; gap: 8px; margin-bottom: 10px;
-    }
+    /* Video section */
+    .playlist-row { display: flex; gap: 8px; margin-bottom: 10px; }
     .playlist-input {
-      flex: 1; height: 36px;
-      border: 1.5px solid var(--divider);
-      border-radius: 9px;
-      padding: 0 11px;
-      font-size: 12px; font-family: inherit;
-      color: var(--text); background: var(--bg);
-      outline: none; transition: border-color .15s;
+      flex: 1; height: 36px; border: 1.5px solid var(--divider); border-radius: 9px;
+      padding: 0 11px; font-size: 12px; font-family: inherit;
+      color: var(--text); background: var(--bg); outline: none; transition: border-color .15s;
     }
     .playlist-input:focus { border-color: var(--accent); background: var(--surface); }
     .playlist-input::placeholder { color: var(--text-3); font-size: 11px; }
     .fetch-btn {
-      height: 36px; padding: 0 14px;
-      background: var(--accent); color: #fff;
-      border: none; border-radius: 9px;
-      font-size: 12px; font-weight: 600;
+      height: 36px; padding: 0 14px; background: var(--accent); color: #fff;
+      border: none; border-radius: 9px; font-size: 12px; font-weight: 600;
       cursor: pointer; white-space: nowrap;
       transition: background .15s, transform .12s var(--spring);
-      touch-action: manipulation;
     }
     .fetch-btn:hover { background: #005bbf; }
     .fetch-btn:active { transform: scale(.97); }
     .fetch-btn:disabled { background: var(--text-3); cursor: default; }
-
-    /* Manual add row */
-    .manual-row {
-      display: flex; gap: 6px; margin-bottom: 8px;
-    }
+    .manual-row { display: flex; gap: 6px; margin-bottom: 8px; }
     .manual-row .playlist-input { font-size: 11px; }
     .manual-btn {
-      height: 32px; padding: 0 10px;
-      background: var(--bg); color: var(--text-2);
-      border: 1.5px solid var(--divider); border-radius: 8px;
-      font-size: 11px; font-weight: 600;
-      cursor: pointer; white-space: nowrap;
-      transition: border-color .12s, color .12s;
+      height: 32px; padding: 0 10px; background: var(--bg); color: var(--text-2);
+      border: 1.5px solid var(--divider); border-radius: 8px; font-size: 11px; font-weight: 600;
+      cursor: pointer; white-space: nowrap; transition: border-color .12s, color .12s;
     }
     .manual-btn:hover { border-color: var(--accent); color: var(--accent); }
     .manual-btn:disabled { opacity: .5; cursor: default; }
-
     .v-status {
-      font-size: 11px; color: var(--text-2);
-      display: flex; align-items: center; gap: 6px;
-      min-height: 18px; margin-bottom: 6px;
+      font-size: 11px; color: var(--text-2); display: flex; align-items: center;
+      gap: 6px; min-height: 18px; margin-bottom: 6px;
     }
     .v-status .spinner {
-      width: 12px; height: 12px;
-      border: 1.5px solid var(--divider);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin .6s linear infinite;
-      flex-shrink: 0;
+      width: 12px; height: 12px; border: 1.5px solid var(--divider);
+      border-top-color: var(--accent); border-radius: 50%;
+      animation: spin .6s linear infinite; flex-shrink: 0;
     }
     .v-status.err { color: var(--red); }
     .v-status.ok  { color: var(--green); }
-
-    /* Video list */
-    .video-list { display: flex; flex-direction: column; gap: 4px; max-height: 260px; overflow-y: auto; }
+    .video-list {
+      display: flex; flex-direction: column; gap: 4px;
+      max-height: 260px; overflow-y: auto;
+    }
     .video-list::-webkit-scrollbar { width: 4px; }
     .video-list::-webkit-scrollbar-thumb { background: var(--divider); border-radius: 2px; }
-
     .vi {
-      display: flex; align-items: center; gap: 7px;
-      background: var(--bg); border-radius: 8px;
-      padding: 5px 7px 5px 6px;
-      border: 1.5px solid transparent;
+      display: flex; align-items: center; gap: 7px; background: var(--bg);
+      border-radius: 8px; padding: 5px 7px 5px 6px; border: 1.5px solid transparent;
       cursor: default; user-select: none;
       transition: border-color .1s, box-shadow .1s, opacity .12s;
-      draggable: true;
     }
     .vi.selected { background: rgba(0,113,227,.05); border-color: rgba(0,113,227,.2); }
     .vi.dragging { opacity: .35; }
     .vi.drag-over { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(0,113,227,.12); }
-
     .vi-handle { cursor: grab; color: var(--text-3); padding: 2px 1px; flex-shrink: 0; touch-action: none; }
     .vi-handle:active { cursor: grabbing; }
     .vi-handle svg { display: block; }
-
     .vi-check {
-      width: 16px; height: 16px;
-      border: 1.5px solid var(--text-3);
-      border-radius: 4px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
+      width: 16px; height: 16px; border: 1.5px solid var(--text-3); border-radius: 4px;
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
       cursor: pointer; transition: background .1s, border-color .1s;
     }
     .vi.selected .vi-check { background: var(--accent); border-color: var(--accent); }
     .vi-check svg { display: none; }
     .vi.selected .vi-check svg { display: block; }
-
-    .vi-thumb {
-      width: 52px; height: 29px; border-radius: 4px;
-      background: var(--divider); flex-shrink: 0; overflow: hidden;
-    }
+    .vi-thumb { width: 52px; height: 29px; border-radius: 4px; background: var(--divider); flex-shrink: 0; overflow: hidden; }
     .vi-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
     .vi-info { flex: 1; min-width: 0; }
-    .vi-title {
-      font-size: 11px; font-weight: 500; color: var(--text);
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
+    .vi-title { font-size: 11px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .vi-id { font-size: 10px; color: var(--text-3); font-family: monospace; }
-
-    .vi-order {
-      width: 18px; text-align: right;
-      font-size: 10px; font-weight: 600; color: var(--accent);
-      flex-shrink: 0;
-    }
-
-    /* Controls */
-    .list-controls {
-      display: flex; align-items: center; gap: 6px;
-      margin: 8px 0 6px; flex-wrap: wrap;
-    }
+    .vi-order { width: 18px; text-align: right; font-size: 10px; font-weight: 600; color: var(--accent); flex-shrink: 0; }
+    .list-controls { display: flex; align-items: center; gap: 6px; margin: 8px 0 6px; flex-wrap: wrap; }
     .sel-hint { font-size: 11px; color: var(--text-2); flex: 1; }
     .ctrl-btn {
-      font-size: 11px; font-weight: 600;
-      padding: 4px 9px; border-radius: 980px;
-      border: none; cursor: pointer;
-      background: rgba(0,0,0,.06); color: var(--text-2);
-      transition: background .12s; touch-action: manipulation;
+      font-size: 11px; font-weight: 600; padding: 4px 9px; border-radius: 980px;
+      border: none; cursor: pointer; background: rgba(0,0,0,.06); color: var(--text-2);
+      transition: background .12s;
     }
     .ctrl-btn:hover { background: rgba(0,0,0,.1); color: var(--text); }
-
-    /* Video output box */
     .v-output {
-      background: var(--bg);
-      border-radius: 8px;
-      padding: 8px 10px;
-      font-size: 10px; font-family: monospace;
-      color: var(--text-2);
+      background: var(--bg); border-radius: 8px; padding: 8px 10px;
+      font-size: 10px; font-family: monospace; color: var(--text-2);
       white-space: pre-wrap; word-break: break-all;
-      max-height: 60px; overflow-y: auto;
-      border: 1.5px solid var(--divider);
-      margin-top: 8px;
-      line-height: 1.4;
+      max-height: 60px; overflow-y: auto; border: 1.5px solid var(--divider);
+      margin-top: 8px; line-height: 1.4;
     }
     .v-output::-webkit-scrollbar { width: 3px; }
     .v-output::-webkit-scrollbar-thumb { background: var(--divider); }
-    .v-copy-row {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-top: 5px;
-    }
+    .v-copy-row { display: flex; align-items: center; justify-content: space-between; margin-top: 5px; }
     .v-count { font-size: 10px; color: var(--text-3); }
     .v-copy {
-      font-size: 11px; font-weight: 600;
-      padding: 4px 10px; border-radius: 7px;
-      border: none; background: rgba(0,113,227,.1);
-      color: var(--accent); cursor: pointer;
-      transition: background .12s;
+      font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 7px;
+      border: none; background: rgba(0,113,227,.1); color: var(--accent); cursor: pointer; transition: background .12s;
     }
     .v-copy:hover { background: rgba(0,113,227,.18); }
     .v-copy.ok { background: rgba(52,199,89,.1); color: var(--green); }
 
-    /* ── CSV Output card ── */
+    /* Output card */
     .output-card {
-      background: var(--surface);
-      border-radius: var(--radius);
-      box-shadow: var(--sh-md);
-      padding: 24px;
-      margin-top: 20px;
-      animation: fade-up .45s var(--spring) both;
-      animation-delay: .2s;
+      background: var(--surface); border-radius: var(--radius);
+      box-shadow: var(--sh-md); padding: 24px; margin-top: 20px;
+      animation: fade-up .45s var(--spring) both; animation-delay: .2s;
     }
     .output-card .card-title { margin-bottom: 16px; }
     .csv-preview {
-      background: var(--bg);
-      border-radius: 10px;
-      padding: 14px 16px;
-      font-family: 'SF Mono', 'Menlo', monospace;
-      font-size: 11px;
-      color: var(--text-2);
-      white-space: pre-wrap;
-      word-break: break-all;
-      line-height: 1.6;
-      border: 1.5px solid var(--divider);
-      max-height: 120px;
-      overflow-y: auto;
-      margin-bottom: 12px;
+      background: var(--bg); border-radius: 10px; padding: 14px 16px;
+      font-family: 'SF Mono', 'Menlo', monospace; font-size: 11px; color: var(--text-2);
+      white-space: pre-wrap; word-break: break-all; line-height: 1.6;
+      border: 1.5px solid var(--divider); max-height: 120px; overflow-y: auto; margin-bottom: 14px;
     }
     .csv-preview::-webkit-scrollbar { width: 4px; }
     .csv-preview::-webkit-scrollbar-thumb { background: var(--divider); }
-
-    .copy-row { display: flex; align-items: center; gap: 12px; }
-    .copy-btn {
-      height: 40px; padding: 0 24px;
-      background: var(--accent); color: #fff;
-      border: none; border-radius: 10px;
-      font-size: 14px; font-weight: 600;
-      cursor: pointer;
+    .action-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .action-btn {
+      height: 42px; padding: 0 22px; border: none; border-radius: 11px;
+      font-size: 14px; font-weight: 600; cursor: pointer;
       transition: background .15s, transform .12s var(--spring);
+      white-space: nowrap;
     }
-    .copy-btn:hover { background: #005bbf; }
-    .copy-btn:active { transform: scale(.97); }
-    .copy-btn.ok { background: var(--green); }
-    .copy-hint { font-size: 12px; color: var(--text-2); line-height: 1.5; }
-    .copy-hint strong { color: var(--text); }
+    .action-btn:active { transform: scale(.97); }
+    .action-btn.primary { background: var(--accent); color: #fff; }
+    .action-btn.primary:hover { background: #005bbf; }
+    .action-btn.primary.ok { background: var(--green); }
+    .action-btn.download {
+      background: rgba(175,82,222,.1); color: var(--purple);
+      border: 1.5px solid rgba(175,82,222,.2);
+    }
+    .action-btn.download:hover { background: rgba(175,82,222,.18); }
+    .action-btn.download.ok { background: rgba(52,199,89,.1); color: var(--green); border-color: rgba(52,199,89,.3); }
+    .action-hint { font-size: 12px; color: var(--text-2); line-height: 1.5; }
+    .action-hint strong { color: var(--text); }
 
-    /* ── Field note ── */
-    .field-note {
-      font-size: 11px; color: var(--text-3);
-      margin-bottom: 8px; line-height: 1.4;
-    }
-    .field-gap { margin-bottom: 10px; }
-
-    /* ── Completeness dots ── */
-    .status-dots {
-      display: flex; gap: 6px; margin-top: 10px;
-    }
-    .sd {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--divider); flex-shrink: 0;
-      transition: background .2s;
-    }
-    .sd.done { background: var(--green); }
-    .sd.partial { background: var(--orange); }
-
-    /* ── card-title ── */
-    .card-title {
-      font-size: 10px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .07em;
-      color: var(--text-3); margin-bottom: 12px;
-    }
+    .field-note { font-size: 11px; color: var(--text-3); margin-bottom: 8px; line-height: 1.4; }
   </style>
 </head>
 <body>
 <div class="page">
 
-  <!-- Header -->
   <div class="header">
-    <h1>Nou tema</h1>
-    <p>Configura les dades del nou tema i genera la fila CSV per afegir a <code style="background:var(--bg);border-radius:5px;padding:1px 6px;font-size:12px;color:var(--accent)">data-classroom.csv</code>.</p>
+    <h1>Config · Step Quiz</h1>
+    <p>Carrega el CSV per editar un tema existent, o emplena el formulari directament per crear-ne un de nou.</p>
   </div>
+
+  <!-- ══ CSV LOADER ══ -->
+  <div class="csv-loader">
+    <div class="csv-loader-top">
+      <span class="csv-loader-label">CSV</span>
+
+      <div class="drop-zone" id="drop-zone"
+           ondragover="evDragOver(event)" ondragleave="evDragLeave(event)" ondrop="evFileDrop(event)">
+        <input type="file" accept=".csv,text/csv" onchange="evFileInput(event)" />
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M8 1v9M5 7l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 11v2a1 1 0 001 1h10a1 1 0 001-1v-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span>Carrega <strong>data-classroom.csv</strong> o arrossega aquí</span>
+      </div>
+
+      <div class="csv-loaded-badge" id="csv-loaded-badge">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
+          <polyline points="5 8 7 10.5 11 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span id="csv-loaded-text">—</span>
+        <button class="csv-clear-btn" onclick="clearCsv()">✕ Descarta</button>
+      </div>
+    </div>
+
+    <div class="subject-picker" id="subject-picker">
+      <div class="picker-label">Quin tema vols editar?</div>
+      <div class="subject-pills" id="subject-pills"></div>
+    </div>
+  </div>
+
+  <!-- Mode banner -->
+  <div class="mode-banner" id="mode-banner"></div>
 
   <!-- Subject -->
   <div class="subject-row">
     <span class="subject-label">Tema</span>
-    <input
-      type="text"
-      class="subject-input"
-      id="subject-input"
-      placeholder="p. ex. funcions, estadistica, complexos…"
-      oninput="onSubjectChange()"
-      autocomplete="off"
-      spellcheck="false"
-    />
-    <span class="subject-preview" id="subject-preview">
-      URL: <code>?subject=…</code>
-    </span>
+    <input type="text" class="subject-input" id="subject-input"
+           placeholder="p. ex. funcions, estadistica, complexos…"
+           oninput="onSubjectChange()" autocomplete="off" spellcheck="false" />
+    <span class="subject-preview" id="subject-preview">URL: <code>?subject=…</code></span>
   </div>
 
-  <!-- API key (shared) -->
+  <!-- API key -->
   <div class="api-card">
     <span class="card-title" style="margin-bottom:0">YouTube API Key</span>
-    <input
-      type="text"
-      class="api-input"
-      id="api-key-input"
-      placeholder="Opcional · AIzaSy… (per obtenir totes les pàgines d'una playlist)"
-      oninput="updateApiBadge()"
-      autocomplete="off"
-      spellcheck="false"
-    />
+    <input type="text" class="api-input" id="api-key-input"
+           placeholder="Opcional · AIzaSy… (per obtenir totes les pàgines de la playlist)"
+           oninput="updateApiBadge()" autocomplete="off" spellcheck="false" />
     <span class="api-badge free" id="api-badge">Sense API</span>
   </div>
 
   <!-- 3-col grid -->
   <div class="grid">
-
-    <!-- ── Left column ── -->
     <div>
-      <!-- Apunts i Exercicis -->
-      <div class="card" id="card-apunts">
+      <div class="card">
         <div class="card-title"><span class="dot dot-pdf"></span> Apunts i Exercicis</div>
-        <div class="field-note">PDF de Bogdan Crintea (Google Drive o enllaç directe)</div>
+        <div class="field-note">PDF de Bogdan Crintea (Google Drive o directe)</div>
         <input type="url" class="url-input" id="apunts-input"
                placeholder="https://drive.google.com/file/d/…/view"
-               oninput="updateCsv()" />
+               oninput="updateCsvPreview()" />
       </div>
 
-      <!-- Step Quiz -->
-      <div class="card" id="card-sq" style="margin-top:12px">
+      <div class="card" style="margin-top:12px">
         <div class="card-title"><span class="dot dot-quiz"></span> Exercicis Step Quiz</div>
-        <div class="field-note">Un o més enllaços (un per línia). Separats per <code style="font-size:10px;background:var(--bg);border-radius:4px;padding:1px 5px">|</code> al CSV.</div>
+        <div class="field-note">Un o més URLs. Separats per <code style="font-size:10px;background:var(--bg);border-radius:4px;padding:1px 5px">|</code> al CSV.</div>
         <div id="sq-list"></div>
         <button class="add-btn" onclick="addSqLink()">+ Afegir URL</button>
       </div>
 
-      <!-- Material Complementari -->
-      <div class="card" id="card-material" style="margin-top:12px">
+      <div class="card" style="margin-top:12px">
         <div class="card-title"><span class="dot dot-lock"></span> Material Complementari</div>
-        <div class="field-note">Google Drive o enllaç directe (opcional)</div>
+        <div class="field-note">Google Drive o directe (opcional)</div>
         <input type="url" class="url-input" id="material-input"
                placeholder="https://drive.google.com/file/d/…/view"
-               oninput="updateCsv()" />
+               oninput="updateCsvPreview()" />
       </div>
     </div>
 
-    <!-- ── Center column: Teoria ── -->
     <div class="card">
       <div class="card-title"><span class="dot dot-theory"></span> Vídeos de Teoria · Píldoras Matemáticas</div>
-
-      <!-- Playlist fetch -->
       <div class="playlist-row">
         <input type="url" class="playlist-input" id="teoria-pl-input"
                placeholder="URL de la playlist de YouTube…"
                onkeydown="if(event.key==='Enter') fetchSection('teoria')" />
         <button class="fetch-btn" id="teoria-fetch-btn" onclick="fetchSection('teoria')">Carrega</button>
       </div>
-
-      <!-- Manual add -->
       <div class="manual-row">
         <input type="text" class="playlist-input" id="teoria-manual-input"
                placeholder="URL o ID d'un vídeo concret"
                onkeydown="if(event.key==='Enter') addManualVideo('teoria')" />
         <button class="manual-btn" id="teoria-manual-btn" onclick="addManualVideo('teoria')">Afegeix</button>
       </div>
-
       <div class="v-status" id="teoria-status"></div>
-
       <div id="teoria-video-section" style="display:none">
         <div class="list-controls">
           <span class="sel-hint" id="teoria-sel-hint">0 vídeos</span>
@@ -535,7 +465,6 @@
           <button class="ctrl-btn" onclick="clearAllVideos('teoria')">Esborra tot</button>
         </div>
         <div class="video-list" id="teoria-video-list"></div>
-
         <div class="v-copy-row">
           <span class="v-count" id="teoria-count"></span>
           <button class="v-copy" id="teoria-copy-btn" onclick="copySection('teoria')">Copia fragment</button>
@@ -544,28 +473,21 @@
       </div>
     </div>
 
-    <!-- ── Right column: Problemes ── -->
     <div class="card">
       <div class="card-title"><span class="dot dot-solved"></span> Problemes Resolts · Matemàtiques amb Bogdan</div>
-
-      <!-- Playlist fetch -->
       <div class="playlist-row">
         <input type="url" class="playlist-input" id="problemes-pl-input"
                placeholder="URL de la playlist de YouTube…"
                onkeydown="if(event.key==='Enter') fetchSection('problemes')" />
         <button class="fetch-btn" id="problemes-fetch-btn" onclick="fetchSection('problemes')">Carrega</button>
       </div>
-
-      <!-- Manual add -->
       <div class="manual-row">
         <input type="text" class="playlist-input" id="problemes-manual-input"
                placeholder="URL o ID d'un vídeo concret"
                onkeydown="if(event.key==='Enter') addManualVideo('problemes')" />
         <button class="manual-btn" id="problemes-manual-btn" onclick="addManualVideo('problemes')">Afegeix</button>
       </div>
-
       <div class="v-status" id="problemes-status"></div>
-
       <div id="problemes-video-section" style="display:none">
         <div class="list-controls">
           <span class="sel-hint" id="problemes-sel-hint">0 vídeos</span>
@@ -574,7 +496,6 @@
           <button class="ctrl-btn" onclick="clearAllVideos('problemes')">Esborra tot</button>
         </div>
         <div class="video-list" id="problemes-video-list"></div>
-
         <div class="v-copy-row">
           <span class="v-count" id="problemes-count"></span>
           <button class="v-copy" id="problemes-copy-btn" onclick="copySection('problemes')">Copia fragment</button>
@@ -582,489 +503,515 @@
         <div class="v-output" id="problemes-output">—</div>
       </div>
     </div>
+  </div>
 
-  </div><!-- /grid -->
-
-  <!-- CSV Output -->
+  <!-- Output -->
   <div class="output-card">
-    <div class="card-title">Fila CSV generada</div>
+    <div class="card-title" id="output-title">Fila CSV</div>
     <div class="csv-preview" id="csv-output">—</div>
-    <div class="copy-row">
-      <button class="copy-btn" id="copy-csv-btn" onclick="copyCsv()">Copia fila</button>
-      <span class="copy-hint">
-        Afegeix aquesta fila al final de
-        <strong>data-classroom.csv</strong>
-        i puja el fitxer actualitzat.
+    <div class="action-row">
+      <button class="action-btn primary" id="copy-csv-btn" onclick="copyCsv()">Copia fila</button>
+      <button class="action-btn download" id="download-btn" onclick="downloadFullCsv()" style="display:none">
+        ⬇ Desa CSV complet
+      </button>
+      <span class="action-hint" id="action-hint">
+        Afegeix aquesta fila al final de <strong>data-classroom.csv</strong>.
       </span>
     </div>
   </div>
 
-</div><!-- /page -->
+</div>
 
 <script>
-/* ══════════════════════════════════════════════════
-   STATE
-══════════════════════════════════════════════════ */
+/* ══ STATE ══ */
 const sections = {
   teoria:    { videos: [], selected: new Set(), dragSrc: null },
   problemes: { videos: [], selected: new Set(), dragSrc: null },
 };
+let loadedRows  = [];
+let csvHeaders  = [];
+let csvRawLines = [];
+let editingIdx  = -1;
+let sqCount     = 0;
 
-/* ══════════════════════════════════════════════════
-   SUBJECT
-══════════════════════════════════════════════════ */
-function onSubjectChange() {
-  const raw = document.getElementById('subject-input').value.trim().toLowerCase();
-  const slug = raw.replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-  const preview = document.getElementById('subject-preview');
-  preview.innerHTML = slug
-    ? `URL: <code>?subject=${slug}</code>`
-    : `URL: <code>?subject=…</code>`;
-  updateCsv();
+/* ══ CSV PARSER (RFC 4180) ══ */
+function parseCSVRow(line) {
+  const fields = []; let cur = '', inQ = false, i = 0;
+  while (i < line.length) {
+    const ch = line[i];
+    if (inQ) {
+      if (ch === '"' && line[i+1] === '"') { cur += '"'; i += 2; }
+      else if (ch === '"') { inQ = false; i++; }
+      else { cur += ch; i++; }
+    } else {
+      if      (ch === '"') { inQ = true; i++; }
+      else if (ch === ',') { fields.push(cur); cur = ''; i++; }
+      else { cur += ch; i++; }
+    }
+  }
+  fields.push(cur);
+  return fields;
 }
 
-/* ══════════════════════════════════════════════════
-   API BADGE
-══════════════════════════════════════════════════ */
-function updateApiBadge() {
-  const key   = document.getElementById('api-key-input').value.trim();
-  const badge = document.getElementById('api-badge');
-  if (key) {
-    badge.textContent = '✓ API activa';
-    badge.className   = 'api-badge active';
+function parseCSVText(text) {
+  const lines = text.replace(/\r\n/g,'\n').replace(/\r/g,'\n').split('\n').filter(l => l.trim());
+  if (lines.length < 2) return { headers: [], rows: [], lines };
+  const headers = parseCSVRow(lines[0]);
+  const rows = lines.slice(1).map(line => {
+    const f = parseCSVRow(line), obj = {};
+    headers.forEach((h,i) => { obj[h] = f[i] ?? ''; });
+    return obj;
+  });
+  return { headers, rows, lines };
+}
+
+/* ══ CSV SERIALISER ══ */
+function csvField(val) {
+  if (!val) return '';
+  if (/[,"\r\n]/.test(val)) return '"' + val.replace(/"/g,'""') + '"';
+  return val;
+}
+function buildCSVLine(subject, apunts, teoria, problemes, material, sq) {
+  return [csvField(subject), csvField(apunts), csvField(teoria),
+          csvField(problemes), csvField(material), csvField(sq)].join(',');
+}
+
+/* ══ FILE LOADING ══ */
+function evDragOver(e) { e.preventDefault(); document.getElementById('drop-zone').classList.add('dragover'); }
+function evDragLeave()  { document.getElementById('drop-zone').classList.remove('dragover'); }
+function evFileDrop(e)  { e.preventDefault(); evDragLeave(); const f = e.dataTransfer.files[0]; if (f) handleCsvFile(f); }
+function evFileInput(e) { const f = e.target.files[0]; if (f) handleCsvFile(f); }
+
+function handleCsvFile(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    const { headers, rows, lines } = parseCSVText(e.target.result);
+    if (!headers.length) { alert('El fitxer CSV sembla buit o invàlid.'); return; }
+    loadedRows = rows; csvHeaders = headers; csvRawLines = lines;
+    document.getElementById('drop-zone').style.display = 'none';
+    const badge = document.getElementById('csv-loaded-badge');
+    badge.classList.add('visible');
+    document.getElementById('csv-loaded-text').textContent =
+      `${file.name} · ${rows.length} tema${rows.length!==1?'s':''} carregat${rows.length!==1?'s':''}`;
+    renderSubjectPicker();
+  };
+  reader.readAsText(file, 'UTF-8');
+}
+
+function clearCsv() {
+  loadedRows = []; csvHeaders = []; csvRawLines = []; editingIdx = -1;
+  document.getElementById('csv-loaded-badge').classList.remove('visible');
+  const dz = document.getElementById('drop-zone');
+  dz.style.display = ''; dz.querySelector('input[type=file]').value = '';
+  document.getElementById('subject-picker').classList.remove('visible');
+  setMode(-1); clearForm();
+}
+
+/* ══ SUBJECT PICKER ══ */
+function renderSubjectPicker() {
+  const container = document.getElementById('subject-pills');
+  container.innerHTML = '';
+  loadedRows.forEach((row, idx) => {
+    const pill = document.createElement('button');
+    pill.className = 'subject-pill'; pill.dataset.idx = idx;
+    pill.textContent = row.subject || `(fila ${idx+1})`;
+    pill.onclick = () => selectSubject(idx);
+    container.appendChild(pill);
+  });
+  const newPill = document.createElement('button');
+  newPill.className = 'subject-pill new-pill'; newPill.id = 'new-pill';
+  newPill.textContent = '+ Nou tema'; newPill.onclick = () => selectSubject(-1);
+  container.appendChild(newPill);
+  document.getElementById('subject-picker').classList.add('visible');
+}
+
+function selectSubject(idx) {
+  document.querySelectorAll('.subject-pill').forEach(p => p.classList.remove('active'));
+  const target = idx === -1
+    ? document.getElementById('new-pill')
+    : document.querySelector(`.subject-pill[data-idx="${idx}"]`);
+  target?.classList.add('active');
+  editingIdx = idx;
+  setMode(idx);
+  if (idx === -1) clearForm();
+  else loadSubjectIntoForm(loadedRows[idx]);
+}
+
+/* ══ MODE BANNER & BUTTONS ══ */
+function setMode(idx) {
+  const banner     = document.getElementById('mode-banner');
+  const downloadBtn= document.getElementById('download-btn');
+  const actionHint = document.getElementById('action-hint');
+  const outputTitle= document.getElementById('output-title');
+
+  if (idx >= 0) {
+    const name = loadedRows[idx].subject || `fila ${idx+1}`;
+    banner.className = 'mode-banner edit-mode';
+    banner.innerHTML = `<svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+      <path d="M11.5 2.5l2 2L6 12l-3 1 1-3 7.5-7.5z" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Mode: <strong>Editar «${escHtml(name)}»</strong> — es sobreescriurà la fila existent.`;
+    downloadBtn.style.display = ''; downloadBtn.textContent = '⬇ Desa CSV complet';
+    actionHint.innerHTML = 'Prem <strong>Desa CSV complet</strong> per descarregar el fitxer actualitzat.';
+    outputTitle.textContent = `Fila «${name}»`;
+  } else if (loadedRows.length > 0) {
+    banner.className = 'mode-banner new-mode';
+    banner.innerHTML = `<svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+      <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M8 5v6M5 8h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Mode: <strong>Nou tema</strong> — s'afegirà al final del CSV carregat.`;
+    downloadBtn.style.display = ''; downloadBtn.textContent = '⬇ Desa CSV complet';
+    actionHint.innerHTML = 'Prem <strong>Desa CSV complet</strong> per descarregar el fitxer actualitzat.';
+    outputTitle.textContent = 'Nova fila CSV';
   } else {
-    badge.textContent = 'Sense API';
-    badge.className   = 'api-badge free';
+    banner.className = 'mode-banner'; // hidden
+    downloadBtn.style.display = 'none';
+    actionHint.innerHTML = 'Afegeix aquesta fila al final de <strong>data-classroom.csv</strong>.';
+    outputTitle.textContent = 'Fila CSV';
   }
 }
 
-/* ══════════════════════════════════════════════════
-   CORS PROXIES (same as links-config)
-══════════════════════════════════════════════════ */
+/* ══ LOAD SUBJECT INTO FORM ══ */
+function parseVideoStr(str) {
+  if (!str) return [];
+  return str.split('|').map(part => {
+    const c = part.indexOf(':');
+    return c < 0 ? null : { id: part.slice(0, c).trim(), title: part.slice(c+1).trim() };
+  }).filter(v => v && v.id);
+}
+
+function loadSubjectIntoForm(row) {
+  document.getElementById('subject-input').value = row.subject || '';
+  onSubjectChange();
+  document.getElementById('apunts-input').value   = row['apunts-bogdan'] || '';
+  document.getElementById('material-input').value = row['material-complementari'] || '';
+
+  // Step Quiz
+  document.getElementById('sq-list').innerHTML = ''; sqCount = 0;
+  const sqLinks = (row['exercicis-stepquiz'] || '').split('|').map(s=>s.trim()).filter(Boolean);
+  if (sqLinks.length) sqLinks.forEach(url => addSqLink(url));
+  else addSqLink();
+
+  // Videos
+  loadVideosIntoSection('teoria',    parseVideoStr(row['teoria-pildoras']  || ''));
+  loadVideosIntoSection('problemes', parseVideoStr(row['problemes-bogdan'] || ''));
+
+  updateCsvPreview();
+}
+
+function loadVideosIntoSection(sec, vids) {
+  clearAllVideos(sec, true);
+  if (!vids.length) return;
+  sections[sec].videos   = vids;
+  sections[sec].selected = new Set(vids.map((_,i) => i));
+  document.getElementById(`${sec}-video-section`).style.display = 'block';
+  renderVideoList(sec); updateSectionOutput(sec);
+}
+
+function clearForm() {
+  document.getElementById('subject-input').value = '';
+  document.getElementById('apunts-input').value   = '';
+  document.getElementById('material-input').value = '';
+  document.getElementById('sq-list').innerHTML = ''; sqCount = 0; addSqLink();
+  clearAllVideos('teoria',    true);
+  clearAllVideos('problemes', true);
+  onSubjectChange(); updateCsvPreview();
+}
+
+/* ══ SUBJECT INPUT ══ */
+function onSubjectChange() {
+  const slug = document.getElementById('subject-input').value.trim().toLowerCase()
+                 .replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+  document.getElementById('subject-preview').innerHTML = slug
+    ? `URL: <code>?subject=${slug}</code>` : `URL: <code>?subject=…</code>`;
+  updateCsvPreview();
+}
+
+/* ══ API BADGE ══ */
+function updateApiBadge() {
+  const key = document.getElementById('api-key-input').value.trim();
+  const b   = document.getElementById('api-badge');
+  b.textContent = key ? '✓ API activa' : 'Sense API';
+  b.className   = key ? 'api-badge active' : 'api-badge free';
+}
+
+/* ══ CORS PROXIES ══ */
 const PROXIES = [
   url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
   url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
   url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
 ];
-
 async function fetchWithProxies(targetUrl) {
   let lastErr;
-  for (const proxyFn of PROXIES) {
+  for (const fn of PROXIES) {
     try {
-      const res = await fetch(proxyFn(targetUrl), { signal: AbortSignal.timeout(8000) });
+      const res  = await fetch(fn(targetUrl), { signal: AbortSignal.timeout(8000) });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
       try { const j = JSON.parse(text); if (j.contents) return j.contents; } catch {}
       return text;
     } catch (e) { lastErr = e; }
   }
-  throw new Error('Tots els proxies han fallat. Comprova la connexió.');
+  throw new Error('Tots els proxies han fallat.');
 }
 
-/* ══════════════════════════════════════════════════
-   PLAYLIST ID / VIDEO ID EXTRACTORS
-══════════════════════════════════════════════════ */
+/* ══ EXTRACTORS ══ */
 function extractPlaylistId(url) {
-  try {
-    const u = new URL(url);
-    return u.searchParams.get('list') || null;
-  } catch {
-    const m = url.match(/[?&]list=([^&]+)/);
-    return m ? m[1] : null;
-  }
+  try { return new URL(url).searchParams.get('list') || null; } catch {}
+  const m = url.match(/[?&]list=([^&]+)/); return m ? m[1] : null;
 }
-
 function extractVideoId(raw) {
   try {
     const u = new URL(raw);
     if (u.searchParams.get('v')) return u.searchParams.get('v');
     if (u.hostname === 'youtu.be') return u.pathname.slice(1).split('?')[0];
-    const m = u.pathname.match(/\/(?:embed|v)\/([^/?]+)/);
-    if (m) return m[1];
+    const m = u.pathname.match(/\/(?:embed|v)\/([^/?]+)/); if (m) return m[1];
   } catch {}
-  const m = raw.match(/^([A-Za-z0-9_-]{11})$/);
-  return m ? m[1] : null;
+  const m = raw.match(/^([A-Za-z0-9_-]{11})$/); return m ? m[1] : null;
 }
 
-/* ══════════════════════════════════════════════════
-   FETCH PLAYLIST (RSS or API)
-══════════════════════════════════════════════════ */
+/* ══ FETCH PLAYLIST ══ */
 async function fetchSection(sec) {
   const raw    = document.getElementById(`${sec}-pl-input`).value.trim();
   const apiKey = document.getElementById('api-key-input').value.trim();
   const pid    = extractPlaylistId(raw);
-
-  if (!pid) {
-    setStatus(sec, 'URL de playlist no vàlida. Exemple: ?list=PLxxxxxx', 'err');
-    return;
-  }
-
-  const btn = document.getElementById(`${sec}-fetch-btn`);
-  btn.disabled = true;
-  setStatus(sec, '', '');
-
+  if (!pid) { setStatus(sec,'URL de playlist no vàlida.','err'); return; }
+  const btn = document.getElementById(`${sec}-fetch-btn`); btn.disabled = true;
   try {
-    if (apiKey) {
-      await fetchPlaylistAPI(sec, pid, apiKey);
-    } else {
-      await fetchPlaylistRSS(sec, pid);
-    }
-    sections[sec].selected = new Set(sections[sec].videos.map((_, i) => i));
-    renderVideoList(sec);
-    updateSectionOutput(sec);
-    setStatus(sec, '', '');
+    if (apiKey) await fetchPlaylistAPI(sec, pid, apiKey);
+    else        await fetchPlaylistRSS(sec, pid);
+    sections[sec].selected = new Set(sections[sec].videos.map((_,i)=>i));
+    renderVideoList(sec); updateSectionOutput(sec); setStatus(sec,'','');
     document.getElementById(`${sec}-video-section`).style.display = 'block';
-    updateCsv();
-  } catch (err) {
-    setStatus(sec, `Error: ${err.message}`, 'err');
-  } finally {
-    btn.disabled = false;
-  }
+    updateCsvPreview();
+  } catch(err) { setStatus(sec,`Error: ${err.message}`,'err'); }
+  finally { btn.disabled = false; }
 }
-
 async function fetchPlaylistRSS(sec, pid) {
-  setStatus(sec, 'Carregant via RSS (màx. 15 vídeos)…');
-  const rssUrl  = `https://www.youtube.com/feeds/videos.xml?playlist_id=${pid}`;
-  const xmlText = await fetchWithProxies(rssUrl);
-  const xml     = new DOMParser().parseFromString(xmlText, 'text/xml');
+  setStatus(sec,'Carregant via RSS (màx. 15 vídeos)…');
+  const xml = new DOMParser().parseFromString(
+    await fetchWithProxies(`https://www.youtube.com/feeds/videos.xml?playlist_id=${pid}`),'text/xml');
   const entries = [...xml.querySelectorAll('entry')];
-  if (entries.length === 0) throw new Error('Playlist buida o no trobada.');
-
-  const existing = new Set(sections[sec].videos.map(v => v.id));
-  const newVids  = entries.map(e => ({
-    id:    e.querySelector('videoId')?.textContent || '',
-    title: e.querySelector('title')?.textContent   || '(sense títol)',
-  })).filter(v => v.id && !existing.has(v.id));
-
-  sections[sec].videos = [...sections[sec].videos, ...newVids];
+  if (!entries.length) throw new Error('Playlist buida o no trobada.');
+  const existing = new Set(sections[sec].videos.map(v=>v.id));
+  sections[sec].videos = [...sections[sec].videos,
+    ...entries.map(e=>({ id:e.querySelector('videoId')?.textContent||'', title:e.querySelector('title')?.textContent||'(sense títol)' }))
+              .filter(v=>v.id&&!existing.has(v.id))];
 }
-
 async function fetchPlaylistAPI(sec, pid, apiKey) {
-  const existing = new Set(sections[sec].videos.map(v => v.id));
-  let pageToken = '', page = 1;
-
+  const existing = new Set(sections[sec].videos.map(v=>v.id));
+  let pageToken='', page=1;
   do {
-    setStatus(sec, `Carregant pàgina ${page} via YouTube API…`);
-    const url = `https://www.googleapis.com/youtube/v3/playlistItems`
-      + `?part=snippet&playlistId=${encodeURIComponent(pid)}`
-      + `&maxResults=50`
-      + (pageToken ? `&pageToken=${pageToken}` : '')
-      + `&key=${encodeURIComponent(apiKey)}`;
-
-    const res  = await fetch(url, { signal: AbortSignal.timeout(10000) });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data?.error?.message || `HTTP ${res.status}`);
-
-    for (const item of (data.items || [])) {
-      const vid   = item.snippet?.resourceId?.videoId;
-      const title = item.snippet?.title;
-      if (vid && title && title !== 'Deleted video' && title !== 'Private video' && !existing.has(vid)) {
-        sections[sec].videos.push({ id: vid, title });
-        existing.add(vid);
-      }
+    setStatus(sec,`Carregant pàgina ${page} via API…`);
+    const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${encodeURIComponent(pid)}&maxResults=50`
+              + (pageToken?`&pageToken=${pageToken}`:'') + `&key=${encodeURIComponent(apiKey)}`;
+    const res = await fetch(url,{signal:AbortSignal.timeout(10000)}), data=await res.json();
+    if (!res.ok) throw new Error(data?.error?.message||`HTTP ${res.status}`);
+    for (const item of (data.items||[])) {
+      const vid=item.snippet?.resourceId?.videoId, title=item.snippet?.title;
+      if (vid&&title&&title!=='Deleted video'&&title!=='Private video'&&!existing.has(vid)) { sections[sec].videos.push({id:vid,title}); existing.add(vid); }
     }
-    pageToken = data.nextPageToken || '';
-    page++;
-  } while (pageToken);
-
-  if (sections[sec].videos.length === 0) throw new Error('Playlist buida, privada o sense vídeos visibles.');
+    pageToken=data.nextPageToken||''; page++;
+  } while(pageToken);
+  if (!sections[sec].videos.length) throw new Error('Playlist buida o privada.');
 }
 
-/* ══════════════════════════════════════════════════
-   MANUAL VIDEO ADD
-══════════════════════════════════════════════════ */
-function decodeHtmlEntities(str) {
-  const t = document.createElement('textarea');
-  t.innerHTML = str;
-  return t.value;
-}
-
+/* ══ MANUAL VIDEO ══ */
+function decodeHtmlEntities(s) { const t=document.createElement('textarea'); t.innerHTML=s; return t.value; }
 async function addManualVideo(sec) {
-  const raw  = document.getElementById(`${sec}-manual-input`).value.trim();
-  const vid  = extractVideoId(raw);
-  const btn  = document.getElementById(`${sec}-manual-btn`);
-
-  if (!vid) { setStatus(sec, '⚠️ URL o ID no vàlid.', 'err'); return; }
-  if (sections[sec].videos.some(v => v.id === vid)) {
-    setStatus(sec, '⚠️ Aquest vídeo ja és a la llista.', 'err'); return;
-  }
-
-  btn.disabled = true;
-  setStatus(sec, 'Obtenint el títol del vídeo…');
-
-  let title = vid;
+  const raw=document.getElementById(`${sec}-manual-input`).value.trim(), vid=extractVideoId(raw);
+  const btn=document.getElementById(`${sec}-manual-btn`);
+  if (!vid) { setStatus(sec,'⚠️ URL o ID no vàlid.','err'); return; }
+  if (sections[sec].videos.some(v=>v.id===vid)) { setStatus(sec,'⚠️ Ja és a la llista.','err'); return; }
+  btn.disabled=true; setStatus(sec,'Obtenint el títol…');
+  let title=vid;
   try {
-    const watchUrl = `https://www.youtube.com/watch?v=${vid}`;
-    const html = await fetchWithProxies(watchUrl);
-    const og   = html.match(/<meta\s+property=["']og:title["']\s+content=["']([^"']+)["']/i);
-    if (og) title = decodeHtmlEntities(og[1]);
-    else {
-      const t = html.match(/<title>([^<]+)<\/title>/i);
-      if (t) title = decodeHtmlEntities(t[1].replace(/ [-–] YouTube\s*$/i, '').trim());
-    }
-  } catch { /* use vid as title */ }
-
-  const newIdx = sections[sec].videos.length;
-  sections[sec].videos.push({ id: vid, title });
-  sections[sec].selected.add(newIdx);
-
-  document.getElementById(`${sec}-video-section`).style.display = 'block';
-  renderVideoList(sec);
-  updateSectionOutput(sec);
-  setStatus(sec, `✓ "${title}" afegit.`, 'ok');
-  document.getElementById(`${sec}-manual-input`).value = '';
-  btn.disabled = false;
-  updateCsv();
+    const html=await fetchWithProxies(`https://www.youtube.com/watch?v=${vid}`);
+    const og=html.match(/<meta\s+property=["']og:title["']\s+content=["']([^"']+)["']/i);
+    if (og) title=decodeHtmlEntities(og[1]);
+    else { const t=html.match(/<title>([^<]+)<\/title>/i); if(t) title=decodeHtmlEntities(t[1].replace(/ [-–] YouTube\s*$/i,'').trim()); }
+  } catch {}
+  const idx=sections[sec].videos.length;
+  sections[sec].videos.push({id:vid,title}); sections[sec].selected.add(idx);
+  document.getElementById(`${sec}-video-section`).style.display='block';
+  renderVideoList(sec); updateSectionOutput(sec);
+  setStatus(sec,`✓ "${title}" afegit.`,'ok');
+  document.getElementById(`${sec}-manual-input`).value=''; btn.disabled=false; updateCsvPreview();
 }
 
-/* ══════════════════════════════════════════════════
-   RENDER VIDEO LIST
-══════════════════════════════════════════════════ */
+/* ══ RENDER VIDEO LIST ══ */
 function renderVideoList(sec) {
-  const list = document.getElementById(`${sec}-video-list`);
-  list.innerHTML = '';
-  const { videos, selected } = sections[sec];
-
-  let selOrder = 0;
-  videos.forEach((v, idx) => {
-    const isSel = selected.has(idx);
-    if (isSel) selOrder++;
-
-    const item = document.createElement('div');
-    item.className = 'vi' + (isSel ? ' selected' : '');
-    item.dataset.idx = idx;
-    item.draggable = true;
-    item.innerHTML = `
-      <div class="vi-handle" title="Arrossega per reordenar">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-          <circle cx="3.5" cy="2.5" r="1" fill="currentColor"/>
-          <circle cx="8.5" cy="2.5" r="1" fill="currentColor"/>
-          <circle cx="3.5" cy="6"   r="1" fill="currentColor"/>
-          <circle cx="8.5" cy="6"   r="1" fill="currentColor"/>
-          <circle cx="3.5" cy="9.5" r="1" fill="currentColor"/>
-          <circle cx="8.5" cy="9.5" r="1" fill="currentColor"/>
-        </svg>
+  const list=document.getElementById(`${sec}-video-list`); list.innerHTML='';
+  const {videos,selected}=sections[sec]; let selOrder=0;
+  videos.forEach((v,idx) => {
+    const isSel=selected.has(idx); if(isSel) selOrder++;
+    const item=document.createElement('div');
+    item.className='vi'+(isSel?' selected':''); item.dataset.idx=idx; item.draggable=true;
+    item.innerHTML=`
+      <div class="vi-handle"><svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <circle cx="3.5" cy="2.5" r="1" fill="currentColor"/><circle cx="8.5" cy="2.5" r="1" fill="currentColor"/>
+        <circle cx="3.5" cy="6"   r="1" fill="currentColor"/><circle cx="8.5" cy="6"   r="1" fill="currentColor"/>
+        <circle cx="3.5" cy="9.5" r="1" fill="currentColor"/><circle cx="8.5" cy="9.5" r="1" fill="currentColor"/>
+      </svg></div>
+      <div class="vi-check" onclick="toggleVideo('${sec}',${idx})">
+        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3 6.5 7 1.5"/></svg>
       </div>
-      <div class="vi-check" onclick="toggleVideo('${sec}', ${idx})">
-        <svg width="8" height="8" viewBox="0 0 8 8" fill="none"
-             stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="1 4 3 6.5 7 1.5"/>
-        </svg>
-      </div>
-      <div class="vi-thumb">
-        <img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg"
-             alt="" loading="lazy" onerror="this.style.display='none'">
-      </div>
-      <div class="vi-info">
-        <div class="vi-title">${escHtml(v.title)}</div>
-        <div class="vi-id">${v.id}</div>
-      </div>
-      <div class="vi-order">${isSel ? selOrder : ''}</div>`;
-
-    item.addEventListener('dragstart', e => onDragStart(sec, e));
-    item.addEventListener('dragover',  e => onDragOver(sec, e));
-    item.addEventListener('dragleave', e => onDragLeave(sec, e));
-    item.addEventListener('drop',      e => onDrop(sec, e));
-    item.addEventListener('dragend',   () => onDragEnd(sec));
+      <div class="vi-thumb"><img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+      <div class="vi-info"><div class="vi-title">${escHtml(v.title)}</div><div class="vi-id">${v.id}</div></div>
+      <div class="vi-order">${isSel?selOrder:''}</div>`;
+    item.addEventListener('dragstart', e=>onVDragStart(sec,e));
+    item.addEventListener('dragover',  e=>onVDragOver(sec,e));
+    item.addEventListener('dragleave', e=>onVDragLeave(sec,e));
+    item.addEventListener('drop',      e=>onVDrop(sec,e));
+    item.addEventListener('dragend',   ()=>onVDragEnd(sec));
     list.appendChild(item);
   });
+  const n=selected.size;
+  document.getElementById(`${sec}-sel-hint`).textContent=`${n} vídeo${n!==1?'s':''} seleccionat${n!==1?'s':''}`;
+}
+function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-  const n = selected.size;
-  document.getElementById(`${sec}-sel-hint`).textContent =
-    `${n} vídeo${n !== 1 ? 's' : ''} seleccionat${n !== 1 ? 's' : ''}`;
+/* ══ VIDEO TOGGLE / SELECT / CLEAR ══ */
+function toggleVideo(sec,idx) {
+  const s=sections[sec]; s.selected.has(idx)?s.selected.delete(idx):s.selected.add(idx);
+  renderVideoList(sec); updateSectionOutput(sec); updateCsvPreview();
 }
-
-function escHtml(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-/* ══════════════════════════════════════════════════
-   TOGGLE / SELECT / CLEAR
-══════════════════════════════════════════════════ */
-function toggleVideo(sec, idx) {
-  const s = sections[sec];
-  s.selected.has(idx) ? s.selected.delete(idx) : s.selected.add(idx);
-  renderVideoList(sec);
-  updateSectionOutput(sec);
-  updateCsv();
-}
-function selectAllVideos(sec) {
-  sections[sec].videos.forEach((_, i) => sections[sec].selected.add(i));
-  renderVideoList(sec); updateSectionOutput(sec); updateCsv();
-}
-function deselectAllVideos(sec) {
-  sections[sec].selected.clear();
-  renderVideoList(sec); updateSectionOutput(sec); updateCsv();
-}
-function clearAllVideos(sec) {
-  sections[sec].videos   = [];
-  sections[sec].selected = new Set();
-  sections[sec].dragSrc  = null;
-  document.getElementById(`${sec}-video-section`).style.display = 'none';
-  updateSectionOutput(sec); updateCsv();
+function selectAllVideos(sec)  { sections[sec].videos.forEach((_,i)=>sections[sec].selected.add(i)); renderVideoList(sec); updateSectionOutput(sec); updateCsvPreview(); }
+function deselectAllVideos(sec){ sections[sec].selected.clear(); renderVideoList(sec); updateSectionOutput(sec); updateCsvPreview(); }
+function clearAllVideos(sec, silent=false) {
+  sections[sec].videos=[]; sections[sec].selected=new Set(); sections[sec].dragSrc=null;
+  document.getElementById(`${sec}-video-section`).style.display='none';
+  if (!silent) { updateSectionOutput(sec); updateCsvPreview(); }
 }
 
-/* ══════════════════════════════════════════════════
-   DRAG & DROP
-══════════════════════════════════════════════════ */
-function onDragStart(sec, e) {
-  sections[sec].dragSrc = +e.currentTarget.dataset.idx;
-  e.currentTarget.classList.add('dragging');
-  e.dataTransfer.effectAllowed = 'move';
+/* ══ VIDEO DRAG & DROP ══ */
+function onVDragStart(sec,e) { sections[sec].dragSrc=+e.currentTarget.dataset.idx; e.currentTarget.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; }
+function onVDragOver(sec,e)  { e.preventDefault(); e.dataTransfer.dropEffect='move'; document.querySelectorAll(`#${sec}-video-list .vi`).forEach(el=>el.classList.remove('drag-over')); e.currentTarget.classList.add('drag-over'); }
+function onVDragLeave(sec,e) { e.currentTarget.classList.remove('drag-over'); }
+function onVDrop(sec,e) {
+  e.preventDefault(); const s=sections[sec], tgt=+e.currentTarget.dataset.idx;
+  if (s.dragSrc===null||s.dragSrc===tgt) return;
+  const moved=s.videos.splice(s.dragSrc,1)[0]; s.videos.splice(tgt,0,moved);
+  const selTitles=new Set([...s.selected].map(i=>s.videos[i]?.title));
+  s.selected=new Set(s.videos.map((v,i)=>selTitles.has(v.title)?i:-1).filter(i=>i>=0));
+  renderVideoList(sec); updateSectionOutput(sec); updateCsvPreview();
 }
-function onDragOver(sec, e) {
-  e.preventDefault();
-  e.dataTransfer.dropEffect = 'move';
-  document.querySelectorAll(`#${sec}-video-list .vi`).forEach(el => el.classList.remove('drag-over'));
-  e.currentTarget.classList.add('drag-over');
-}
-function onDragLeave(sec, e) { e.currentTarget.classList.remove('drag-over'); }
-function onDrop(sec, e) {
-  e.preventDefault();
-  const s = sections[sec];
-  const targetIdx = +e.currentTarget.dataset.idx;
-  if (s.dragSrc === null || s.dragSrc === targetIdx) return;
+function onVDragEnd(sec) { document.querySelectorAll(`#${sec}-video-list .vi`).forEach(el=>el.classList.remove('dragging','drag-over')); sections[sec].dragSrc=null; }
 
-  const moved = s.videos.splice(s.dragSrc, 1)[0];
-  s.videos.splice(targetIdx, 0, moved);
-
-  const selTitles = new Set([...s.selected].map(i => s.videos[i]?.title));
-  s.selected = new Set(s.videos.map((v,i) => selTitles.has(v.title) ? i : -1).filter(i => i >= 0));
-
-  renderVideoList(sec); updateSectionOutput(sec); updateCsv();
-}
-function onDragEnd(sec) {
-  document.querySelectorAll(`#${sec}-video-list .vi`).forEach(el => {
-    el.classList.remove('dragging', 'drag-over');
-  });
-  sections[sec].dragSrc = null;
-}
-
-/* ══════════════════════════════════════════════════
-   SECTION OUTPUT TEXT
-══════════════════════════════════════════════════ */
+/* ══ SECTION OUTPUT ══ */
 function getSectionText(sec) {
-  const { videos, selected } = sections[sec];
-  return videos
-    .filter((_, i) => selected.has(i))
-    .map(v => `${v.id}:${v.title}`)
-    .join('|');
+  const {videos,selected}=sections[sec];
+  return videos.filter((_,i)=>selected.has(i)).map(v=>`${v.id}:${v.title}`).join('|');
 }
-
 function updateSectionOutput(sec) {
-  const text = getSectionText(sec);
-  const el   = document.getElementById(`${sec}-output`);
-  el.textContent = text || '—';
-  const n = sections[sec].selected.size;
-  document.getElementById(`${sec}-count`).textContent =
-    n ? `${n} vídeo${n !== 1 ? 's' : ''}` : '';
+  document.getElementById(`${sec}-output`).textContent=getSectionText(sec)||'—';
+  const n=sections[sec].selected.size;
+  document.getElementById(`${sec}-count`).textContent=n?`${n} vídeo${n!==1?'s':''}` :'';
 }
-
 async function copySection(sec) {
-  const text = getSectionText(sec);
-  if (!text) return;
-  const btn = document.getElementById(`${sec}-copy-btn`);
+  const text=getSectionText(sec); if(!text) return;
+  const btn=document.getElementById(`${sec}-copy-btn`);
   try { await navigator.clipboard.writeText(text); } catch {}
-  btn.textContent = '✓ Copiat!';
-  btn.classList.add('ok');
-  setTimeout(() => { btn.textContent = 'Copia fragment'; btn.classList.remove('ok'); }, 2000);
+  btn.textContent='✓ Copiat!'; btn.classList.add('ok');
+  setTimeout(()=>{ btn.textContent='Copia fragment'; btn.classList.remove('ok'); },2000);
 }
 
-/* ══════════════════════════════════════════════════
-   STEP QUIZ LINKS
-══════════════════════════════════════════════════ */
-let sqCount = 0;
-
-function addSqLink(value = '') {
+/* ══ STEP QUIZ LINKS ══ */
+function addSqLink(value='') {
   sqCount++;
-  const id  = `sq-${sqCount}`;
-  const row = document.createElement('div');
-  row.className = 'sq-item';
-  row.id = `sq-row-${sqCount}`;
-  row.innerHTML = `
-    <input type="url" class="url-input" id="${id}"
-           placeholder="https://step-quiz.net/…"
-           oninput="updateCsv()" />
-    <button class="sq-remove" onclick="removeSqLink('sq-row-${sqCount}')" title="Elimina">×</button>`;
-  if (value) row.querySelector('input').value = value;
+  const n=sqCount, row=document.createElement('div');
+  row.className='sq-item'; row.id=`sq-row-${n}`;
+  row.innerHTML=`<input type="url" class="url-input" id="sq-${n}" placeholder="https://step-quiz.net/…" oninput="updateCsvPreview()"/>
+    <button class="sq-remove" onclick="removeSqLink('sq-row-${n}')" title="Elimina">×</button>`;
+  if (value) row.querySelector('input').value=value;
   document.getElementById('sq-list').appendChild(row);
-  row.querySelector('input').focus();
-  updateCsv();
+  if (value==='') row.querySelector('input').focus();
+  updateCsvPreview();
+}
+function removeSqLink(id) { document.getElementById(id)?.remove(); updateCsvPreview(); }
+function getSqLinks() { return [...document.querySelectorAll('#sq-list input')].map(el=>el.value.trim()).filter(Boolean); }
+
+/* ══ STATUS ══ */
+function setStatus(sec,msg,type='') {
+  const el=document.getElementById(`${sec}-status`);
+  el.className=`v-status${type?' '+type:''}`;
+  if (!msg) { el.innerHTML=''; return; }
+  const spin=(!type||type==='')?'<div class="spinner"></div>':'';
+  el.innerHTML=`${spin}<span>${escHtml(msg)}</span>`;
 }
 
-function removeSqLink(rowId) {
-  const el = document.getElementById(rowId);
-  if (el) el.remove();
-  updateCsv();
+/* ══ CSV PREVIEW ══ */
+function getCurrentRow() {
+  const subject  =document.getElementById('subject-input').value.trim().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+  const apunts   =document.getElementById('apunts-input').value.trim();
+  const teoria   =getSectionText('teoria');
+  const problemes=getSectionText('problemes');
+  const material =document.getElementById('material-input').value.trim();
+  const sq       =getSqLinks().join('|');
+  return {subject,apunts,teoria,problemes,material,sq};
+}
+function updateCsvPreview() {
+  const {subject,apunts,teoria,problemes,material,sq}=getCurrentRow();
+  document.getElementById('csv-output').textContent=buildCSVLine(subject,apunts,teoria,problemes,material,sq)||'—';
 }
 
-function getSqLinks() {
-  return [...document.querySelectorAll('#sq-list input')]
-    .map(el => el.value.trim())
-    .filter(Boolean);
-}
-
-/* ══════════════════════════════════════════════════
-   STATUS HELPERS
-══════════════════════════════════════════════════ */
-function setStatus(sec, msg, type = '') {
-  const el = document.getElementById(`${sec}-status`);
-  el.className = `v-status${type ? ' ' + type : ''}`;
-  if (!msg) { el.innerHTML = ''; return; }
-  const spinner = (!type || type === '') ? '<div class="spinner"></div>' : '';
-  el.innerHTML = `${spinner}<span>${escHtml(msg)}</span>`;
-}
-
-/* ══════════════════════════════════════════════════
-   CSV GENERATION
-══════════════════════════════════════════════════ */
-function csvField(val) {
-  // If the value contains a comma, newline, or quote, wrap in quotes and escape inner quotes
-  if (!val) return '';
-  if (/[,"\r\n]/.test(val)) return '"' + val.replace(/"/g, '""') + '"';
-  return val;
-}
-
-function updateCsv() {
-  const subject  = document.getElementById('subject-input').value.trim().toLowerCase()
-                    .replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-  const apunts   = document.getElementById('apunts-input').value.trim();
-  const teoria   = getSectionText('teoria');
-  const problemes= getSectionText('problemes');
-  const material = document.getElementById('material-input').value.trim();
-  const sq       = getSqLinks().join('|');
-
-  const row = [
-    csvField(subject),
-    csvField(apunts),
-    csvField(teoria),
-    csvField(problemes),
-    csvField(material),
-    csvField(sq),
-  ].join(',');
-
-  document.getElementById('csv-output').textContent = row || '—';
-}
-
+/* ══ COPY ROW ══ */
 async function copyCsv() {
-  const text = document.getElementById('csv-output').textContent;
-  if (!text || text === '—') return;
-  const btn = document.getElementById('copy-csv-btn');
+  const text=document.getElementById('csv-output').textContent;
+  if (!text||text==='—') return;
+  const btn=document.getElementById('copy-csv-btn');
   try { await navigator.clipboard.writeText(text); } catch {
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.cssText = 'position:fixed;opacity:0';
-    document.body.appendChild(ta);
-    ta.focus(); ta.select();
+    const ta=document.createElement('textarea'); ta.value=text; ta.style.cssText='position:fixed;opacity:0';
+    document.body.appendChild(ta); ta.focus(); ta.select();
     try { document.execCommand('copy'); } catch {}
     document.body.removeChild(ta);
   }
-  btn.textContent = '✓ Copiat!';
-  btn.classList.add('ok');
-  setTimeout(() => { btn.textContent = 'Copia fila'; btn.classList.remove('ok'); }, 2500);
+  btn.textContent='✓ Copiat!'; btn.classList.add('ok');
+  setTimeout(()=>{ btn.textContent='Copia fila'; btn.classList.remove('ok'); },2500);
 }
 
-/* ── Init: one empty SQ link ── */
+/* ══ DOWNLOAD FULL CSV ══ */
+function downloadFullCsv() {
+  if (!loadedRows.length) return;
+  const {subject,apunts,teoria,problemes,material,sq}=getCurrentRow();
+  const newLine=buildCSVLine(subject,apunts,teoria,problemes,material,sq);
+
+  let updatedLines;
+  if (editingIdx >= 0) {
+    // Replace existing row (line 0 = header, row i → line i+1)
+    updatedLines = csvRawLines.map((line, i) => i === editingIdx + 1 ? newLine : line);
+  } else {
+    // Append new row
+    updatedLines = [...csvRawLines, newLine];
+  }
+
+  const blob=new Blob([updatedLines.join('\r\n')+'\r\n'],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download='data-classroom.csv';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+
+  // Update local state so subsequent edits work
+  const newRow={subject,'apunts-bogdan':apunts,'teoria-pildoras':teoria,
+                'problemes-bogdan':problemes,'material-complementari':material,'exercicis-stepquiz':sq};
+  if (editingIdx >= 0) {
+    loadedRows[editingIdx]=newRow;
+    csvRawLines=updatedLines;
+  } else if (subject) {
+    loadedRows.push(newRow); csvRawLines=updatedLines;
+    editingIdx=loadedRows.length-1;
+    renderSubjectPicker();
+    document.querySelectorAll('.subject-pill').forEach(p=>p.classList.remove('active'));
+    document.querySelector(`.subject-pill[data-idx="${editingIdx}"]`)?.classList.add('active');
+    setMode(editingIdx);
+  }
+
+  const btn=document.getElementById('download-btn');
+  btn.textContent='✓ Descarregat!'; btn.classList.add('ok');
+  setTimeout(()=>{ btn.textContent='⬇ Desa CSV complet'; btn.classList.remove('ok'); },3000);
+}
+
+/* ── Init ── */
 addSqLink();
 </script>
 </body>
