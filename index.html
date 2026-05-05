@@ -980,14 +980,40 @@ function parseCSVRow(line) {
   return fields;
 }
 
-// Parseja una cel·la de vídeos: "id:Títol|id:Títol|..."
+// Parseja una cel·la de vídeos. Formats suportats:
+//   "ytId:Títol|ytId:Títol|..."           (format estàndard)
+//   "ytId:https://youtube.com/...|..."    (URL en lloc de títol → extreu l'id de la URL)
+//   "https://youtube.com/watch?v=id|..."  (URL sola → extreu l'id i usa 'Vídeo N' com a títol)
+//   "ytId|ytId|..."                       (sols ids, sense títol)
 function parseVideos(cell) {
   if (!cell || !cell.trim()) return [];
-  return cell.trim().split('|').map(entry => {
+  return cell.trim().split('|').map((entry, idx) => {
+    entry = entry.trim();
+    if (!entry) return null;
+
+    // Cas: URL de YouTube sola (https://... o http://...)
+    const ytMatch = entry.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=)([\w-]+)/);
+    if (ytMatch && (entry.startsWith('http://') || entry.startsWith('https://'))) {
+      return { id: ytMatch[1], title: 'Vídeo ' + (idx + 1), note: '' };
+    }
+
     const sep = entry.indexOf(':');
-    if (sep < 0) return null;
-    return { id: entry.substring(0, sep).trim(), title: entry.substring(sep + 1).trim(), note: '' };
-  }).filter(Boolean);
+    if (sep < 0) {
+      // Cas: sols id sense títol (p. ex. "dQw4w9WgXcQ")
+      return entry.length > 3 ? { id: entry, title: 'Vídeo ' + (idx + 1), note: '' } : null;
+    }
+
+    const id    = entry.substring(0, sep).trim();
+    const rest  = entry.substring(sep + 1).trim();
+
+    // Cas: el "títol" és una URL de YouTube → extreu l'id real de la URL
+    const restYt = rest.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=)([\w-]+)/);
+    if (restYt) {
+      return { id: restYt[1], title: 'Vídeo ' + (idx + 1), note: '' };
+    }
+
+    return { id, title: rest, note: '' };
+  }).filter(v => v && v.id);
 }
 
 // Parseja la cel·la d'exercicis stepquiz: suporta 1 o més enllaços.
@@ -1372,6 +1398,24 @@ function makeStepquizPlaylist(colKey, colClass) {
 function makeVideoPanel(colKey, colClass) {
   const meta   = PANEL_META[colKey];
   const videos = currentTopicData[colKey];
+
+  // Guàrdia defensiva: si no hi ha vídeos, mostra un panell buit en lloc de petar
+  if (!videos || videos.length === 0) {
+    const div = document.createElement('div');
+    div.className = 'panel' + (colClass ? ' ' + colClass : '');
+    div.innerHTML = `
+      <div class="panel-head">
+        <div class="panel-dot ${meta ? meta.dot : ''}"></div>
+        <div>
+          <div class="panel-label">${meta ? meta.label : ''}</div>
+          <div class="panel-name">${meta ? meta.name : ''}</div>
+        </div>
+      </div>
+      <div class="panel-body" style="padding:24px 20px;color:var(--text-muted);font-size:13px;">
+        No hi ha vídeos disponibles per a aquest tema.
+      </div>`;
+    return div;
+  }
 
   if (!makeVideoPanel._state) makeVideoPanel._state = {};
   if (!makeVideoPanel._state[colKey]) makeVideoPanel._state[colKey] = 0;
