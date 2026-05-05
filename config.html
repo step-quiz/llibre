@@ -353,6 +353,55 @@
     .action-hint strong { color: var(--text); }
 
     .field-note { font-size: 11px; color: var(--text-3); margin-bottom: 8px; line-height: 1.4; }
+
+    /* ── INDEX.HTML MANAGER ── */
+    .index-card {
+      background: var(--surface); border-radius: var(--radius);
+      box-shadow: var(--sh-md); padding: 24px; margin-top: 20px;
+      animation: fade-up .45s var(--spring) both; animation-delay: .25s;
+    }
+    .index-card-top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .index-loaded-badge {
+      display: none; align-items: center; gap: 8px;
+      background: rgba(175,82,222,.1); border-radius: 10px; padding: 8px 14px;
+      font-size: 13px; color: var(--purple); font-weight: 500; flex: 1;
+    }
+    .index-loaded-badge.visible { display: flex; }
+    .index-clear-btn {
+      margin-left: auto; font-size: 11px; font-weight: 600;
+      padding: 3px 9px; border-radius: 7px; border: none;
+      background: rgba(255,59,48,.1); color: var(--red); cursor: pointer; transition: background .12s;
+    }
+    .index-clear-btn:hover { background: rgba(255,59,48,.2); }
+    .ready-grid { display: none; margin-top: 18px; border-top: 1px solid var(--divider); padding-top: 18px; }
+    .ready-grid.visible { display: block; animation: fade-in .25s var(--ease); }
+    .ready-grid-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .07em; color: var(--text-3); margin-bottom: 14px;
+    }
+    .ready-section-title {
+      font-size: 11px; font-weight: 600; color: var(--text-2); margin: 14px 0 8px;
+      text-transform: uppercase; letter-spacing: .05em;
+    }
+    .ready-section-title:first-of-type { margin-top: 0; }
+    .ready-rows { display: flex; flex-wrap: wrap; gap: 8px; }
+    .ready-toggle {
+      display: flex; align-items: center; gap: 8px;
+      height: 36px; padding: 0 14px 0 10px;
+      border-radius: 980px; border: 1.5px solid var(--divider);
+      background: var(--bg); cursor: pointer;
+      transition: border-color .12s, background .12s; user-select: none;
+    }
+    .ready-toggle:hover { border-color: var(--text-3); }
+    .ready-toggle.on { background: rgba(52,199,89,.08); border-color: rgba(52,199,89,.4); }
+    .ready-toggle.on:hover { border-color: var(--green); }
+    .rt-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--divider); flex-shrink: 0; transition: background .15s; }
+    .ready-toggle.on .rt-dot { background: var(--green); }
+    .rt-label { font-size: 13px; font-weight: 500; color: var(--text-2); transition: color .12s; }
+    .ready-toggle.on .rt-label { color: var(--text); }
+    .rt-badge { font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 980px; background: rgba(0,0,0,.06); color: var(--text-3); transition: background .12s, color .12s; }
+    .ready-toggle.on .rt-badge { background: rgba(52,199,89,.15); color: var(--green); }
+    .csv-hint { font-size: 11px; color: var(--text-3); margin-top: 12px; line-height: 1.5; }
   </style>
 </head>
 <body>
@@ -517,6 +566,45 @@
       <span class="action-hint" id="action-hint">
         Afegeix aquesta fila al final de <strong>data-classroom.csv</strong>.
       </span>
+    </div>
+  </div>
+
+  <!-- ══ INDEX.HTML MANAGER ══ -->
+  <div class="index-card">
+    <div class="index-card-top">
+      <span class="card-title" style="margin-bottom:0">index.html · Temes actius</span>
+
+      <div class="drop-zone" id="index-drop-zone" style="min-width:180px"
+           ondragover="idxDragOver(event)" ondragleave="idxDragLeave(event)" ondrop="idxFileDrop(event)">
+        <input type="file" accept=".html,text/html" onchange="idxFileInput(event)" />
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path d="M8 1v9M5 7l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 11v2a1 1 0 001 1h10a1 1 0 001-1v-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span>Carrega <strong>index.html</strong></span>
+      </div>
+
+      <div class="index-loaded-badge" id="index-loaded-badge">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
+          <polyline points="5 8 7 10.5 11 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span id="index-loaded-text">index.html carregat</span>
+        <button class="index-clear-btn" onclick="clearIndexHtml()">✕</button>
+      </div>
+    </div>
+
+    <div class="ready-grid" id="ready-grid">
+      <div class="ready-grid-label">Clica per activar o desactivar · <span style="color:var(--green)">●</span> verd = accessible pels alumnes</div>
+      <div id="ready-rows-eso"></div>
+      <div id="ready-rows-batx"></div>
+      <div class="csv-hint" id="ready-csv-hint"></div>
+      <div class="action-row" style="margin-top:16px">
+        <button class="action-btn download" id="download-index-btn" onclick="downloadIndexHtml()">
+          ⬇ Desa index.html
+        </button>
+        <span class="action-hint">Substitueix el fitxer al servidor per activar els canvis.</span>
+      </div>
     </div>
   </div>
 
@@ -1009,6 +1097,157 @@ function downloadFullCsv() {
   const btn=document.getElementById('download-btn');
   btn.textContent='✓ Descarregat!'; btn.classList.add('ok');
   setTimeout(()=>{ btn.textContent='⬇ Desa CSV complet'; btn.classList.remove('ok'); },3000);
+}
+
+
+/* ══ INDEX.HTML MANAGER ══ */
+let indexHtmlText   = '';   // raw file content
+let indexTopics     = [];   // [{id, title, section, ready}] parsed from ALL_TOPICS
+let indexReadyState = {};   // {id: bool} — current toggle state
+
+/* File loading */
+function idxDragOver(e)  { e.preventDefault(); document.getElementById('index-drop-zone').classList.add('dragover'); }
+function idxDragLeave()  { document.getElementById('index-drop-zone').classList.remove('dragover'); }
+function idxFileDrop(e)  { e.preventDefault(); idxDragLeave(); const f = e.dataTransfer.files[0]; if (f) handleIndexFile(f); }
+function idxFileInput(e) { const f = e.target.files[0]; if (f) handleIndexFile(f); }
+
+function handleIndexFile(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    indexHtmlText = e.target.result;
+    const parsed  = parseIndexTopics(indexHtmlText);
+    if (!parsed.length) { alert("No s'han trobat temes ALL_TOPICS a l'index.html."); return; }
+    indexTopics = parsed;
+    indexReadyState = {};
+    parsed.forEach(t => { indexReadyState[t.id] = t.ready; });
+
+    document.getElementById('index-drop-zone').style.display = 'none';
+    document.getElementById('index-loaded-badge').classList.add('visible');
+    document.getElementById('index-loaded-text').textContent =
+      `${file.name} · ${parsed.length} temes trobats`;
+    renderReadyGrid();
+  };
+  reader.readAsText(file, 'UTF-8');
+}
+
+function clearIndexHtml() {
+  indexHtmlText = ''; indexTopics = []; indexReadyState = {};
+  document.getElementById('index-loaded-badge').classList.remove('visible');
+  const dz = document.getElementById('index-drop-zone');
+  dz.style.display = ''; dz.querySelector('input[type=file]').value = '';
+  document.getElementById('ready-grid').classList.remove('visible');
+}
+
+/* Parse ALL_TOPICS from index.html text */
+function parseIndexTopics(html) {
+  const topics = [];
+  // Match lines like: { id: 'trigonometria', icon: '', title: 'Trigonometria', desc: '', ready: true/false }
+  const re = /\{\s*id:\s*'([^']+)'[^}]*title:\s*'([^']*)'[^}]*ready:\s*(true|false)\s*\}/g;
+  // Also detect which section (eso/batx) by finding the array keys
+  const esoMatch   = html.match(/eso\s*:\s*\[([\s\S]*?)\]/);
+  const batxMatch  = html.match(/batx\s*:\s*\[([\s\S]*?)\]/);
+  const esoIds  = new Set();
+  const batxIds = new Set();
+  if (esoMatch) {
+    const esoRe = /id:\s*'([^']+)'/g; let m;
+    while ((m = esoRe.exec(esoMatch[1])) !== null) esoIds.add(m[1]);
+  }
+  if (batxMatch) {
+    const batxRe = /id:\s*'([^']+)'/g; let m;
+    while ((m = batxRe.exec(batxMatch[1])) !== null) batxIds.add(m[1]);
+  }
+  let m;
+  while ((m = re.exec(html)) !== null) {
+    const id = m[1], title = m[2], ready = m[3] === 'true';
+    const section = esoIds.has(id) ? 'eso' : batxIds.has(id) ? 'batx' : 'eso';
+    topics.push({ id, title, section, ready });
+  }
+  return topics;
+}
+
+/* Render the ready toggles */
+function renderReadyGrid() {
+  const esoTopics  = indexTopics.filter(t => t.section === 'eso');
+  const batxTopics = indexTopics.filter(t => t.section === 'batx');
+
+  // Check which subjects in the CSV have real data (not placeholder)
+  const csvDataIds = new Set(
+    loadedRows
+      .filter(r => r['apunts-bogdan'] && !r['apunts-bogdan'].includes('XXXXXXXXXX'))
+      .map(r => r.subject)
+  );
+
+  function buildSection(containerId, sectionTitle, topics) {
+    const el = document.getElementById(containerId);
+    el.innerHTML = `<div class="ready-section-title">${sectionTitle}</div><div class="ready-rows" id="${containerId}-rows"></div>`;
+    const rowEl = document.getElementById(`${containerId}-rows`);
+    topics.forEach(t => {
+      const isOn      = indexReadyState[t.id] ?? false;
+      const hasCsvData = csvDataIds.has(t.id);
+      const toggle = document.createElement('div');
+      toggle.className = 'ready-toggle' + (isOn ? ' on' : '');
+      toggle.dataset.id = t.id;
+      toggle.title = hasCsvData ? 'Té dades al CSV' : 'Sense dades al CSV';
+      toggle.innerHTML = `
+        <div class="rt-dot"></div>
+        <span class="rt-label">${escHtml(t.title)}</span>
+        <span class="rt-badge">${isOn ? 'actiu' : 'ocult'}</span>`;
+      toggle.onclick = () => toggleReady(t.id);
+      rowEl.appendChild(toggle);
+    });
+  }
+
+  buildSection('ready-rows-eso',  'ESO',       esoTopics);
+  buildSection('ready-rows-batx', 'Batxillerat', batxTopics);
+
+  // Hint about CSV sync
+  const hint = document.getElementById('ready-csv-hint');
+  if (csvDataIds.size > 0) {
+    const csvNames = [...csvDataIds].join(', ');
+    hint.innerHTML = `💡 Temes amb dades reals al CSV carregat: <strong>${csvNames}</strong>. Activa'ls si vols que siguin accessibles.`;
+  } else if (loadedRows.length > 0) {
+    hint.textContent = 'CSV carregat però cap tema té dades reals complertes.';
+  } else {
+    hint.textContent = 'Carrega el CSV per veure quins temes tenen dades reals.';
+  }
+
+  document.getElementById('ready-grid').classList.add('visible');
+}
+
+function toggleReady(id) {
+  indexReadyState[id] = !indexReadyState[id];
+  const toggle = document.querySelector(`.ready-toggle[data-id="${id}"]`);
+  if (toggle) {
+    toggle.classList.toggle('on', indexReadyState[id]);
+    toggle.querySelector('.rt-badge').textContent = indexReadyState[id] ? 'actiu' : 'ocult';
+  }
+}
+
+/* Patch and download index.html */
+function downloadIndexHtml() {
+  if (!indexHtmlText) return;
+  let patched = indexHtmlText;
+  indexTopics.forEach(t => {
+    const want = indexReadyState[t.id] ? 'true' : 'false';
+    // Replace  ready: true/false  for this specific id
+    // Match the full topic object line to avoid false positives
+    const re = new RegExp(
+      `(\{\s*id:\s*'${t.id}'[^}]*ready:\s*)(true|false)(\s*\})`,
+      'g'
+    );
+    patched = patched.replace(re, `$1${want}$3`);
+  });
+
+  const blob = new Blob([patched], { type: 'text/html;charset=utf-8;' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = 'index.html';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+  const btn = document.getElementById('download-index-btn');
+  btn.textContent = '✓ Descarregat!'; btn.classList.add('ok');
+  setTimeout(() => { btn.textContent = '⬇ Desa index.html'; btn.classList.remove('ok'); }, 3000);
 }
 
 /* ── Init ── */
