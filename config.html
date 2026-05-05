@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Config · Nou Tema · Step Quiz</title>
+  <style>
+    :root {
+      --bg:       #f5f5f7;
+      --surface:  #ffffff;
+      --text:     #1d1d1f;
+      --text-2:   #6e6e73;
+      --text-3:   #aeaeb2;
+      --accent:   #0071e3;
+      --red:      #ff3b30;
+      --green:    #34c759;
+      --orange:   #ff9500;
+      --divider:  rgba(0,0,0,.07);
+      --sh:       0 2px 8px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
+      --sh-md:    0 6px 24px rgba(0,0,0,.09), 0 2px 6px rgba(0,0,0,.05);
+      --radius:   16px;
+      --ease:     cubic-bezier(.4,0,.2,1);
+      --spring:   cubic-bezier(.34,1.56,.64,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      min-height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+    @keyframes fade-up {
+      from { opacity:0; transform:translateY(12px) scale(.99); }
+      to   { opacity:1; transform:translateY(0) scale(1); }
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .page {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+
+    /* ── Header ── */
+    .header { margin-bottom: 32px; animation: fade-up .5s var(--spring) both; }
+    .header h1 {
+      font-size: 28px; font-weight: 700;
+      letter-spacing: -.03em;
+      margin-bottom: 6px;
+    }
+    .header p { font-size: 14px; color: var(--text-2); line-height: 1.5; }
+
+    /* ── Subject row ── */
+    .subject-row {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--sh-md);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      animation: fade-up .45s var(--spring) both;
+      animation-delay: .05s;
+    }
+    .subject-label {
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .07em;
+      color: var(--text-3); white-space: nowrap;
+    }
+    .subject-input {
+      flex: 1; height: 42px;
+      border: 1.5px solid var(--divider);
+      border-radius: 10px;
+      padding: 0 14px;
+      font-size: 16px; font-weight: 600;
+      font-family: inherit;
+      color: var(--text);
+      background: var(--bg);
+      outline: none;
+      transition: border-color .15s;
+    }
+    .subject-input:focus { border-color: var(--accent); background: var(--surface); }
+    .subject-input::placeholder { color: var(--text-3); font-weight: 400; font-size: 14px; }
+    .subject-preview {
+      font-size: 12px; color: var(--text-2);
+      white-space: nowrap;
+    }
+    .subject-preview code {
+      background: var(--bg); border-radius: 5px;
+      padding: 2px 6px; font-size: 11px; color: var(--accent);
+    }
+
+    /* ── API key card ── */
+    .api-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--sh);
+      padding: 16px 24px;
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+      flex-wrap: wrap;
+      animation: fade-up .45s var(--spring) both;
+      animation-delay: .1s;
+    }
+    .api-card .card-title { margin-bottom: 0; white-space: nowrap; }
+    .api-input {
+      flex: 1; min-width: 240px;
+      height: 36px;
+      border: 1.5px solid var(--divider);
+      border-radius: 8px;
+      padding: 0 12px;
+      font-size: 13px; font-family: monospace;
+      color: var(--text);
+      background: var(--bg);
+      outline: none;
+      transition: border-color .15s;
+    }
+    .api-input:focus { border-color: var(--accent); }
+    .api-input::placeholder { font-family: -apple-system, sans-serif; color: var(--text-3); }
+    .api-badge {
+      font-size: 11px; font-weight: 600;
+      padding: 4px 10px; border-radius: 980px;
+      white-space: nowrap;
+    }
+    .api-badge.free   { background: rgba(255,149,0,.12); color: var(--orange); }
+    .api-badge.active { background: rgba(52,199,89,.12);  color: var(--green); }
+
+    /* ── 3-col grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: 280px 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+      animation: fade-up .45s var(--spring) both;
+      animation-delay: .15s;
+    }
+    @media (max-width: 800px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--sh-md);
+      padding: 18px 18px 20px;
+    }
+    .card + .card { margin-top: 12px; }
+    .card-title {
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .07em;
+      color: var(--text-3); margin-bottom: 12px;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .dot {
+      width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+    }
+    .dot-pdf    { background: #6e6e73; }
+    .dot-theory { background: #0071e3; }
+    .dot-solved { background: #30d158; }
+    .dot-lock   { background: #ff9500; }
+    .dot-quiz   { background: #ff375f; }
+
+    /* ── URL input ── */
+    .url-input {
+      width: 100%;
+      height: 38px;
+      border: 1.5px solid var(--divider);
+      border-radius: 9px;
+      padding: 0 12px;
+      font-size: 13px;
+      font-family: inherit;
+      color: var(--text);
+      background: var(--bg);
+      outline: none;
+      transition: border-color .15s;
+    }
+    .url-input:focus { border-color: var(--accent); background: var(--surface); }
+    .url-input::placeholder { color: var(--text-3); }
+
+    /* ── Step Quiz link list ── */
+    .sq-item {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 8px;
+    }
+    .sq-item .url-input { flex: 1; }
+    .sq-remove {
+      width: 28px; height: 28px;
+      border: none; background: transparent;
+      color: var(--text-3); font-size: 16px;
+      cursor: pointer; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .12s, color .12s;
+      flex-shrink: 0;
+    }
+    .sq-remove:hover { background: rgba(255,59,48,.1); color: var(--red); }
+    .add-btn {
+      font-size: 12px; font-weight: 600;
+      padding: 6px 12px; border-radius: 8px;
+      border: 1.5px dashed var(--divider);
+      background: transparent; color: var(--text-2);
+      cursor: pointer; width: 100%; margin-top: 4px;
+      transition: border-color .12s, color .12s, background .12s;
+    }
+    .add-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,113,227,.04); }
+
+    /* ── Video section ── */
+    .playlist-row {
+      display: flex; gap: 8px; margin-bottom: 10px;
+    }
+    .playlist-input {
+      flex: 1; height: 36px;
+      border: 1.5px solid var(--divider);
+      border-radius: 9px;
+      padding: 0 11px;
+      font-size: 12px; font-family: inherit;
+      color: var(--text); background: var(--bg);
+      outline: none; transition: border-color .15s;
+    }
+    .playlist-input:focus { border-color: var(--accent); background: var(--surface); }
+    .playlist-input::placeholder { color: var(--text-3); font-size: 11px; }
+    .fetch-btn {
+      height: 36px; padding: 0 14px;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 9px;
+      font-size: 12px; font-weight: 600;
+      cursor: pointer; white-space: nowrap;
+      transition: background .15s, transform .12s var(--spring);
+      touch-action: manipulation;
+    }
+    .fetch-btn:hover { background: #005bbf; }
+    .fetch-btn:active { transform: scale(.97); }
+    .fetch-btn:disabled { background: var(--text-3); cursor: default; }
+
+    /* Manual add row */
+    .manual-row {
+      display: flex; gap: 6px; margin-bottom: 8px;
+    }
+    .manual-row .playlist-input { font-size: 11px; }
+    .manual-btn {
+      height: 32px; padding: 0 10px;
+      background: var(--bg); color: var(--text-2);
+      border: 1.5px solid var(--divider); border-radius: 8px;
+      font-size: 11px; font-weight: 600;
+      cursor: pointer; white-space: nowrap;
+      transition: border-color .12s, color .12s;
+    }
+    .manual-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .manual-btn:disabled { opacity: .5; cursor: default; }
+
+    .v-status {
+      font-size: 11px; color: var(--text-2);
+      display: flex; align-items: center; gap: 6px;
+      min-height: 18px; margin-bottom: 6px;
+    }
+    .v-status .spinner {
+      width: 12px; height: 12px;
+      border: 1.5px solid var(--divider);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin .6s linear infinite;
+      flex-shrink: 0;
+    }
+    .v-status.err { color: var(--red); }
+    .v-status.ok  { color: var(--green); }
+
+    /* Video list */
+    .video-list { display: flex; flex-direction: column; gap: 4px; max-height: 260px; overflow-y: auto; }
+    .video-list::-webkit-scrollbar { width: 4px; }
+    .video-list::-webkit-scrollbar-thumb { background: var(--divider); border-radius: 2px; }
+
+    .vi {
+      display: flex; align-items: center; gap: 7px;
+      background: var(--bg); border-radius: 8px;
+      padding: 5px 7px 5px 6px;
+      border: 1.5px solid transparent;
+      cursor: default; user-select: none;
+      transition: border-color .1s, box-shadow .1s, opacity .12s;
+      draggable: true;
+    }
+    .vi.selected { background: rgba(0,113,227,.05); border-color: rgba(0,113,227,.2); }
+    .vi.dragging { opacity: .35; }
+    .vi.drag-over { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(0,113,227,.12); }
+
+    .vi-handle { cursor: grab; color: var(--text-3); padding: 2px 1px; flex-shrink: 0; touch-action: none; }
+    .vi-handle:active { cursor: grabbing; }
+    .vi-handle svg { display: block; }
+
+    .vi-check {
+      width: 16px; height: 16px;
+      border: 1.5px solid var(--text-3);
+      border-radius: 4px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background .1s, border-color .1s;
+    }
+    .vi.selected .vi-check { background: var(--accent); border-color: var(--accent); }
+    .vi-check svg { display: none; }
+    .vi.selected .vi-check svg { display: block; }
+
+    .vi-thumb {
+      width: 52px; height: 29px; border-radius: 4px;
+      background: var(--divider); flex-shrink: 0; overflow: hidden;
+    }
+    .vi-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .vi-info { flex: 1; min-width: 0; }
+    .vi-title {
+      font-size: 11px; font-weight: 500; color: var(--text);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .vi-id { font-size: 10px; color: var(--text-3); font-family: monospace; }
+
+    .vi-order {
+      width: 18px; text-align: right;
+      font-size: 10px; font-weight: 600; color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* Controls */
+    .list-controls {
+      display: flex; align-items: center; gap: 6px;
+      margin: 8px 0 6px; flex-wrap: wrap;
+    }
+    .sel-hint { font-size: 11px; color: var(--text-2); flex: 1; }
+    .ctrl-btn {
+      font-size: 11px; font-weight: 600;
+      padding: 4px 9px; border-radius: 980px;
+      border: none; cursor: pointer;
+      background: rgba(0,0,0,.06); color: var(--text-2);
+      transition: background .12s; touch-action: manipulation;
+    }
+    .ctrl-btn:hover { background: rgba(0,0,0,.1); color: var(--text); }
+
+    /* Video output box */
+    .v-output {
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 10px; font-family: monospace;
+      color: var(--text-2);
+      white-space: pre-wrap; word-break: break-all;
+      max-height: 60px; overflow-y: auto;
+      border: 1.5px solid var(--divider);
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+    .v-output::-webkit-scrollbar { width: 3px; }
+    .v-output::-webkit-scrollbar-thumb { background: var(--divider); }
+    .v-copy-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 5px;
+    }
+    .v-count { font-size: 10px; color: var(--text-3); }
+    .v-copy {
+      font-size: 11px; font-weight: 600;
+      padding: 4px 10px; border-radius: 7px;
+      border: none; background: rgba(0,113,227,.1);
+      color: var(--accent); cursor: pointer;
+      transition: background .12s;
+    }
+    .v-copy:hover { background: rgba(0,113,227,.18); }
+    .v-copy.ok { background: rgba(52,199,89,.1); color: var(--green); }
+
+    /* ── CSV Output card ── */
+    .output-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--sh-md);
+      padding: 24px;
+      margin-top: 20px;
+      animation: fade-up .45s var(--spring) both;
+      animation-delay: .2s;
+    }
+    .output-card .card-title { margin-bottom: 16px; }
+    .csv-preview {
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-family: 'SF Mono', 'Menlo', monospace;
+      font-size: 11px;
+      color: var(--text-2);
+      white-space: pre-wrap;
+      word-break: break-all;
+      line-height: 1.6;
+      border: 1.5px solid var(--divider);
+      max-height: 120px;
+      overflow-y: auto;
+      margin-bottom: 12px;
+    }
+    .csv-preview::-webkit-scrollbar { width: 4px; }
+    .csv-preview::-webkit-scrollbar-thumb { background: var(--divider); }
+
+    .copy-row { display: flex; align-items: center; gap: 12px; }
+    .copy-btn {
+      height: 40px; padding: 0 24px;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 10px;
+      font-size: 14px; font-weight: 600;
+      cursor: pointer;
+      transition: background .15s, transform .12s var(--spring);
+    }
+    .copy-btn:hover { background: #005bbf; }
+    .copy-btn:active { transform: scale(.97); }
+    .copy-btn.ok { background: var(--green); }
+    .copy-hint { font-size: 12px; color: var(--text-2); line-height: 1.5; }
+    .copy-hint strong { color: var(--text); }
+
+    /* ── Field note ── */
+    .field-note {
+      font-size: 11px; color: var(--text-3);
+      margin-bottom: 8px; line-height: 1.4;
+    }
+    .field-gap { margin-bottom: 10px; }
+
+    /* ── Completeness dots ── */
+    .status-dots {
+      display: flex; gap: 6px; margin-top: 10px;
+    }
+    .sd {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--divider); flex-shrink: 0;
+      transition: background .2s;
+    }
+    .sd.done { background: var(--green); }
+    .sd.partial { background: var(--orange); }
+
+    /* ── card-title ── */
+    .card-title {
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .07em;
+      color: var(--text-3); margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>Nou tema</h1>
+    <p>Configura les dades del nou tema i genera la fila CSV per afegir a <code style="background:var(--bg);border-radius:5px;padding:1px 6px;font-size:12px;color:var(--accent)">data-classroom.csv</code>.</p>
+  </div>
+
+  <!-- Subject -->
+  <div class="subject-row">
+    <span class="subject-label">Tema</span>
+    <input
+      type="text"
+      class="subject-input"
+      id="subject-input"
+      placeholder="p. ex. funcions, estadistica, complexos…"
+      oninput="onSubjectChange()"
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <span class="subject-preview" id="subject-preview">
+      URL: <code>?subject=…</code>
+    </span>
+  </div>
+
+  <!-- API key (shared) -->
+  <div class="api-card">
+    <span class="card-title" style="margin-bottom:0">YouTube API Key</span>
+    <input
+      type="text"
+      class="api-input"
+      id="api-key-input"
+      placeholder="Opcional · AIzaSy… (per obtenir totes les pàgines d'una playlist)"
+      oninput="updateApiBadge()"
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <span class="api-badge free" id="api-badge">Sense API</span>
+  </div>
+
+  <!-- 3-col grid -->
+  <div class="grid">
+
+    <!-- ── Left column ── -->
+    <div>
+      <!-- Apunts i Exercicis -->
+      <div class="card" id="card-apunts">
+        <div class="card-title"><span class="dot dot-pdf"></span> Apunts i Exercicis</div>
+        <div class="field-note">PDF de Bogdan Crintea (Google Drive o enllaç directe)</div>
+        <input type="url" class="url-input" id="apunts-input"
+               placeholder="https://drive.google.com/file/d/…/view"
+               oninput="updateCsv()" />
+      </div>
+
+      <!-- Step Quiz -->
+      <div class="card" id="card-sq" style="margin-top:12px">
+        <div class="card-title"><span class="dot dot-quiz"></span> Exercicis Step Quiz</div>
+        <div class="field-note">Un o més enllaços (un per línia). Separats per <code style="font-size:10px;background:var(--bg);border-radius:4px;padding:1px 5px">|</code> al CSV.</div>
+        <div id="sq-list"></div>
+        <button class="add-btn" onclick="addSqLink()">+ Afegir URL</button>
+      </div>
+
+      <!-- Material Complementari -->
+      <div class="card" id="card-material" style="margin-top:12px">
+        <div class="card-title"><span class="dot dot-lock"></span> Material Complementari</div>
+        <div class="field-note">Google Drive o enllaç directe (opcional)</div>
+        <input type="url" class="url-input" id="material-input"
+               placeholder="https://drive.google.com/file/d/…/view"
+               oninput="updateCsv()" />
+      </div>
+    </div>
+
+    <!-- ── Center column: Teoria ── -->
+    <div class="card">
+      <div class="card-title"><span class="dot dot-theory"></span> Vídeos de Teoria · Píldoras Matemáticas</div>
+
+      <!-- Playlist fetch -->
+      <div class="playlist-row">
+        <input type="url" class="playlist-input" id="teoria-pl-input"
+               placeholder="URL de la playlist de YouTube…"
+               onkeydown="if(event.key==='Enter') fetchSection('teoria')" />
+        <button class="fetch-btn" id="teoria-fetch-btn" onclick="fetchSection('teoria')">Carrega</button>
+      </div>
+
+      <!-- Manual add -->
+      <div class="manual-row">
+        <input type="text" class="playlist-input" id="teoria-manual-input"
+               placeholder="URL o ID d'un vídeo concret"
+               onkeydown="if(event.key==='Enter') addManualVideo('teoria')" />
+        <button class="manual-btn" id="teoria-manual-btn" onclick="addManualVideo('teoria')">Afegeix</button>
+      </div>
+
+      <div class="v-status" id="teoria-status"></div>
+
+      <div id="teoria-video-section" style="display:none">
+        <div class="list-controls">
+          <span class="sel-hint" id="teoria-sel-hint">0 vídeos</span>
+          <button class="ctrl-btn" onclick="selectAllVideos('teoria')">Tots</button>
+          <button class="ctrl-btn" onclick="deselectAllVideos('teoria')">Cap</button>
+          <button class="ctrl-btn" onclick="clearAllVideos('teoria')">Esborra tot</button>
+        </div>
+        <div class="video-list" id="teoria-video-list"></div>
+
+        <div class="v-copy-row">
+          <span class="v-count" id="teoria-count"></span>
+          <button class="v-copy" id="teoria-copy-btn" onclick="copySection('teoria')">Copia fragment</button>
+        </div>
+        <div class="v-output" id="teoria-output">—</div>
+      </div>
+    </div>
+
+    <!-- ── Right column: Problemes ── -->
+    <div class="card">
+      <div class="card-title"><span class="dot dot-solved"></span> Problemes Resolts · Matemàtiques amb Bogdan</div>
+
+      <!-- Playlist fetch -->
+      <div class="playlist-row">
+        <input type="url" class="playlist-input" id="problemes-pl-input"
+               placeholder="URL de la playlist de YouTube…"
+               onkeydown="if(event.key==='Enter') fetchSection('problemes')" />
+        <button class="fetch-btn" id="problemes-fetch-btn" onclick="fetchSection('problemes')">Carrega</button>
+      </div>
+
+      <!-- Manual add -->
+      <div class="manual-row">
+        <input type="text" class="playlist-input" id="problemes-manual-input"
+               placeholder="URL o ID d'un vídeo concret"
+               onkeydown="if(event.key==='Enter') addManualVideo('problemes')" />
+        <button class="manual-btn" id="problemes-manual-btn" onclick="addManualVideo('problemes')">Afegeix</button>
+      </div>
+
+      <div class="v-status" id="problemes-status"></div>
+
+      <div id="problemes-video-section" style="display:none">
+        <div class="list-controls">
+          <span class="sel-hint" id="problemes-sel-hint">0 vídeos</span>
+          <button class="ctrl-btn" onclick="selectAllVideos('problemes')">Tots</button>
+          <button class="ctrl-btn" onclick="deselectAllVideos('problemes')">Cap</button>
+          <button class="ctrl-btn" onclick="clearAllVideos('problemes')">Esborra tot</button>
+        </div>
+        <div class="video-list" id="problemes-video-list"></div>
+
+        <div class="v-copy-row">
+          <span class="v-count" id="problemes-count"></span>
+          <button class="v-copy" id="problemes-copy-btn" onclick="copySection('problemes')">Copia fragment</button>
+        </div>
+        <div class="v-output" id="problemes-output">—</div>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <!-- CSV Output -->
+  <div class="output-card">
+    <div class="card-title">Fila CSV generada</div>
+    <div class="csv-preview" id="csv-output">—</div>
+    <div class="copy-row">
+      <button class="copy-btn" id="copy-csv-btn" onclick="copyCsv()">Copia fila</button>
+      <span class="copy-hint">
+        Afegeix aquesta fila al final de
+        <strong>data-classroom.csv</strong>
+        i puja el fitxer actualitzat.
+      </span>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+/* ══════════════════════════════════════════════════
+   STATE
+══════════════════════════════════════════════════ */
+const sections = {
+  teoria:    { videos: [], selected: new Set(), dragSrc: null },
+  problemes: { videos: [], selected: new Set(), dragSrc: null },
+};
+
+/* ══════════════════════════════════════════════════
+   SUBJECT
+══════════════════════════════════════════════════ */
+function onSubjectChange() {
+  const raw = document.getElementById('subject-input').value.trim().toLowerCase();
+  const slug = raw.replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  const preview = document.getElementById('subject-preview');
+  preview.innerHTML = slug
+    ? `URL: <code>?subject=${slug}</code>`
+    : `URL: <code>?subject=…</code>`;
+  updateCsv();
+}
+
+/* ══════════════════════════════════════════════════
+   API BADGE
+══════════════════════════════════════════════════ */
+function updateApiBadge() {
+  const key   = document.getElementById('api-key-input').value.trim();
+  const badge = document.getElementById('api-badge');
+  if (key) {
+    badge.textContent = '✓ API activa';
+    badge.className   = 'api-badge active';
+  } else {
+    badge.textContent = 'Sense API';
+    badge.className   = 'api-badge free';
+  }
+}
+
+/* ══════════════════════════════════════════════════
+   CORS PROXIES (same as links-config)
+══════════════════════════════════════════════════ */
+const PROXIES = [
+  url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+  url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+  url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+];
+
+async function fetchWithProxies(targetUrl) {
+  let lastErr;
+  for (const proxyFn of PROXIES) {
+    try {
+      const res = await fetch(proxyFn(targetUrl), { signal: AbortSignal.timeout(8000) });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const text = await res.text();
+      try { const j = JSON.parse(text); if (j.contents) return j.contents; } catch {}
+      return text;
+    } catch (e) { lastErr = e; }
+  }
+  throw new Error('Tots els proxies han fallat. Comprova la connexió.');
+}
+
+/* ══════════════════════════════════════════════════
+   PLAYLIST ID / VIDEO ID EXTRACTORS
+══════════════════════════════════════════════════ */
+function extractPlaylistId(url) {
+  try {
+    const u = new URL(url);
+    return u.searchParams.get('list') || null;
+  } catch {
+    const m = url.match(/[?&]list=([^&]+)/);
+    return m ? m[1] : null;
+  }
+}
+
+function extractVideoId(raw) {
+  try {
+    const u = new URL(raw);
+    if (u.searchParams.get('v')) return u.searchParams.get('v');
+    if (u.hostname === 'youtu.be') return u.pathname.slice(1).split('?')[0];
+    const m = u.pathname.match(/\/(?:embed|v)\/([^/?]+)/);
+    if (m) return m[1];
+  } catch {}
+  const m = raw.match(/^([A-Za-z0-9_-]{11})$/);
+  return m ? m[1] : null;
+}
+
+/* ══════════════════════════════════════════════════
+   FETCH PLAYLIST (RSS or API)
+══════════════════════════════════════════════════ */
+async function fetchSection(sec) {
+  const raw    = document.getElementById(`${sec}-pl-input`).value.trim();
+  const apiKey = document.getElementById('api-key-input').value.trim();
+  const pid    = extractPlaylistId(raw);
+
+  if (!pid) {
+    setStatus(sec, 'URL de playlist no vàlida. Exemple: ?list=PLxxxxxx', 'err');
+    return;
+  }
+
+  const btn = document.getElementById(`${sec}-fetch-btn`);
+  btn.disabled = true;
+  setStatus(sec, '', '');
+
+  try {
+    if (apiKey) {
+      await fetchPlaylistAPI(sec, pid, apiKey);
+    } else {
+      await fetchPlaylistRSS(sec, pid);
+    }
+    sections[sec].selected = new Set(sections[sec].videos.map((_, i) => i));
+    renderVideoList(sec);
+    updateSectionOutput(sec);
+    setStatus(sec, '', '');
+    document.getElementById(`${sec}-video-section`).style.display = 'block';
+    updateCsv();
+  } catch (err) {
+    setStatus(sec, `Error: ${err.message}`, 'err');
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function fetchPlaylistRSS(sec, pid) {
+  setStatus(sec, 'Carregant via RSS (màx. 15 vídeos)…');
+  const rssUrl  = `https://www.youtube.com/feeds/videos.xml?playlist_id=${pid}`;
+  const xmlText = await fetchWithProxies(rssUrl);
+  const xml     = new DOMParser().parseFromString(xmlText, 'text/xml');
+  const entries = [...xml.querySelectorAll('entry')];
+  if (entries.length === 0) throw new Error('Playlist buida o no trobada.');
+
+  const existing = new Set(sections[sec].videos.map(v => v.id));
+  const newVids  = entries.map(e => ({
+    id:    e.querySelector('videoId')?.textContent || '',
+    title: e.querySelector('title')?.textContent   || '(sense títol)',
+  })).filter(v => v.id && !existing.has(v.id));
+
+  sections[sec].videos = [...sections[sec].videos, ...newVids];
+}
+
+async function fetchPlaylistAPI(sec, pid, apiKey) {
+  const existing = new Set(sections[sec].videos.map(v => v.id));
+  let pageToken = '', page = 1;
+
+  do {
+    setStatus(sec, `Carregant pàgina ${page} via YouTube API…`);
+    const url = `https://www.googleapis.com/youtube/v3/playlistItems`
+      + `?part=snippet&playlistId=${encodeURIComponent(pid)}`
+      + `&maxResults=50`
+      + (pageToken ? `&pageToken=${pageToken}` : '')
+      + `&key=${encodeURIComponent(apiKey)}`;
+
+    const res  = await fetch(url, { signal: AbortSignal.timeout(10000) });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data?.error?.message || `HTTP ${res.status}`);
+
+    for (const item of (data.items || [])) {
+      const vid   = item.snippet?.resourceId?.videoId;
+      const title = item.snippet?.title;
+      if (vid && title && title !== 'Deleted video' && title !== 'Private video' && !existing.has(vid)) {
+        sections[sec].videos.push({ id: vid, title });
+        existing.add(vid);
+      }
+    }
+    pageToken = data.nextPageToken || '';
+    page++;
+  } while (pageToken);
+
+  if (sections[sec].videos.length === 0) throw new Error('Playlist buida, privada o sense vídeos visibles.');
+}
+
+/* ══════════════════════════════════════════════════
+   MANUAL VIDEO ADD
+══════════════════════════════════════════════════ */
+function decodeHtmlEntities(str) {
+  const t = document.createElement('textarea');
+  t.innerHTML = str;
+  return t.value;
+}
+
+async function addManualVideo(sec) {
+  const raw  = document.getElementById(`${sec}-manual-input`).value.trim();
+  const vid  = extractVideoId(raw);
+  const btn  = document.getElementById(`${sec}-manual-btn`);
+
+  if (!vid) { setStatus(sec, '⚠️ URL o ID no vàlid.', 'err'); return; }
+  if (sections[sec].videos.some(v => v.id === vid)) {
+    setStatus(sec, '⚠️ Aquest vídeo ja és a la llista.', 'err'); return;
+  }
+
+  btn.disabled = true;
+  setStatus(sec, 'Obtenint el títol del vídeo…');
+
+  let title = vid;
+  try {
+    const watchUrl = `https://www.youtube.com/watch?v=${vid}`;
+    const html = await fetchWithProxies(watchUrl);
+    const og   = html.match(/<meta\s+property=["']og:title["']\s+content=["']([^"']+)["']/i);
+    if (og) title = decodeHtmlEntities(og[1]);
+    else {
+      const t = html.match(/<title>([^<]+)<\/title>/i);
+      if (t) title = decodeHtmlEntities(t[1].replace(/ [-–] YouTube\s*$/i, '').trim());
+    }
+  } catch { /* use vid as title */ }
+
+  const newIdx = sections[sec].videos.length;
+  sections[sec].videos.push({ id: vid, title });
+  sections[sec].selected.add(newIdx);
+
+  document.getElementById(`${sec}-video-section`).style.display = 'block';
+  renderVideoList(sec);
+  updateSectionOutput(sec);
+  setStatus(sec, `✓ "${title}" afegit.`, 'ok');
+  document.getElementById(`${sec}-manual-input`).value = '';
+  btn.disabled = false;
+  updateCsv();
+}
+
+/* ══════════════════════════════════════════════════
+   RENDER VIDEO LIST
+══════════════════════════════════════════════════ */
+function renderVideoList(sec) {
+  const list = document.getElementById(`${sec}-video-list`);
+  list.innerHTML = '';
+  const { videos, selected } = sections[sec];
+
+  let selOrder = 0;
+  videos.forEach((v, idx) => {
+    const isSel = selected.has(idx);
+    if (isSel) selOrder++;
+
+    const item = document.createElement('div');
+    item.className = 'vi' + (isSel ? ' selected' : '');
+    item.dataset.idx = idx;
+    item.draggable = true;
+    item.innerHTML = `
+      <div class="vi-handle" title="Arrossega per reordenar">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <circle cx="3.5" cy="2.5" r="1" fill="currentColor"/>
+          <circle cx="8.5" cy="2.5" r="1" fill="currentColor"/>
+          <circle cx="3.5" cy="6"   r="1" fill="currentColor"/>
+          <circle cx="8.5" cy="6"   r="1" fill="currentColor"/>
+          <circle cx="3.5" cy="9.5" r="1" fill="currentColor"/>
+          <circle cx="8.5" cy="9.5" r="1" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="vi-check" onclick="toggleVideo('${sec}', ${idx})">
+        <svg width="8" height="8" viewBox="0 0 8 8" fill="none"
+             stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="1 4 3 6.5 7 1.5"/>
+        </svg>
+      </div>
+      <div class="vi-thumb">
+        <img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg"
+             alt="" loading="lazy" onerror="this.style.display='none'">
+      </div>
+      <div class="vi-info">
+        <div class="vi-title">${escHtml(v.title)}</div>
+        <div class="vi-id">${v.id}</div>
+      </div>
+      <div class="vi-order">${isSel ? selOrder : ''}</div>`;
+
+    item.addEventListener('dragstart', e => onDragStart(sec, e));
+    item.addEventListener('dragover',  e => onDragOver(sec, e));
+    item.addEventListener('dragleave', e => onDragLeave(sec, e));
+    item.addEventListener('drop',      e => onDrop(sec, e));
+    item.addEventListener('dragend',   () => onDragEnd(sec));
+    list.appendChild(item);
+  });
+
+  const n = selected.size;
+  document.getElementById(`${sec}-sel-hint`).textContent =
+    `${n} vídeo${n !== 1 ? 's' : ''} seleccionat${n !== 1 ? 's' : ''}`;
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ══════════════════════════════════════════════════
+   TOGGLE / SELECT / CLEAR
+══════════════════════════════════════════════════ */
+function toggleVideo(sec, idx) {
+  const s = sections[sec];
+  s.selected.has(idx) ? s.selected.delete(idx) : s.selected.add(idx);
+  renderVideoList(sec);
+  updateSectionOutput(sec);
+  updateCsv();
+}
+function selectAllVideos(sec) {
+  sections[sec].videos.forEach((_, i) => sections[sec].selected.add(i));
+  renderVideoList(sec); updateSectionOutput(sec); updateCsv();
+}
+function deselectAllVideos(sec) {
+  sections[sec].selected.clear();
+  renderVideoList(sec); updateSectionOutput(sec); updateCsv();
+}
+function clearAllVideos(sec) {
+  sections[sec].videos   = [];
+  sections[sec].selected = new Set();
+  sections[sec].dragSrc  = null;
+  document.getElementById(`${sec}-video-section`).style.display = 'none';
+  updateSectionOutput(sec); updateCsv();
+}
+
+/* ══════════════════════════════════════════════════
+   DRAG & DROP
+══════════════════════════════════════════════════ */
+function onDragStart(sec, e) {
+  sections[sec].dragSrc = +e.currentTarget.dataset.idx;
+  e.currentTarget.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+}
+function onDragOver(sec, e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  document.querySelectorAll(`#${sec}-video-list .vi`).forEach(el => el.classList.remove('drag-over'));
+  e.currentTarget.classList.add('drag-over');
+}
+function onDragLeave(sec, e) { e.currentTarget.classList.remove('drag-over'); }
+function onDrop(sec, e) {
+  e.preventDefault();
+  const s = sections[sec];
+  const targetIdx = +e.currentTarget.dataset.idx;
+  if (s.dragSrc === null || s.dragSrc === targetIdx) return;
+
+  const moved = s.videos.splice(s.dragSrc, 1)[0];
+  s.videos.splice(targetIdx, 0, moved);
+
+  const selTitles = new Set([...s.selected].map(i => s.videos[i]?.title));
+  s.selected = new Set(s.videos.map((v,i) => selTitles.has(v.title) ? i : -1).filter(i => i >= 0));
+
+  renderVideoList(sec); updateSectionOutput(sec); updateCsv();
+}
+function onDragEnd(sec) {
+  document.querySelectorAll(`#${sec}-video-list .vi`).forEach(el => {
+    el.classList.remove('dragging', 'drag-over');
+  });
+  sections[sec].dragSrc = null;
+}
+
+/* ══════════════════════════════════════════════════
+   SECTION OUTPUT TEXT
+══════════════════════════════════════════════════ */
+function getSectionText(sec) {
+  const { videos, selected } = sections[sec];
+  return videos
+    .filter((_, i) => selected.has(i))
+    .map(v => `${v.id}:${v.title}`)
+    .join('|');
+}
+
+function updateSectionOutput(sec) {
+  const text = getSectionText(sec);
+  const el   = document.getElementById(`${sec}-output`);
+  el.textContent = text || '—';
+  const n = sections[sec].selected.size;
+  document.getElementById(`${sec}-count`).textContent =
+    n ? `${n} vídeo${n !== 1 ? 's' : ''}` : '';
+}
+
+async function copySection(sec) {
+  const text = getSectionText(sec);
+  if (!text) return;
+  const btn = document.getElementById(`${sec}-copy-btn`);
+  try { await navigator.clipboard.writeText(text); } catch {}
+  btn.textContent = '✓ Copiat!';
+  btn.classList.add('ok');
+  setTimeout(() => { btn.textContent = 'Copia fragment'; btn.classList.remove('ok'); }, 2000);
+}
+
+/* ══════════════════════════════════════════════════
+   STEP QUIZ LINKS
+══════════════════════════════════════════════════ */
+let sqCount = 0;
+
+function addSqLink(value = '') {
+  sqCount++;
+  const id  = `sq-${sqCount}`;
+  const row = document.createElement('div');
+  row.className = 'sq-item';
+  row.id = `sq-row-${sqCount}`;
+  row.innerHTML = `
+    <input type="url" class="url-input" id="${id}"
+           placeholder="https://step-quiz.net/…"
+           oninput="updateCsv()" />
+    <button class="sq-remove" onclick="removeSqLink('sq-row-${sqCount}')" title="Elimina">×</button>`;
+  if (value) row.querySelector('input').value = value;
+  document.getElementById('sq-list').appendChild(row);
+  row.querySelector('input').focus();
+  updateCsv();
+}
+
+function removeSqLink(rowId) {
+  const el = document.getElementById(rowId);
+  if (el) el.remove();
+  updateCsv();
+}
+
+function getSqLinks() {
+  return [...document.querySelectorAll('#sq-list input')]
+    .map(el => el.value.trim())
+    .filter(Boolean);
+}
+
+/* ══════════════════════════════════════════════════
+   STATUS HELPERS
+══════════════════════════════════════════════════ */
+function setStatus(sec, msg, type = '') {
+  const el = document.getElementById(`${sec}-status`);
+  el.className = `v-status${type ? ' ' + type : ''}`;
+  if (!msg) { el.innerHTML = ''; return; }
+  const spinner = (!type || type === '') ? '<div class="spinner"></div>' : '';
+  el.innerHTML = `${spinner}<span>${escHtml(msg)}</span>`;
+}
+
+/* ══════════════════════════════════════════════════
+   CSV GENERATION
+══════════════════════════════════════════════════ */
+function csvField(val) {
+  // If the value contains a comma, newline, or quote, wrap in quotes and escape inner quotes
+  if (!val) return '';
+  if (/[,"\r\n]/.test(val)) return '"' + val.replace(/"/g, '""') + '"';
+  return val;
+}
+
+function updateCsv() {
+  const subject  = document.getElementById('subject-input').value.trim().toLowerCase()
+                    .replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  const apunts   = document.getElementById('apunts-input').value.trim();
+  const teoria   = getSectionText('teoria');
+  const problemes= getSectionText('problemes');
+  const material = document.getElementById('material-input').value.trim();
+  const sq       = getSqLinks().join('|');
+
+  const row = [
+    csvField(subject),
+    csvField(apunts),
+    csvField(teoria),
+    csvField(problemes),
+    csvField(material),
+    csvField(sq),
+  ].join(',');
+
+  document.getElementById('csv-output').textContent = row || '—';
+}
+
+async function copyCsv() {
+  const text = document.getElementById('csv-output').textContent;
+  if (!text || text === '—') return;
+  const btn = document.getElementById('copy-csv-btn');
+  try { await navigator.clipboard.writeText(text); } catch {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    try { document.execCommand('copy'); } catch {}
+    document.body.removeChild(ta);
+  }
+  btn.textContent = '✓ Copiat!';
+  btn.classList.add('ok');
+  setTimeout(() => { btn.textContent = 'Copia fila'; btn.classList.remove('ok'); }, 2500);
+}
+
+/* ── Init: one empty SQ link ── */
+addSqLink();
+</script>
+</body>
+</html>
