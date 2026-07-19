@@ -1,0 +1,85 @@
+{
+  "course": "4eso",
+  "label": "4t ESO",
+  "pdfPrefix": "4eso",
+  "units": [
+    {
+      "num": 2,
+      "title": "Percentatges i matemàtica financera",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Qui hi surt guanyant?",
+          "subtitle": "Reprendre els percentatges de 3r amb una pregunta incòmoda —l'ordre en què s'apliquen— i descobrir l'error de sumar percentatges i el factor multiplicador com a solució."
+        },
+        {
+          "num": 2,
+          "title": "El factor multiplicador, a fons",
+          "subtitle": "Dominar augments i disminucions successius amb $\\times(1\\pm r)$, treballar percentatges més grans del 100\\% i més petits de l'1\\%, i justificar per què els percentatges no se sumen."
+        },
+        {
+          "num": 3,
+          "title": "Impostos, rebuts i interessos",
+          "subtitle": "Aplicar el factor multiplicador a situacions financeres reals: calcular i treure l'IVA, interpretar rebuts, i entendre l'interès simple i el cost total."
+        },
+        {
+          "num": 4,
+          "title": "Comptat o a terminis? Mira els sectors",
+          "subtitle": "Comparar opcions de pagament (comptat vs. terminis), representar despeses amb diagrames de sectors i conèixer, com a fenomen, l'interès compost i la idea de TAE."
+        },
+        {
+          "num": 5,
+          "title": "Síntesi: el mapa i les trampes",
+          "subtitle": "Reunir en un full el mètode del factor multiplicador i les aplicacions financeres, i construir un «quadre de trampes» amb els errors típics per no tornar-hi a caure."
+        },
+        {
+          "num": 6,
+          "title": "Informe breu de decisió financera",
+          "subtitle": "Aplicar en grup tot el mètode de la unitat per analitzar una situació real —una compra amb opcions de pagament o un estalvi amb interès— i recomanar, amb taula i diagrama de sectors, l'opció més convenient."
+        },
+        {
+          "num": 7,
+          "title": "Prova de la unitat",
+          "subtitle": "Demostrar de manera individual el domini del factor multiplicador, els percentatges encadenats, els impostos, els interessos i la comparació d'opcions."
+        }
+      ]
+    },
+    {
+      "num": 3,
+      "title": "Expressions algebraiques: el llibre de les demostracions",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Per què sempre funciona?",
+          "subtitle": "Recuperar el llenguatge dels monomis i polinomis, descobrir un «truc» de càlcul mental que amaga una identitat notable i plantejar el repte de la unitat: no fer servir les fórmules, sinó demostrar-les."
+        },
+        {
+          "num": 2,
+          "title": "Operar amb polinomis",
+          "subtitle": "Sumar, restar i multiplicar polinomis amb solvència, calcular-ne el valor numèric i fer servir bé el vocabulari (grau, coeficient, terme)."
+        },
+        {
+          "num": 3,
+          "title": "Demostrar les identitats notables",
+          "subtitle": "Demostrar el quadrat d'una suma, el quadrat d'una diferència i la suma per diferència, per dues vies en paral·lel: el model d'àrea (geomètrica) i el desenvolupament (algebraica)."
+        },
+        {
+          "num": 4,
+          "title": "Factoritzar, el camí invers",
+          "subtitle": "Factoritzar expressions traient factor comú i reconeixent les identitats notables a la inversa, i simplificar fraccions algebraiques senzilles."
+        },
+        {
+          "num": 5,
+          "title": "Síntesi: desenvolupar i factoritzar",
+          "subtitle": "Reunir en un mapa les dues direccions del treball algebraic —desenvolupar i factoritzar— i construir el quadre d'errors típics per no tornar-hi a caure."
+        },
+        {
+          "num": 6,
+          "title": "El llibre de les demostracions",
+          "subtitle": "Construir en grup un recull on cada identitat notable apareix amb la seva demostració (gràfica i algebraica), i demostrar de manera individual el domini de la unitat."
+        }
+      ]
+    }
+  ],
+  "indexPdf": null
+}
