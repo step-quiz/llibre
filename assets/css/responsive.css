@@ -1,0 +1,24 @@
+/* responsive.css — media queries */
+
+@media (max-width: 820px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar {
+    /* En mòbil la sidebar queda sempre visible (scroll de la pàgina sencera).
+       Si en un futur es vol tornar al drawer, afegir el codi de transform aquí. */
+  }
+  .doc-wrap { padding: 22px 18px 70px; }
+  .doc-head .dh-actions { display: none; }
+  /* En mòbil: text "< Índex" ocult, botons de curs més compactes */
+  .topbar .pill-btn { font-size: 0; padding: 7px 10px; }
+  .topbar .pill-btn svg { width: 15px; height: 15px; }
+  .course-nav-btn { padding: 6px 10px; font-size: 12.5px; }
+
+  /* ── Visor de PDF: en mòbil la sidebar ja no és sticky en columna,
+     així que el panell principal necessita una alçada pròpia en lloc
+     de dependre de calc(100dvh - 54px) de l'escriptori. ─────────────── */
+  .sidebar { position: static; height: auto; max-height: 50dvh; }
+  .viewer-panel { height: 70dvh; }
+  .selection-bar { flex-wrap: wrap; gap: 8px; padding: 10px 14px; }
+  .selection-actions { width: 100%; justify-content: flex-end; }
+  .act-title, .unit-title-text { white-space: normal; }
+}

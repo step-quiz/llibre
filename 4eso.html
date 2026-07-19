@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4t ESO — Llibre de text · Matemàtiques</title>
+
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/viewer.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+<div class="app" id="app">
+
+  <header class="topbar">
+    <a class="pill-btn" href="index.html">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M10 4l-5 4 5 4"/></svg>
+      Índex
+    </a>
+    <span class="brand" id="brand"></span>
+    <div class="topbar-spacer"></div>
+    <nav class="course-nav">
+      <a class="course-nav-btn" href="2eso.html">2n ESO</a>
+      <a class="course-nav-btn" href="3eso.html">3r ESO</a>
+      <a class="course-nav-btn active" href="4eso.html">4t ESO</a>
+    </nav>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" id="sidebar">
+      <div class="state"><div class="spinner"></div><div>Carregant…</div></div>
+    </nav>
+    <main class="main" id="main">
+      <div class="viewer-panel">
+        <div class="viewer-topbar">
+          <span id="viewerTitle">Selecciona una activitat</span>
+          <div class="topbar-spacer"></div>
+          <a class="pill-btn" id="openNewTab" href="#" target="_blank" rel="noopener" hidden>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3H3.5A1.5 1.5 0 0 0 2 4.5v8A1.5 1.5 0 0 0 3.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-3M9 2h5v5M14 2 7 9"/></svg>
+            Obrir en pestanya nova
+          </a>
+        </div>
+        <iframe id="pdfFrame" class="pdf-frame" hidden title="Visor de PDF"></iframe>
+        <div class="viewer-empty" id="viewerEmpty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+          <p>Tria una activitat, marca caselles per combinar-ne diverses, o selecciona tot el curs des de la barra lateral.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="selection-bar" id="selectionBar" hidden>
+    <div class="selection-info"><strong id="selCount">0</strong> <span id="selLabel">activitats seleccionades</span></div>
+    <div class="selection-actions">
+      <button class="pill-btn" id="btnClear">Netejar</button>
+      <button class="pill-btn accent" id="btnView">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 8s2.5-5 7-5 7 5 7 5-2.5 5-7 5-7-5-7-5z"/><circle cx="8" cy="8" r="2"/></svg>
+        Veure selecció
+      </button>
+      <button class="pill-btn accent" id="btnDownload">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v8m0 0-3-3m3 3 3-3M3 13h10"/></svg>
+        Descarregar PDF
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<script src="assets/lib/pdf-lib.min.js"></script>
+<script src="assets/js/utils.js"></script>
+<script src="assets/js/course-tree.js"></script>
+<script src="assets/js/pdf-merge.js"></script>
+<script>
+  window.COURSE = 'contingut/4eso';
+</script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+/* tokens.css — Design tokens (estil del projecte de matemàtiques) i reset base */
+:root {
+  --navy:   #1f3a5f;
+  --blue:   #2e75b6;
+  --blue-bg:#eaf1fa;
+  --ink:    #22262b;
+  --muted:  #5f5e5a;
+  --hint:   #8a8a85;
+  --line:   #dfe3ea;
+  --line-2: #eef1f5;
+  --bg:     #f4f6f9;
+  --card:   #ffffff;
+  --surface-2: #fafbfc;
+  --accent-soft: rgba(46,117,182,.10);
+
+  --radius:    14px;
+  --radius-sm: 9px;
+  --sh:    0 1px 2px rgba(0,0,0,.04), 0 2px 8px rgba(0,0,0,.05);
+  --sh-md: 0 4px 16px rgba(0,0,0,.07), 0 2px 6px rgba(0,0,0,.04);
+  --ease:  cubic-bezier(.4,0,.2,1);
+
+  /* accents per tipus de document */
+  --doc-prog:  #b56010;   /* programació general (DOCX) */
+  --doc-ud:    #2e75b6;   /* unitats didàctiques (MD)   */
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* Assegura que l'atribut HTML `hidden` sempre oculta l'element,
+   independentment de qualsevol regla CSS `display` amb més especificitat. */
+[hidden] { display: none !important; }
+
+html, body {
+  height: 100%;
+  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  font-size: 16.5px;
+  line-height: 1.5;
+}
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }

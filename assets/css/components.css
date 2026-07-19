@@ -1,0 +1,93 @@
+/* components.css — pill-btn, nav-item, spinner, estats, doc-head */
+
+.pill-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 13px; border-radius: 20px;
+  border: 1px solid var(--line); font-size: 14px; font-weight: 600;
+  color: var(--muted); background: var(--card); transition: .12s;
+  white-space: nowrap; text-decoration: none;
+}
+.pill-btn:hover { border-color: var(--navy); color: var(--navy); text-decoration: none; }
+.pill-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+.pill-btn.accent { border-color: var(--blue); color: var(--blue); }
+.pill-btn.accent:hover { background: var(--blue); color: #fff; }
+
+/* ── Sidebar: grups i ítems de navegació ────────────────────────────── */
+.side-group { margin-bottom: 18px; }
+.side-group h3 {
+  font-size: 10px; font-weight: 700; letter-spacing: .07em;
+  text-transform: uppercase; color: var(--hint);
+  margin: 4px 10px 8px;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 11px;
+  width: 100%; text-align: left;
+  padding: 9px 11px; margin-bottom: 3px;
+  border-radius: var(--radius-sm);
+  color: var(--ink); transition: background .12s, color .12s;
+  cursor: pointer; line-height: 1.3;
+}
+.nav-item:hover { background: var(--blue-bg); text-decoration: none; }
+.nav-item.active { background: var(--blue); color: #fff; }
+.nav-item.active .nav-sub { color: rgba(255,255,255,.82); }
+.nav-item.active .nav-badge { background: rgba(255,255,255,.22); color: #fff; }
+.nav-ico {
+  flex-shrink: 0; width: 30px; height: 30px;
+  border-radius: 8px; display: inline-flex;
+  align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800;
+}
+.nav-ico.prog { color: var(--doc-prog); background: rgba(181,96,16,.10); }
+.nav-ico.ud   { color: var(--doc-ud);   background: rgba(46,117,182,.10); }
+.nav-item.active .nav-ico { background: rgba(255,255,255,.20); color: #fff; }
+.nav-body { flex: 1; min-width: 0; }
+.nav-title { font-size: 14.5px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nav-sub { font-size: 11.5px; color: var(--muted); margin-top: 1px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nav-badge {
+  flex-shrink: 0; font-size: 11px; font-weight: 700;
+  color: var(--muted); background: var(--line-2);
+  padding: 2px 7px; border-radius: 20px;
+}
+.nav-empty {
+  font-size: 12.5px; color: var(--hint); line-height: 1.5;
+  padding: 8px 11px; border: 1px dashed var(--line);
+  border-radius: var(--radius-sm); margin-top: 4px;
+}
+
+/* ── Capçalera de cada document ─────────────────────────────────────── */
+.doc-head {
+  display: flex; align-items: flex-start; gap: 14px;
+  margin-bottom: 24px; padding-bottom: 18px;
+  border-bottom: 2px solid var(--line);
+}
+.doc-head .dh-ico {
+  flex-shrink: 0; width: 44px; height: 44px; border-radius: 11px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 800;
+}
+.doc-head .dh-ico.prog { color: var(--doc-prog); background: rgba(181,96,16,.10); }
+.doc-head .dh-ico.ud   { color: var(--doc-ud);   background: rgba(46,117,182,.10); }
+.doc-head h1 { font-size: 25px; color: var(--navy); line-height: 1.2; }
+.doc-head .dh-meta { font-size: 13.5px; color: var(--muted); margin-top: 4px; }
+.doc-head .dh-actions { margin-left: auto; display: flex; gap: 8px; flex-shrink: 0; }
+
+/* ── Estats (carregant / error) ─────────────────────────────────────── */
+.state {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 14px; padding: 80px 20px; text-align: center; color: var(--muted);
+}
+.spinner {
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 3px solid var(--line); border-top-color: var(--blue);
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.state.err { color: #a02848; }
+.state.err .state-box {
+  background: rgba(160,40,72,.06); border: 1px solid rgba(160,40,72,.18);
+  border-radius: var(--radius); padding: 18px 22px; max-width: 520px;
+  text-align: left; line-height: 1.55; color: var(--ink); font-size: 14.5px;
+}
+.state.err code { font-family: ui-monospace, Menlo, Consolas, monospace;
+  background: rgba(0,0,0,.05); padding: 1px 5px; border-radius: 5px; font-size: 13px; }
