@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Llibre digital de Matemàtiques</title>
+  <style>
+    /* ── Design tokens ──────────────────────────────────────────────── */
+    :root {
+      --bg:          #f5f5f7;   /* Apple background */
+      --surface:     #ffffff;
+      --surface-2:   #fafafa;
+      --text:        #1d1d1f;   /* Apple near-black */
+      --text-2:      #6e6e73;   /* secondary */
+      --text-3:      #aeaeb2;   /* tertiary */
+      --accent:      #0071e3;   /* Apple blue */
+      --accent-dark: #0064cc;
+      --green:       #34c759;   /* Apple green */
+      --amber:       #ff9f0a;   /* Apple amber */
+      --purple:      #bf5af2;   /* Apple purple */
+      --red:         #ff3b30;   /* Apple red */
+      --divider:     rgba(0,0,0,.07);
+      --divider-2:   rgba(0,0,0,.04);
+      --radius-xs:   8px;
+      --radius-sm:   12px;
+      --radius:      18px;
+      --radius-lg:   22px;
+      --sh:          0 2px 8px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+      --sh-md:       0 6px 24px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.05);
+      --sh-lg:       0 16px 48px rgba(0,0,0,.10), 0 4px 12px rgba(0,0,0,.06);
+      --ease:        cubic-bezier(.4,0,.2,1);
+      --spring:      cubic-bezier(.34,1.56,.64,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+                   'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* ⑤ touch-action: evita el retard de 300ms en mòbils antics */
+    button, a, label, [role="button"] { touch-action: manipulation; }
+
+    /* ── Keyframes ───────────────────────────────────────────────────── */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(20px) scale(.98); }
+      to   { opacity: 1; transform: translateY(0)    scale(1); }
+    }
+    @keyframes fade-in { from { opacity:0; } to { opacity:1; } }
+
+    /* ── Shake-and-bright (atenció a les playlists) ────────────────── */
+    .select-atencio-shake { animation: select-shake-wave 1.2s ease-in-out; }
+    @keyframes select-shake-wave {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); background-color: #fef08a; }
+      20%, 40%, 60%, 80% { transform: translateX(4px); background-color: #ffedd5; }
+    }
+
+    /* ══════════════════════════════════════════════════════════════════
+       HOME PAGE
+    ══════════════════════════════════════════════════════════════════ */
+    #page-home {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;       /* fallback */
+      min-height: 100dvh;      /* ⑥ iOS Safari: exclou la barra de navegació */
+      padding: 0 20px 100px;
+    }
+
+    /* ── Header ─────────────────────────────────────────────────────── */
+    .home-header {
+      text-align: center;
+      padding: 52px 16px 32px;
+      animation: fade-up .6s var(--spring) both;
+    }
+    .home-title {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700;
+      letter-spacing: -.03em;
+      color: var(--text);
+    }
+
+    /* ── iOS-style segmented control ────────────────────────────────── */
+    .level-tabs {
+      display: inline-flex;
+      gap: 0;
+      margin: 24px auto 0;
+      background: rgba(0,0,0,.06);
+      border-radius: 980px;
+      padding: 4px;
+      animation: fade-in .4s var(--ease) .35s both;
+      opacity: 0;
+    }
+    .level-tabs input[type="radio"] { display: none; }
+    .level-tabs label {
+      padding: 8px 30px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -.01em;
+      color: var(--text-2);
+      border-radius: 980px;
+      cursor: pointer;
+      transition: color .2s var(--ease);
+      user-select: none;
+    }
+    .level-tabs input:checked + label {
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: var(--sh);
+    }
+
+    /* ── Topic grid ──────────────────────────────────────────────────── */
+    .home-section {
+      max-width: 1000px;
+      margin: 0 auto;
+      width: 100%;
+      display: none;
+      padding-top: 28px;
+    }
+    .home-section.active { display: block; }
+
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(188px, 1fr));
+      gap: 14px;
+    }
+
+    /* ── Topic card ──────────────────────────────────────────────────── */
+    .topic-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 22px 18px 18px;
+      cursor: pointer;
+      box-shadow: var(--sh);
+      animation: fade-up .45s var(--spring) both;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow .25s var(--ease),
+                  transform  .25s var(--spring);
+    }
+    .topic-card.coming { opacity: .5; cursor: default; }
+    .topic-card.coming:hover { box-shadow: var(--sh); transform: none; }
+    /* ⑩ Hover només en dispositius amb punter real (no tàctil) */
+    @media (hover: hover) {
+      .topic-card:hover {
+        box-shadow: var(--sh-lg);
+        transform: translateY(-4px) scale(1.01);
+      }
+    }
+
+    .card-icon  { font-size: 30px; margin-bottom: 11px; display: block; line-height: 1; }
+    .card-title {
+      font-size: 14px; font-weight: 600;
+      letter-spacing: -.01em; color: var(--text);
+      margin-bottom: 5px;
+    }
+    .card-desc  { font-size: 11px; color: var(--text-2); line-height: 1.45; }
+    .card-foot  { margin-top: 16px; }
+    .card-pill  {
+      display: inline-block;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: .03em;
+      padding: 3px 9px; border-radius: 980px;
+    }
+    .pill-ok     { background: rgba(52,199,89,.12); color: #1a7a3a; }
+    .pill-coming { background: rgba(0,0,0,.06);     color: var(--text-3); }
+
+    /* ══════════════════════════════════════════════════════════════════
+       TOPIC PAGE
+    ══════════════════════════════════════════════════════════════════ */
+    #page-topic {
+      display: none;
+      flex-direction: column;
+      height: 100dvh;
+      max-height: 100dvh;
+      overflow: hidden;
+    }
+    /* Panels fills exactly: screen - topbar(54px) - footer(≈36px) */
+    #panels-wrap {
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    /* ── Top bar ─────────────────────────────────────────────────────── */
+    .topic-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 16px;
+      padding-left: max(16px, env(safe-area-inset-left));   /* ⑧ iPhone notch */
+      padding-right: max(16px, env(safe-area-inset-right));
+      height: 54px;
+      background: rgba(255,255,255,.92);   /* ⑨ fallback sòlid si no hi ha backdrop */
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--divider);
+      flex-shrink: 0;
+    }
+    .bar-info    { flex: 1; min-width: 0; overflow: hidden; }
+    .bar-actions { display: flex; gap: 7px; flex-shrink: 0; }
+
+    .back-btn {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600;
+      color: var(--text-2);
+      cursor: pointer;
+      padding: 6px 13px 6px 10px;
+      border-radius: 980px;
+      border: none;
+      background: rgba(0,0,0,.06);
+      transition: background .18s var(--ease), color .18s var(--ease);
+      white-space: nowrap;
+      letter-spacing: -.01em;
+    }
+    @media (hover: hover) {
+      .back-btn:hover { background: rgba(0,0,0,.10); color: var(--text); }
+    }
+    .back-btn svg   { width: 13px; height: 13px; opacity: .7; }
+
+    .bar-sep   { width: 1px; height: 20px; background: var(--divider); flex-shrink: 0; }
+    .bar-title { font-size: 20px; font-weight: 700; letter-spacing: -.03em; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bar-sub   { display: none; }
+
+    /* Shared action button style */
+    .bar-btn {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 12px; font-weight: 600;
+      padding: 6px 13px; border-radius: 980px;
+      border: none; cursor: pointer;
+      background: rgba(0,0,0,.06);
+      color: var(--text-2);
+      transition: background .18s var(--ease), color .18s var(--ease);
+      white-space: nowrap;
+      letter-spacing: -.01em;
+    }
+    .bar-btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; flex-shrink: 0; }
+    @media (hover: hover) {
+      .bar-btn:hover { background: rgba(0,0,0,.1); color: var(--text); }
+    }
+
+    .copy-link-btn         { }
+    .copy-link-btn.copied  { background: rgba(52,199,89,.15); color: #1a7a3a; }
+
+    .classroom-btn         { }
+    .classroom-btn:hover   { background: rgba(255,159,10,.12); color: #a05a00; }
+    .classroom-btn.copied  { background: rgba(52,199,89,.15); color: #1a7a3a; }
+    .classroom-btn.error   { background: rgba(255,59,48,.12);  color: #c0392b; }
+
+    @media (max-width: 520px) {
+      .btn-label { display: none; }
+      .bar-btn   { padding: 8px 10px; min-height: 36px; }
+      .back-btn  { min-height: 36px; }
+      .bar-sub   { display: none; }
+    }
+
+    /* ── Panels ──────────────────────────────────────────────────────── */
+    .panels {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr 1.6fr;
+      grid-template-rows: repeat(3, 1fr);
+      gap: 14px 40px;
+      padding: 14px 40px 44px;
+      width: 100%;
+      /* NO height:100% — s'usa flex:1 del #panels-wrap per tenir l'alçada real */
+    }
+
+    /* Col 1: els tres panells petits s'apilen normalment (una fila cada un) */
+    .panel-col1 { grid-column: 1; }
+
+    /* Cols 2 i 3: ocupen totes 3 files però s'alineen a l'inici quan la playlist és tancada */
+    .panel-col2 { grid-column: 2; grid-row: 1 / 4; align-self: start; }
+    .panel-col3 { grid-column: 3; grid-row: 1 / 4; align-self: start; }
+    /* Quan la playlist és oberta, s'estiren per omplir */
+    .panel-col2.playlist-open,
+    .panel-col3.playlist-open { align-self: stretch; }
+
+    .panel {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--sh-md);
+      display: flex; flex-direction: column;
+      overflow: hidden;
+      animation: fade-up .35s var(--spring) both;
+      min-height: 0;            /* permet que el panel s'encongeixi en el grid 1fr */
+    }
+    .panel:nth-child(2) { animation-delay: .06s; }
+    .panel:nth-child(3) { animation-delay: .12s; }
+    .panel:nth-child(4) { animation-delay: .18s; }
+    .panel:nth-child(5) { animation-delay: .24s; }
+
+    /* Els panells de vídeo (col 2 i 3) necessiten altura explícita per fer scroll intern */
+    .panel-col2 .video-list.open,
+    .panel-col3 .video-list.open {
+      max-height: calc(100dvh - 220px);
+      flex: 1 1 auto;
+      overflow-y: auto;
+    }
+    .panel-col2 .video-wrap,
+    .panel-col3 .video-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      overflow: hidden;
+    }
+    .panel-col2 .panel-body,
+    .panel-col3 .panel-body {
+      flex: 1;
+      overflow: hidden;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Panel header ────────────────────────────────────────────────── */
+    .panel-head {
+      display: flex; align-items: center; gap: 9px;
+      padding: 12px 14px 11px;
+      border-bottom: 1px solid var(--divider-2);
+      background: var(--surface);
+      flex-shrink: 0;
+    }
+    .panel-dot  { display: none; }
+    .dot-pdf    { background: var(--amber); }
+    .dot-theory { background: var(--accent); }
+    .dot-solved { background: var(--green); }
+    .dot-lock   { background: var(--purple); }
+    .dot-quiz   { background: #06b6d4; }
+
+    .panel-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase; letter-spacing: .06em;
+      color: var(--text-3);
+    }
+    .panel-name {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -.01em;
+      color: var(--text);
+      margin-top: 1px;
+    }
+    /* Títol fusionat (mòbil vertical) — ocult per defecte */
+    .panel-fused { display: none; }
+
+    .panel-body { flex: 1; overflow: hidden; min-height: 0; }
+    .panel-body iframe { width: 100%; height: 100%; border: none; display: block; }
+
+    /* ── Drive link panels ───────────────────────────────────────────── */
+    .drive-link {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 7px; padding: 10px 14px;       /* compacte per caber en pantalla */
+      text-decoration: none; color: var(--text);
+      transition: background .18s var(--ease);
+      border-radius: 0 0 var(--radius) var(--radius);
+      flex: 1; min-height: 0;             /* ocupa l'espai lliure de la fila */
+    }
+    .drive-icon  { font-size: 1.6rem; line-height: 1; }
+    .drive-label { font-size: .88rem; font-weight: 600; text-align: center; line-height: 1.4; color: var(--text); }
+    .drive-open-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .78rem; font-weight: 600;
+      padding: 6px 15px; border-radius: 980px;
+      background: rgba(0,0,0,.05); color: var(--text-2);
+      transition: background .18s, color .18s;
+      letter-spacing: -.01em;
+    }
+    @media (hover: hover) {
+      .drive-link:hover { background: rgba(0,0,0,.18); }
+      .drive-link:hover .drive-open-btn { background: rgba(0,113,227,.25); color: var(--accent); }
+      .panel-lock .drive-link:hover { background: rgba(0,0,0,.18); }
+      .panel-lock .drive-link:hover .drive-open-btn { background: rgba(191,90,242,.25); color: #8c3fbb; }
+    }
+
+    /* ── Hero YouTube thumbnail ──────────────────────────────────────── */
+    .video-wrap { display: flex; flex-direction: column; }
+
+    /* ── Mobile: compact now-playing strip instead of big hero ─── */
+    .yt-now-playing {
+      display: none;            /* ocult per defecte — escriptori usa .yt-hero */
+    }
+
+    @media (max-width: 900px) {
+      /* Mostra la franja compacta */
+      .yt-now-playing {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--divider-2);
+        text-decoration: none;
+        flex-shrink: 0;
+        min-height: 0;
+      }
+      .yt-np-thumb {
+        width: 64px; height: 36px;
+        border-radius: 6px;
+        overflow: hidden; flex-shrink: 0;
+        background: #000; position: relative;
+      }
+      .yt-np-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .yt-np-title {
+        flex: 1; font-size: .76rem; font-weight: 500;
+        color: var(--text); line-height: 1.3;
+        overflow: hidden;
+        display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+      }
+      .yt-np-btn {
+        display: flex; align-items: center; gap: 3px;
+        background: var(--red); color: #fff;
+        font-size: 10px; font-weight: 600;
+        padding: 5px 10px; border-radius: 980px;
+        white-space: nowrap; flex-shrink: 0;
+        min-height: 28px;
+      }
+      .yt-np-btn svg { width: 10px; height: 10px; fill: white; }
+
+      /* Playlist: ocupa tot l'espai disponible */
+      .video-list.open {
+        max-height: 65vh;
+        overflow-y: auto;
+        flex: 1 1 auto;
+      }
+    }
+    /* ── Playlist toggle button ─────────────────────────────────────── */
+    .playlist-toggle {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-shrink: 0;
+      padding: 9px 14px;
+      font-size: 17px; font-weight: 600; letter-spacing: -.01em;
+      color: var(--text-2);
+      cursor: pointer; border: none;
+      background: var(--surface-2);
+      border-top: 1px solid var(--divider-2);
+      width: 100%; text-align: left;
+      transition: background .15s var(--ease), color .15s var(--ease);
+      flex-shrink: 0; gap: 8px;
+      user-select: none;
+    }
+    @media (hover: hover) {
+      .playlist-toggle:hover { background: rgba(0,0,0,.16); color: var(--text); }
+    }
+    .playlist-toggle.open  { color: var(--accent); }
+    .playlist-toggle .toggle-arrow {
+      width: 14px; height: 14px; flex-shrink: 0;
+      stroke: currentColor; fill: none;
+      transition: transform .22s var(--ease);
+    }
+    .playlist-toggle.open .toggle-arrow { transform: rotate(90deg); }
+    .playlist-count {
+      display: inline-flex; align-items: center;
+      background: rgba(0,0,0,.06); color: var(--text-3);
+      font-size: 10px; font-weight: 700;
+      padding: 2px 7px; border-radius: 980px;
+      margin-left: 4px;
+    }
+    .playlist-toggle.open .playlist-count {
+      background: rgba(0,113,227,.1); color: var(--accent);
+    }
+
+    .video-list {
+      /* plegada per defecte */
+      overflow: hidden;
+      max-height: 0;
+      flex: 0 0 0;
+      transition: max-height .35s var(--ease);
+    }
+    .video-list.open {
+      overflow-y: auto;
+      max-height: calc(100dvh - 54px - 44px - 52px - 42px);
+      /* 54=topbar, 44=footer-pad, 52=panel-head, 42=toggle-btn */
+    }
+
+    .yt-hero {
+      display: block; position: relative;
+      width: 100%; aspect-ratio: 16/9; flex-shrink: 0;
+      overflow: hidden; background: #000;
+      text-decoration: none; cursor: pointer;
+    }
+    .yt-hero img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: opacity .22s var(--ease);
+    }
+    @media (hover: hover) {
+      .yt-hero:hover img { opacity: .75; }
+      .yt-hero:hover .yt-hero-btn { background: #d42b22; transform: scale(1.06); }
+    }
+    .yt-hero-overlay {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 8px;
+      background: linear-gradient(to top, rgba(0,0,0,.6) 0%, transparent 55%);
+    }
+    .yt-hero-btn {
+      display: flex; align-items: center; gap: 7px;
+      background: var(--red); color: #fff;
+      font-size: 12px; font-weight: 600;
+      padding: 7px 18px; border-radius: 980px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.35);
+      transition: background .15s, transform .2s var(--spring);
+      white-space: nowrap;
+    }
+    .yt-hero-btn svg { width: 14px; height: 14px; fill: white; flex-shrink: 0; }
+    .yt-hero-title {
+      font-size: 11px; font-weight: 600; color: var(--text);
+      text-align: center; padding: 5px 12px; line-height: 1.35;
+      text-shadow: none;
+      background: rgba(230,230,232,.88);
+      border-radius: 6px;
+      max-width: calc(100% - 32px);
+      overflow: hidden;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    }
+
+    /* ── Video list items ────────────────────────────────────────────── */
+    .video-item {
+      display: grid;
+      grid-template-columns: 104px 1fr;
+      border-bottom: 1px solid var(--divider-2);
+      transition: background .14s var(--ease);
+      min-height: 70px;
+    }
+    @media (hover: hover) {
+      .video-item:hover { background: rgba(0,0,0,.10); }
+    }
+    .video-item.v-active {
+      background: rgba(0,113,227,.06);
+      border-left: 2.5px solid var(--accent);
+    }
+    .video-item.v-active .v-title { color: var(--accent-dark); font-weight: 600; }
+
+    .v-left {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 5px; padding: 8px 7px 8px 9px;
+      border-right: 1px solid var(--divider-2);
+    }
+    .v-thumb {
+      width: 86px; height: 48px; border-radius: var(--radius-xs);
+      background: var(--bg); flex-shrink: 0;
+      overflow: hidden; position: relative;
+    }
+    .v-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .v-thumb-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,.22);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .v-thumb-overlay svg { width: 20px; height: 20px; fill: white; opacity: .9; }
+
+    .yt-btn {
+      display: flex; align-items: center; justify-content: center; gap: 3px;
+      background: var(--red); color: #fff;
+      font-size: 10px; font-weight: 600;
+      padding: 5px 8px; border-radius: 980px;   /* ⑪ padding augmentat */
+      min-height: 28px;                           /* mínim tap target raonable */
+      text-decoration: none;
+      transition: background .15s;
+      white-space: nowrap; width: 86px;
+    }
+    @media (hover: hover) {
+      .yt-btn:hover { background: #d42b22; transform: scale(1.04); }
+    }
+    .yt-btn svg { width: 11px; height: 11px; fill: white; flex-shrink: 0; }
+
+    .v-right {
+      display: flex; flex-direction: column;
+      justify-content: center; padding: 8px 11px 8px 9px; gap: 4px;
+    }
+    .v-title {
+      font-size: .76rem; font-weight: 500;
+      letter-spacing: -.005em; color: var(--text);
+      line-height: 1.3;
+    }
+    .v-note {
+      font-size: .7rem; color: var(--text-2); line-height: 1.4; font-style: italic;
+    }
+    .v-note:empty { display: none; }
+
+    /* ── Scrollbar ───────────────────────────────────────────────────── */
+
+    /* ── Stepquiz link list (playlist mode) ───────────────────────────── */
+    .sq-list {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height .35s var(--ease);
+    }
+    .sq-list.open {
+      overflow-y: auto;
+      max-height: 400px;
+    }
+    .sq-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px;
+      text-decoration: none; color: var(--text);
+      border-bottom: 1px solid var(--divider-2);
+      transition: background .14s var(--ease);
+    }
+    @media (hover: hover) {
+      .sq-item:hover { background: rgba(0,0,0,.06); }
+    }
+    .sq-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .sq-title {
+      flex: 1; font-size: .82rem; font-weight: 500;
+      letter-spacing: -.005em; line-height: 1.35;
+    }
+    .sq-item:hover .sq-title { color: var(--accent); }
+
+    /* ── Enviar codi button inside Step Quiz header ── */
+    .sq-send-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11.5px; font-weight: 600;
+      padding: 4px 11px; border-radius: 980px;
+      background: rgba(103,58,183,.1); color: #6741d9;
+      text-decoration: none; white-space: nowrap; flex-shrink: 0;
+      transition: background .15s;
+    }
+    @media (hover: hover) {
+      .sq-send-btn:hover { background: rgba(103,58,183,.2); }
+    }
+    .sq-send-icon {
+      width: 14px; height: 14px; flex-shrink: 0;
+    }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(0,0,0,.12); border-radius: 3px; }
+
+    /* ── Footer ─────────────────────────────────────────────────────── */
+    footer {
+      position: fixed; bottom: 0; left: 0; width: 100%;
+      background: rgba(245,245,247,.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--divider);
+      /* ⑫ iPhone home bar safe area */
+      padding: 8px 20px;
+      padding-bottom: max(8px, env(safe-area-inset-bottom));
+      z-index: 100;
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; font-size: .72em; color: var(--text-2);
+      flex-wrap: wrap; text-align: center;
+    }
+    footer a { color: var(--text-2); }
+
+    /* ── Mobile tab bar (Documents / Vídeos) ────────────────────────── */
+    .mobile-tabs {
+      display: none;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--divider);
+      padding: 6px 14px;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .mobile-tabs input[type="radio"] { display: none; }
+    .mobile-tabs label {
+      flex: 1; text-align: center;
+      padding: 8px 0;
+      font-size: 13px; font-weight: 600;
+      color: var(--text-2);
+      border-radius: 980px;
+      cursor: pointer;
+      transition: background .15s, color .15s;
+      user-select: none;
+    }
+    .mobile-tabs input:checked + label {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* ── Responsive ──────────────────────────────────────────────────── */
+
+    /* Tablet i mòbil ≤ 900px: tabs de navegació + columna única */
+    @media (max-width: 900px) {
+      .mobile-tabs { display: flex; }
+
+      /* Amaga el hero gran — aquí ve DESPRÉS de .yt-hero { display:block } */
+      .yt-hero { display: none !important; }
+
+      /* Franja "ara reproduint": borde inferior ben visible */
+      .yt-now-playing {
+        border-bottom: 3px solid rgba(0,0,0,.55) !important;
+      }
+
+      /* Toggle "Playlist": borde superior molt pronunciat */
+      .panel-col2 .playlist-toggle,
+      .panel-col3 .playlist-toggle {
+        border-top: 3px solid rgba(0,0,0,.55) !important;
+        border-bottom: 2px solid rgba(0,0,0,.25) !important;
+      }
+
+      /* Zona de la playlist: fons gris per distingir-la clarament */
+      .panel-col2 .video-list,
+      .panel-col3 .video-list {
+        background: #e8e8ed;
+      }
+
+      /* Items sobre fons gris: card blanc per destacar */
+      .panel-col2 .video-item,
+      .panel-col3 .video-item {
+        background: #ffffff;
+        border-bottom: 2px solid rgba(0,0,0,.18);
+        margin: 4px 6px;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .panel-col2 .video-item.v-active,
+      .panel-col3 .video-item.v-active {
+        background: #e8f0fe;
+        border-left: 3px solid var(--accent);
+      }
+
+      /* Separador entre miniatura i text dins cada item */
+      .panel-col2 .v-left,
+      .panel-col3 .v-left {
+        border-right: 2px solid rgba(0,0,0,.12);
+      }
+
+      /* Amaga el grup no activa via classe JS */
+      .panels.show-docs .panel-col2,
+      .panels.show-docs .panel-col3 { display: none; }
+      .panels.show-vids .panel-col1  { display: none; }
+
+      .panels {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+        gap: 14px; padding: 12px 16px 80px;
+        height: auto; flex: none;
+        overflow-y: auto;
+      }
+      #page-topic { overflow-y: auto; height: auto; min-height: 100dvh; }
+      .panel-col1 { grid-column: auto; }
+      .panel-col2 { grid-column: auto; grid-row: auto; }
+      .panel-col3 { grid-column: auto; grid-row: auto; }
+      .panel-col2 .video-list.open,
+      .panel-col3 .video-list.open { max-height: 60vh; flex: 1 1 auto; overflow-y: auto; }
+      .panel-col2 .video-wrap,
+      .panel-col3 .video-wrap { height: auto; flex: none; }
+      .panel-col2 .panel-body,
+      .panel-col3 .panel-body { overflow: visible; min-height: 0; flex: none; }
+      .drive-link { flex: none; }
+    }
+
+    /* Mòbil vertical */
+    @media (max-width: 600px) {
+      .panels { grid-template-columns: 1fr; gap: 12px; padding: 10px 12px 80px; height: auto; flex: none; }
+      .panel-col2 .video-list.open,
+      .panel-col3 .video-list.open { max-height: 55vh; }
+      /* Capçalera home més compacta */
+      #page-home { padding: 0 14px 72px; }
+      .home-header { padding: 28px 16px 20px; }
+      .level-tabs label { padding: 8px 18px; }
+      /* Dues columnes a la graella de temes */
+      .topic-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+      /* Títol de la barra de navegació més petit */
+      .bar-title { font-size: 17px; }
+    }
+
+    /* ── Mòbil vertical: títol i subtítol en una sola línia ─────────── */
+    @media (max-width: 900px) and (orientation: portrait) {
+      .panel-col2 .panel-head,
+      .panel-col3 .panel-head {
+        padding: 8px 14px;
+      }
+      /* Amaga label i name separats */
+      .panel-col2 .panel-label,
+      .panel-col3 .panel-label,
+      .panel-col2 .panel-name,
+      .panel-col3 .panel-name { display: none; }
+
+      /* Mostra el títol fusionat */
+      .panel-col2 .panel-fused,
+      .panel-col3 .panel-fused {
+        display: block;
+        font-size: 14px; font-weight: 600;
+        letter-spacing: -.01em; color: var(--text);
+        line-height: 1.2;
+      }
+    }
+
+    /* ── Mòbil horitzontal: pantalla de "gira el mòbil" ─────────────── */
+    @media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
+      /* Amaga tot el contingut del topic */
+      #page-topic .panels,
+      #page-topic .mobile-tabs { display: none !important; }
+
+      /* Mostra el missatge de gir */
+      #rotate-msg { display: flex !important; }
+
+      /* Home: compacte */
+      .home-header { padding: 16px 16px 12px; }
+      #page-home { padding: 0 16px 60px; }
+      .topic-grid { grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); }
+      footer { padding-top: 5px; padding-bottom: max(5px, env(safe-area-inset-bottom)); font-size: .65em; }
+    }
+
+    /* Missatge gir: estils base (ocult per defecte) */
+    #rotate-msg {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--text-2);
+      flex: 1;
+    }
+    #rotate-msg .rotate-icon {
+      font-size: 3rem;
+      animation: rotate-hint 2s ease-in-out infinite;
+    }
+    @keyframes rotate-hint {
+      0%, 100% { transform: rotate(0deg); }
+      40%       { transform: rotate(-90deg); }
+      60%       { transform: rotate(-90deg); }
+    }
+    #rotate-msg p {
+      font-size: 15px; font-weight: 600;
+      letter-spacing: -.01em;
+    }
+
+    /* Barra estreta */
+    @media (max-width: 400px) {
+      .back-btn .back-label { display: none; }
+      .back-btn { padding: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ HOME ═══════════ -->
+<div id="page-home">
+  <div class="home-header">
+    <div class="home-title">Llibre de matemàtiques</div>
+    <div class="level-tabs">
+      <input type="radio" name="level" id="tab-eso" value="eso" checked>
+      <label for="tab-eso">ESO</label>
+      <input type="radio" name="level" id="tab-batx" value="batx">
+      <label for="tab-batx">Batxillerat</label>
+    </div>
+  </div>
+
+  <div class="home-section active" id="section-eso">
+    <div class="topic-grid" id="grid-eso"></div>
+  </div>
+
+  <div class="home-section" id="section-batx">
+    <div class="topic-grid" id="grid-batx"></div>
+  </div>
+</div>
+
+<!-- ═══════════ TOPIC ═══════════ -->
+<div id="page-topic">
+  <div class="topic-bar">
+    <button class="back-btn" onclick="goHome()">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="10" x2="3" y2="10"/>
+        <polyline points="9 4 3 10 9 16"/>
+      </svg>
+      <span class="back-label">Tots els temes</span>
+    </button>
+    <div class="bar-sep"></div>
+    <div class="bar-info">
+      <span class="bar-title" id="bar-title"></span>
+      <span class="bar-sub"   id="bar-sub"></span>
+    </div>
+    <div class="bar-actions">
+      <button class="bar-btn copy-link-btn" id="copy-link-btn" onclick="copyTopicLink()">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        <span class="btn-label">Copia enllaç</span>
+      </button>
+      <button class="bar-btn classroom-btn" id="classroom-btn" onclick="copyClassroomText()">
+        📋 <span class="btn-label">Text Classroom</span>
+      </button>
+    </div>
+  </div>
+  <!-- Tabs mòbil: visibles quan ≤ 900px -->
+  <div class="mobile-tabs" id="mobile-tabs">
+    <input type="radio" name="mobile-tab" id="mtab-docs" value="docs" checked>
+    <label for="mtab-docs">📄 Documents</label>
+    <input type="radio" name="mobile-tab" id="mtab-vids" value="vids">
+    <label for="mtab-vids">▶ Vídeos</label>
+  </div>
+  <!-- Missatge gir (mòbil horitzontal) -->
+  <div id="rotate-msg">
+    <div class="rotate-icon">📱</div>
+    <p>Gira el mòbil en vertical, si us plau</p>
+  </div>
+  <div class="panels" id="panels-wrap"></div>
+</div>
+
+<footer>
+  © 2026 [DAVID ARSO CIVIL]. Ús educatiu lliure. Prohibida la comercialització i la modificació
+  (<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a>).
+</footer>
+
+<script>
+/* ─── CONFIG ─────────────────────────────────────────────────────────
+   ✏️  Canvia BASE_URL pel domini on allotges el fitxer.
+   ✏️  CSV_FILE ha d'estar a la mateixa carpeta que l'HTML.
+──────────────────────────────────────────────────────────────────── */
+const BASE_URL = 'https://llibre.step-quiz.net';
+const CSV_FILE = 'data-classroom.csv';
+
+/* ─── PANEL METADATA
+   Les claus coincideixen amb les capçaleres del CSV.
+   Aquí és l'ÚNICA vegada que s'escriu qui és cada canal/autor.
+──────────────────────────────────────────────────────────────────── */
+const PANEL_META = {
+  'apunts-bogdan':         { dot: 'dot-pdf',    type: 'drive', label: 'Apunts i exercicis',        name: 'Bogdan Crintea'          },
+  'teoria-pildoras':       { dot: 'dot-theory', type: 'video', label: 'Vídeos de teoria',           name: 'Píldoras Matemáticas'    },
+  'problemes-bogdan':      { dot: 'dot-solved', type: 'video', label: 'Problemes resolts',          name: 'Matemàtiques amb Bogdan' },
+  'material-complementari':{ dot: 'dot-lock',   type: 'drive', label: 'Material complementari',    name: ''     },
+  'exercicis-stepquiz':    { dot: 'dot-quiz',   type: 'drive', label: 'Exercicis interactius',      name: 'Step Quiz'               },
+};
+
+/* ─── UI METADATA (home grid only — no contingut) ────────────────── */
+const ALL_TOPICS = {
+  eso: [
+    { id: 'trigonometria', icon: '', title: 'Trigonometria', desc: '', ready: true  },
+    { id: 'algebra',       icon: '', title: 'Àlgebra',       desc: '', ready: false },
+    { id: 'geometria',     icon: '', title: 'Geometria',     desc: '', ready: false },
+    { id: 'estadistica',   icon: '', title: 'Estadística',   desc: '', ready: false },
+    { id: 'funcions',      icon: '', title: 'Funcions',      desc: '', ready: false },
+    { id: 'nombres',       icon: '', title: 'Nombres',       desc: '', ready: false },
+  ],
+  batx: [
+    { id: 'derivades',  icon: '', title: 'Derivades',           desc: '', ready: false },
+    { id: 'integrals',  icon: '', title: 'Integrals',           desc: '', ready: true  },
+    { id: 'matrius',    icon: '', title: 'Matrius',             desc: '', ready: false },
+    { id: 'complexos',  icon: '', title: 'Nombres complexos',   desc: '', ready: false },
+    { id: 'vectorial',  icon: '', title: 'Geometria vectorial', desc: '', ready: false },
+  ]
+};
+
+/* ─── STATE ──────────────────────────────────────────────────────── */
+let currentTopic     = null;   // { id, icon, title, desc, ready }  — des de ALL_TOPICS
+let currentTopicData = null;   // { subject, apunts-bogdan, teoria-pildoras[], problemes-bogdan[], material-complementari, exercicis-stepquiz[] } — des del CSV
+
+/* ─── CSV PARSER ─────────────────────────────────────────────────── */
+// Parseja una línia de CSV gestionant camps entre cometes.
+function parseCSVRow(line) {
+  const fields = [];
+  let i = 0;
+  while (i <= line.length) {
+    if (i === line.length) { fields.push(''); break; }
+    if (line[i] === '"') {
+      i++;
+      let val = '';
+      while (i < line.length) {
+        if (line[i] === '"' && line[i + 1] === '"') { val += '"'; i += 2; }
+        else if (line[i] === '"') { i++; break; }
+        else val += line[i++];
+      }
+      fields.push(val);
+      if (line[i] === ',') i++;
+    } else {
+      let val = '';
+      while (i < line.length && line[i] !== ',') val += line[i++];
+      fields.push(val.trim());
+      if (line[i] === ',') i++;
+    }
+  }
+  return fields;
+}
+
+// Parseja una cel·la de vídeos. Formats suportats:
+//   "ytId:Títol|ytId:Títol|..."           (format estàndard)
+//   "ytId:https://youtube.com/...|..."    (URL en lloc de títol → extreu l'id de la URL)
+//   "https://youtube.com/watch?v=id|..."  (URL sola → extreu l'id i usa 'Vídeo N' com a títol)
+//   "ytId|ytId|..."                       (sols ids, sense títol)
+function parseVideos(cell) {
+  if (!cell || !cell.trim()) return [];
+  return cell.trim().split('|').map((entry, idx) => {
+    entry = entry.trim();
+    if (!entry) return null;
+
+    // Cas: URL de YouTube sola (https://... o http://...)
+    const ytMatch = entry.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=)([\w-]+)/);
+    if (ytMatch && (entry.startsWith('http://') || entry.startsWith('https://'))) {
+      return { id: ytMatch[1], title: 'Vídeo ' + (idx + 1), note: '' };
+    }
+
+    const sep = entry.indexOf(':');
+    if (sep < 0) {
+      // Cas: sols id sense títol (p. ex. "dQw4w9WgXcQ")
+      return entry.length > 3 ? { id: entry, title: 'Vídeo ' + (idx + 1), note: '' } : null;
+    }
+
+    const id    = entry.substring(0, sep).trim();
+    const rest  = entry.substring(sep + 1).trim();
+
+    // Cas: el "títol" és una URL de YouTube → extreu l'id real de la URL
+    const restYt = rest.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=)([\w-]+)/);
+    if (restYt) {
+      return { id: restYt[1], title: 'Vídeo ' + (idx + 1), note: '' };
+    }
+
+    return { id, title: rest, note: '' };
+  }).filter(v => v && v.id);
+}
+
+// Parseja la cel·la d'exercicis stepquiz: suporta 1 o més enllaços.
+// Format: "url" (1 sol enllaç sense títol)
+//    o bé: "títol1::url1|títol2::url2|..." (múltiples enllaços amb títol)
+//    o bé: "url" (retro-compatible: extreu el nom de la pàgina de la URL)
+function parseStepquizLinks(cell) {
+  if (!cell || !cell.trim()) return [];
+  return cell.trim().split('|').map(entry => {
+    entry = entry.trim();
+    if (!entry) return null;
+    const sep = entry.indexOf('::');
+    if (sep >= 0) {
+      // Format "títol::url"
+      return { title: entry.substring(0, sep).trim(), url: entry.substring(sep + 2).trim() };
+    }
+    // URL sola → extreu el nom del fitxer sense extensió
+    const pageName = extractPageName(entry);
+    return { title: pageName, url: entry };
+  }).filter(Boolean);
+}
+
+// Extreu el nom de la pàgina d'una URL (p.ex. "https://step-quiz.net/raons-trigonometria.html" → "raons-trigonometria")
+function extractPageName(url) {
+  try {
+    const path = new URL(url).pathname;            // "/raons-trigonometria.html"
+    const file = path.split('/').pop();            // "raons-trigonometria.html"
+    return file.replace(/\.[^.]+$/, '') || file;   // "raons-trigonometria"
+  } catch {
+    return url;
+  }
+}
+
+// Carrega el CSV i retorna les dades de la fila corresponent a l'id demanat.
+async function fetchTopicData(id) {
+  const res = await fetch(CSV_FILE);
+  if (!res.ok) throw new Error('No s\'ha pogut carregar ' + CSV_FILE);
+  const lines   = (await res.text()).trim().split('\n');
+  const headers = parseCSVRow(lines[0]);  // subject, apunts-bogdan, teoria-pildoras, problemes-bogdan, material-complementari, exercicis-stepquiz
+
+  for (let i = 1; i < lines.length; i++) {
+    const fields = parseCSVRow(lines[i]);
+    if (fields[0] !== id) continue;
+    const row = {};
+    headers.forEach((h, idx) => row[h] = fields[idx] || '');
+    return {
+      subject:                row['subject'],
+      'apunts-bogdan':        row['apunts-bogdan'],
+      'teoria-pildoras':      parseVideos(row['teoria-pildoras']),
+      'problemes-bogdan':     parseVideos(row['problemes-bogdan']),
+      'material-complementari': row['material-complementari'] || '',
+      'exercicis-stepquiz':     parseStepquizLinks(row['exercicis-stepquiz'] || ''),
+    };
+  }
+  throw new Error(`No s'ha trobat la fila "${id}" al CSV.`);
+}
+
+/* ─── HOME GRID ──────────────────────────────────────────────────── */
+function buildGrid(containerId, topics) {
+  const grid = document.getElementById(containerId);
+  topics.forEach((t, i) => {
+    const card = document.createElement('div');
+    card.className = 'topic-card' + (t.ready ? '' : ' coming');
+    card.style.animationDelay = (i * .06) + 's';
+    card.innerHTML = `
+      <span class="card-icon">${t.icon}</span>
+      <div class="card-title">${t.title}</div>
+      <div class="card-desc">${t.desc}</div>
+      <div class="card-foot">
+        <span class="card-pill ${t.ready ? 'pill-ok' : 'pill-coming'}">
+          ${t.ready ? '✓ Disponible' : 'Aviat'}
+        </span>
+      </div>`;
+    if (t.ready) card.addEventListener('click', () => openTopic(t));
+    grid.appendChild(card);
+  });
+}
+buildGrid('grid-eso',  ALL_TOPICS.eso);
+buildGrid('grid-batx', ALL_TOPICS.batx);
+
+// Tab switching
+document.querySelectorAll('input[name="level"]').forEach(radio => {
+  radio.addEventListener('change', e => {
+    document.querySelectorAll('.home-section').forEach(s => s.classList.remove('active'));
+    document.getElementById('section-' + e.target.value).classList.add('active');
+  });
+});
+
+/* ─── MOBILE TABS ────────────────────────────────────────────────── */
+document.querySelectorAll('input[name="mobile-tab"]').forEach(radio => {
+  radio.addEventListener('change', () => {
+    const wrap = document.getElementById('panels-wrap');
+    wrap.classList.toggle('show-docs', radio.value === 'docs');
+    wrap.classList.toggle('show-vids', radio.value === 'vids');
+    // Torna al principi de la pàgina per veure sempre els tabs
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+function resetMobileTabs() {
+  const docsRadio = document.getElementById('mtab-docs');
+  if (docsRadio) docsRadio.checked = true;
+  const wrap = document.getElementById('panels-wrap');
+  wrap.classList.add('show-docs');
+  wrap.classList.remove('show-vids');
+}
+
+/* ─── NAVIGATION ─────────────────────────────────────────────────── */
+async function openTopic(t) {
+  currentTopic     = t;
+  currentTopicData = null;
+  makeVideoPanel._state = {};
+
+  document.getElementById('bar-title').textContent = t.icon + '  ' + t.title;
+  document.getElementById('bar-sub').textContent   = ' · ' + t.desc;
+  try { history.pushState({ subject: t.id }, '', '?subject=' + t.id); } catch(e) {}
+
+  // Reset mobile tabs to Documents
+  resetMobileTabs();
+  // Sempre al principi per veure la barra de tabs
+  window.scrollTo(0, 0);
+
+  // Mostra la pàgina del tema amb indicador de càrrega
+  document.getElementById('page-home').style.display  = 'none';
+  document.getElementById('page-topic').style.display = 'flex';
+  document.getElementById('panels-wrap').innerHTML =
+    `<div style="grid-column:1/-1;display:flex;align-items:center;justify-content:center;
+                 color:var(--text-muted);font-size:14px;gap:8px;padding:60px 20px;">
+       ⏳ Carregant recursos…
+     </div>`;
+
+  try {
+    currentTopicData = await fetchTopicData(t.id);
+    renderPanels();
+
+    // Shake-and-bright: crida l'atenció a les playlists de vídeo
+    setTimeout(() => {
+      const toggles = document.querySelectorAll('.panel-col2 .playlist-toggle, .panel-col3 .playlist-toggle');
+      toggles.forEach(t => t.classList.add('select-atencio-shake'));
+      setTimeout(() => {
+        toggles.forEach(t => {
+          t.classList.remove('select-atencio-shake');
+          // Desplega la playlist si encara està tancada
+          if (t.getAttribute('aria-expanded') !== 'true') {
+            t.click();
+          }
+        });
+      }, 1250);
+    }, 2220);
+
+  } catch (err) {
+    document.getElementById('panels-wrap').innerHTML =
+      `<div style="grid-column:1/-1;padding:40px;color:#b91c1c;font-size:14px;">
+         ⚠️ ${err.message}
+       </div>`;
+    console.error(err);
+  }
+}
+
+function goHome() {
+  try { history.pushState({}, '', window.location.pathname); } catch(e) {}
+  document.getElementById('page-topic').style.display = 'none';
+  document.getElementById('page-home').style.display  = 'flex';
+}
+
+/* ─── CLIPBOARD HELPERS ──────────────────────────────────────────── */
+function writeToClipboard(text, onOk, onFail) {
+  const doFallback = () => {
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(ta);
+      ta.focus(); ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      onOk();
+    } catch { onFail && onFail(); }
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText)
+    navigator.clipboard.writeText(text).then(onOk).catch(doFallback);
+  else
+    doFallback();
+}
+
+function copyTopicLink() {
+  const btn = document.getElementById('copy-link-btn');
+  const url = BASE_URL + '?subject=' + currentTopic.id;
+  writeToClipboard(url,
+    () => {
+      btn.classList.add('copied');
+      btn.innerHTML = '👍 <span class="btn-label">Copiat!</span>';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = `<svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" fill="none" stroke="currentColor" width="13" height="13">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg><span class="btn-label">Copia enllaç</span>`;
+      }, 2000);
+    },
+    () => prompt('Copia aquest enllaç:', url)
+  );
+}
+
+function copyClassroomText() {
+  const btn = document.getElementById('classroom-btn');
+
+  function showOk() {
+    btn.classList.add('copied');
+    btn.innerHTML = '👍 <span class="btn-label">Copiat!</span>';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = '📋 <span class="btn-label">Text Classroom</span>';
+    }, 2000);
+  }
+  function showErr() {
+    btn.classList.add('error');
+    btn.innerHTML = '⚠️ <span class="btn-label">Error</span>';
+    setTimeout(() => {
+      btn.classList.remove('error');
+      btn.innerHTML = '📋 <span class="btn-label">Text Classroom</span>';
+    }, 2000);
+  }
+
+  if (!currentTopicData) { showErr(); return; }
+
+  const full = 'Fes els exercicis que es descriuen a continuació.\nFes fotografies dels exercicis a la teva llibreta, crea un únic PDF i adjunta\'l a la teva tasca Classroom.\nEls exercicis es troben aquí:\n🔗 ' + BASE_URL + '?subject=' + currentTopic.id;
+  writeToClipboard(full, showOk, showErr);
+}
+
+/* ─── BROWSER HISTORY ────────────────────────────────────────────── */
+window.addEventListener('popstate', () => {
+  const id = new URLSearchParams(window.location.search).get('subject');
+  if (id) {
+    const t = [...ALL_TOPICS.eso, ...ALL_TOPICS.batx].find(x => x.id === id && x.ready);
+    if (t) { openTopic(t); return; }
+  }
+  document.getElementById('page-topic').style.display = 'none';
+  document.getElementById('page-home').style.display  = 'flex';
+});
+
+// Obre directament el tema si la URL ja té ?subject=
+(function() {
+  const id = new URLSearchParams(window.location.search).get('subject');
+  if (id) {
+    const t = [...ALL_TOPICS.eso, ...ALL_TOPICS.batx].find(x => x.id === id && x.ready);
+    if (t) openTopic(t);
+  }
+})();
+
+/* ─── RENDER PANELS ──────────────────────────────────────────────── */
+function renderPanels() {
+  const wrap = document.getElementById('panels-wrap');
+  wrap.innerHTML = '';
+
+  // Col 1: 3 panells apilats
+  wrap.appendChild(makeDrivePanel('apunts-bogdan',          'panel-col1'));
+
+  // exercicis-stepquiz: si hi ha >1 enllaç, es mostra com a playlist; si no, panell simple
+  const sqLinks = currentTopicData['exercicis-stepquiz'] || [];
+  if (sqLinks.length > 1) {
+    wrap.appendChild(makeStepquizPlaylist('exercicis-stepquiz', 'panel-col1'));
+  } else {
+    wrap.appendChild(makeDrivePanel('exercicis-stepquiz',     'panel-col1'));
+  }
+
+  wrap.appendChild(makeDrivePanel('material-complementari', 'panel-col1'));
+
+  // Col 2: vídeos de teoria (span 3 files)
+  wrap.appendChild(makeVideoPanel('teoria-pildoras',  'panel-col2'));
+
+  // Col 3: problemes resolts (span 3 files)
+  wrap.appendChild(makeVideoPanel('problemes-bogdan', 'panel-col3'));
+}
+
+function makeDrivePanel(colKey, colClass) {
+  const meta   = PANEL_META[colKey];
+
+  // exercicis-stepquiz és ara un array d'objectes [{title, url}]
+  let url;
+  if (colKey === 'exercicis-stepquiz') {
+    const links = currentTopicData[colKey] || [];
+    url = links.length > 0 ? links[0].url : '';
+  } else {
+    url = currentTopicData[colKey] || '';
+  }
+  const hasUrl = url.trim() !== '';
+
+  const ICONS = {
+    'apunts-bogdan':          '📄',
+    'material-complementari': '📦',
+    'exercicis-stepquiz':     '✏️',
+  };
+  const icon    = ICONS[colKey] || '📄';
+  const isLock  = colKey === 'material-complementari';
+  let btnText = 'Obre';
+  if (colKey === 'exercicis-stepquiz') {
+    const links = currentTopicData[colKey] || [];
+    btnText = links.length > 0 ? links[0].title : 'Obre';
+  }
+
+  const div = document.createElement('div');
+  div.className = 'panel' + (isLock ? ' panel-lock' : '') + (colClass ? ' ' + colClass : '');
+  div.innerHTML = `
+    <div class="panel-head">
+      <div class="panel-dot ${meta.dot}"></div>
+      <div>
+        <div class="panel-label">${meta.label}</div>
+        <div class="panel-name">${meta.name}</div>
+      </div>
+    </div>
+    ${hasUrl
+      ? `<a class="drive-link" href="${url}" target="_blank" rel="noopener">
+           <div class="drive-icon">${icon}</div>
+           <div class="drive-open-btn">
+             ${btnText}
+           </div>
+         </a>`
+      : `<div class="drive-link" style="cursor:default;opacity:.4;">
+           <div class="drive-icon">${icon}</div>
+           <div class="drive-label" style="color:var(--text-2)">No disponible per a aquest tema</div>
+         </div>`
+    }`;
+  return div;
+}
+
+/* Panell amb llista d'enllaços stepquiz (format playlist, com els vídeos) */
+function makeStepquizPlaylist(colKey, colClass) {
+  const meta  = PANEL_META[colKey];
+  const links = currentTopicData[colKey] || [];
+
+  const div = document.createElement('div');
+  div.className = 'panel' + (colClass ? ' ' + colClass : '');
+
+  const listHTML = links.map((lk, i) => `
+    <a class="sq-item" href="${lk.url}" target="_blank" rel="noopener">
+      <div class="sq-icon">✏️</div>
+      <div class="sq-title">${lk.title}</div>
+    </a>`).join('');
+
+  div.innerHTML = `
+    <div class="panel-body">
+      <button class="playlist-toggle" aria-expanded="false" aria-controls="list-sq">
+        <span style="display:flex;align-items:center;gap:8px;">
+          Step Quiz
+          <a class="sq-send-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfGul0XzwH_SiJ8Vr8kOe_J5pHNFCohSk1tW1dpz8GZuB7f_Q/viewform?usp=publish-editor" target="_blank" rel="noopener"
+             onclick="event.stopPropagation()">
+            <svg class="sq-send-icon" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="3" width="18" height="18" rx="3" fill="#6741d9"/>
+              <path d="M7 12h10M12 7l5 5-5 5" stroke="white" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Enviar codi
+          </a>
+        </span>
+        <svg class="toggle-arrow" viewBox="0 0 24 24" stroke-width="2.5"
+             stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 6 15 12 9 18"/>
+        </svg>
+      </button>
+      <div class="sq-list" id="list-sq">${listHTML}</div>
+    </div>`;
+
+  // Toggle collapse/expand
+  const toggleBtn = div.querySelector('.playlist-toggle');
+  const listEl    = div.querySelector('.sq-list');
+  // Obre per defecte
+  listEl.classList.add('open');
+  toggleBtn.classList.add('open');
+  toggleBtn.setAttribute('aria-expanded', true);
+
+  toggleBtn.addEventListener('click', () => {
+    const isOpen = listEl.classList.toggle('open');
+    toggleBtn.classList.toggle('open', isOpen);
+    toggleBtn.setAttribute('aria-expanded', isOpen);
+  });
+
+  return div;
+}
+
+function makeVideoPanel(colKey, colClass) {
+  const meta   = PANEL_META[colKey];
+  const videos = currentTopicData[colKey];
+
+  // Guàrdia defensiva: si no hi ha vídeos, mostra un panell buit en lloc de petar
+  if (!videos || videos.length === 0) {
+    const div = document.createElement('div');
+    div.className = 'panel' + (colClass ? ' ' + colClass : '');
+    div.innerHTML = `
+      <div class="panel-head">
+        <div class="panel-dot ${meta ? meta.dot : ''}"></div>
+        <div>
+          <div class="panel-label">${meta ? meta.label : ''}</div>
+          <div class="panel-name">${meta ? meta.name : ''}</div>
+        </div>
+      </div>
+      <div class="panel-body" style="padding:24px 20px;color:var(--text-muted);font-size:13px;">
+        No hi ha vídeos disponibles per a aquest tema.
+      </div>`;
+    return div;
+  }
+
+  if (!makeVideoPanel._state) makeVideoPanel._state = {};
+  if (!makeVideoPanel._state[colKey]) makeVideoPanel._state[colKey] = 0;
+  const activeIdx = makeVideoPanel._state[colKey];
+  const activeVid = videos[activeIdx] || videos[0];
+
+  const div = document.createElement('div');
+  div.className = 'panel' + (colClass ? ' ' + colClass : '');
+
+  const listHTML = videos.map((v, i) => `
+    <div class="video-item${i === activeIdx ? ' v-active' : ''}" data-idx="${i}">
+      <div class="v-left">
+        <div class="v-thumb">
+          <img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg" alt="" loading="lazy">
+          <div class="v-thumb-overlay">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <a class="yt-btn" href="https://www.youtube.com/watch?v=${v.id}"
+           target="_blank" rel="noopener" onclick="event.stopPropagation()">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          YouTube
+        </a>
+      </div>
+      <div class="v-right">
+        <div class="v-title">${v.title}</div>
+        <div class="v-note">${v.note || ''}</div>
+      </div>
+    </div>`).join('');
+
+  div.innerHTML = `
+    <div class="panel-head">
+      <div class="panel-dot ${meta.dot}"></div>
+      <div>
+        <div class="panel-label">${meta.label}</div>
+        <div class="panel-name">${meta.name}</div>
+        <div class="panel-fused">${
+          colKey === 'teoria-pildoras'
+            ? 'Vídeos teoria <span style="color:var(--text-2);font-weight:400">(Píldoras matemáticas)</span>'
+            : 'Problemes resolts <span style="color:var(--text-2);font-weight:400">(Bogdan)</span>'
+        }</div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="video-wrap">
+        <!-- Hero gran (escriptori) -->
+        <a class="yt-hero" href="https://www.youtube.com/watch?v=${activeVid.id}"
+           target="_blank" rel="noopener" id="hero-${colKey}">
+          <img id="hero-img-${colKey}"
+               src="https://img.youtube.com/vi/${activeVid.id}/hqdefault.jpg"
+               alt="${activeVid.title}">
+          <div class="yt-hero-overlay">
+            <div class="yt-hero-btn">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              Obre
+            </div>
+            <div class="yt-hero-title" id="hero-title-${colKey}">${activeVid.title}</div>
+          </div>
+        </a>
+        <!-- Franja compacta (mòbil) -->
+        <a class="yt-now-playing" id="np-${colKey}"
+           href="https://www.youtube.com/watch?v=${activeVid.id}"
+           target="_blank" rel="noopener">
+          <div class="yt-np-thumb">
+            <img id="np-img-${colKey}"
+                 src="https://img.youtube.com/vi/${activeVid.id}/mqdefault.jpg" alt="">
+          </div>
+          <div class="yt-np-title" id="np-title-${colKey}">${activeVid.title}</div>
+          <div class="yt-np-btn">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            Obre
+          </div>
+        </a>
+        <button class="playlist-toggle" aria-expanded="false" aria-controls="list-${colKey}">
+          <span>
+            Playlist
+            <span class="playlist-count">${videos.length}</span>
+          </span>
+          <svg class="toggle-arrow" viewBox="0 0 24 24" stroke-width="2.5"
+               stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 6 15 12 9 18"/>
+          </svg>
+        </button>
+        <div class="video-list" id="list-${colKey}">${listHTML}</div>
+      </div>
+    </div>`;
+
+  // Toggle playlist collapse/expand
+  const toggleBtn = div.querySelector('.playlist-toggle');
+  const listEl    = div.querySelector('.video-list');
+
+  // Auto-obre la playlist en mòbil
+  if (window.innerWidth <= 900) {
+    listEl.classList.add('open');
+    toggleBtn.classList.add('open');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+    div.classList.add('playlist-open');
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    const isOpen = listEl.classList.toggle('open');
+    toggleBtn.classList.toggle('open', isOpen);
+    toggleBtn.setAttribute('aria-expanded', isOpen);
+    div.classList.toggle('playlist-open', isOpen);
+    if (isOpen) {
+      const activeItem = listEl.querySelector('.v-active');
+      if (activeItem) activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+  });
+
+  // Clic a la llista → actualitza el hero (escriptori) i la franja mòbil
+  div.querySelectorAll('.video-item').forEach(el => {
+    el.addEventListener('click', () => {
+      const idx = +el.dataset.idx;
+      const v   = videos[idx];
+      makeVideoPanel._state[colKey] = idx;
+
+      // Hero gran (escriptori)
+      const hero = div.querySelector(`#hero-${colKey}`);
+      hero.href = `https://www.youtube.com/watch?v=${v.id}`;
+      div.querySelector(`#hero-img-${colKey}`).src =
+        `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
+      div.querySelector(`#hero-title-${colKey}`).textContent = v.title;
+
+      // Franja compacta (mòbil)
+      const np = div.querySelector(`#np-${colKey}`);
+      np.href = `https://www.youtube.com/watch?v=${v.id}`;
+      div.querySelector(`#np-img-${colKey}`).src =
+        `https://img.youtube.com/vi/${v.id}/mqdefault.jpg`;
+      div.querySelector(`#np-title-${colKey}`).textContent = v.title;
+
+      div.querySelectorAll('.video-item').forEach((e, i) =>
+        e.classList.toggle('v-active', i === idx));
+      el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    });
+  });
+
+  return div;
+}
+</script>
+
+</body>
+</html>
