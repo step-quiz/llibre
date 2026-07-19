@@ -1,0 +1,309 @@
+{
+  "course": "2eso",
+  "label": "2n ESO",
+  "pdfPrefix": "2eso",
+  "units": [
+    {
+      "num": 1,
+      "title": "Sentit numèric: la caixa d'eines dels nombres",
+      "activities": [
+        {
+          "num": 1,
+          "title": "On som amb els nombres?",
+          "subtitle": "Recordar el que ja sabem de divisibilitat i de fraccions, i començar el Quadern d'eines numèriques."
+        },
+        {
+          "num": 2,
+          "title": "La recta de terra",
+          "subtitle": "Donar sentit als nombres negatius amb desplaçaments i amb situacions de deute i haver."
+        },
+        {
+          "num": 3,
+          "title": "Divisibilitat i factorització",
+          "subtitle": "Reconèixer múltiples i divisors amb els criteris de divisibilitat i descompondre un nombre en factors primers."
+        },
+        {
+          "num": 4,
+          "title": "MCD i mcm",
+          "subtitle": "Calcular el màxim comú divisor i el mínim comú múltiple, i saber quin dels dos resol cada problema."
+        },
+        {
+          "num": 5,
+          "title": "Enters: oposat, valor absolut i ordre",
+          "subtitle": "Situar, comparar i ordenar nombres enters a la recta numèrica."
+        },
+        {
+          "num": 6,
+          "title": "Suma i resta d'enters",
+          "subtitle": "Sumar i restar nombres enters amb sentit, fent servir la recta i les targetes de deute i haver."
+        },
+        {
+          "num": 7,
+          "title": "Multiplicar, dividir i operacions combinades",
+          "subtitle": "Aplicar la regla dels signes i respectar la jerarquia de les operacions amb nombres enters."
+        },
+        {
+          "num": 8,
+          "title": "Fraccions: les quatre operacions",
+          "subtitle": "Sumar, restar, multiplicar i dividir fraccions, i calcular la fracció d'un nombre."
+        },
+        {
+          "num": 9,
+          "title": "Operacions combinades i pont fracció–decimal",
+          "subtitle": "Combinar operacions amb fraccions i triar la representació més adequada per a cada situació."
+        },
+        {
+          "num": 10,
+          "title": "Potències",
+          "subtitle": "Entendre què és una potència, calcular-la amb base entera i fraccionària i aplicar-ne les propietats bàsiques."
+        },
+        {
+          "num": 11,
+          "title": "El mapa de les quatre famílies de nombres",
+          "subtitle": "Posar ordre a tot el que hem après i tancar el Quadern d'eines numèriques."
+        },
+        {
+          "num": 12,
+          "title": "Repte d'aplicació: el viatge de fi de curs",
+          "subtitle": "Fer servir tot el que hem après de la unitat per resoldre una situació real, treballant en equip."
+        },
+        {
+          "num": 13,
+          "title": "Examen de la unitat",
+          "subtitle": "Prova individual sobre tota la unitat, seguida de l'autoavaluació amb la rúbrica."
+        }
+      ]
+    },
+    {
+      "num": 2,
+      "title": "Proporcionalitat i percentatges: el sentit de la comparació justa",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Quan dues coses varien juntes",
+          "subtitle": "Reconèixer magnituds, decidir si podem assumir una condició de regularitat i calcular la raó entre dues magnituds."
+        },
+        {
+          "num": 2,
+          "title": "Proporcional o no?",
+          "subtitle": "Distingir situacions proporcionals, no proporcionals i inversament proporcionals, i comparar raons per decidir quina compra surt més a compte."
+        },
+        {
+          "num": 3,
+          "title": "Percentatges en context",
+          "subtitle": "Calcular descomptes, IVA i canvis de divisa raonant la raó, i treballar percentatges més grans que 100\\% i més petits que 1\\%."
+        },
+        {
+          "num": 4,
+          "title": "Escales i síntesi",
+          "subtitle": "Entendre una escala com una raó, llegir gràfics amb esperit crític i posar ordre al raonament proporcional."
+        },
+        {
+          "num": 5,
+          "title": "El Full de compra intel·ligent",
+          "subtitle": "Analitzar ofertes reals, detectar falses ofertes i justificar la millor decisió de compra."
+        }
+      ]
+    },
+    {
+      "num": 3,
+      "title": "El pla cartesià: dibuixar la proporcionalitat",
+      "activities": [
+        {
+          "num": 1,
+          "title": "On apareixen gràfiques al dia a dia?",
+          "subtitle": "Reconèixer les convencions dels eixos i llegir informació d'una gràfica sense números."
+        },
+        {
+          "num": 2,
+          "title": "El pla cartesià",
+          "subtitle": "Situar i llegir punts amb coordenades, i reconèixer els quadrants pels signes."
+        },
+        {
+          "num": 3,
+          "title": "De la taula a la recta",
+          "subtitle": "Dibuixar una relació de proporcionalitat directa i entendre què significa el pendent."
+        },
+        {
+          "num": 4,
+          "title": "Síntesi i lectura crítica de gràfics",
+          "subtitle": "Connectar les quatre representacions d'una relació i detectar les trampes dels gràfics reals."
+        },
+        {
+          "num": 5,
+          "title": "El Retrat gràfic d'una relació",
+          "subtitle": "Triar una situació real de proporcionalitat directa, representar-la i interpretar-ne el pendent."
+        }
+      ]
+    },
+    {
+      "num": 4,
+      "title": "Equacions de 1r grau",
+      "activities": [
+        {
+          "num": 1,
+          "title": "La balança que no menteix",
+          "subtitle": "Entendre què vol dir que dues coses són iguals i descobrir la regla d'or de l'equilibri."
+        },
+        {
+          "num": 2,
+          "title": "De la paraula al símbol",
+          "subtitle": "Traduir enunciats a expressions i equacions, i fixar el vocabulari algebraic."
+        },
+        {
+          "num": 3,
+          "title": "Solució i comprovació",
+          "subtitle": "Entendre què és la solució d'una equació i comprovar-la per substitució."
+        },
+        {
+          "num": 4,
+          "title": "Aïllar la incògnita",
+          "subtitle": "Resoldre equacions d'un pas i amb termes als dos membres, agrupant termes amb la regla de la balança."
+        },
+        {
+          "num": 5,
+          "title": "Equacions amb parèntesis",
+          "subtitle": "Aplicar la propietat distributiva i evitar els errors de signe."
+        },
+        {
+          "num": 6,
+          "title": "Equacions amb denominadors",
+          "subtitle": "Eliminar els denominadors reduint a comú denominador i resoldre l'equació resultant."
+        },
+        {
+          "num": 7,
+          "title": "Del problema a l'equació",
+          "subtitle": "Traduir un enunciat real a una equació, resoldre'l i tornar al context."
+        },
+        {
+          "num": 8,
+          "title": "El mapa de la resolució",
+          "subtitle": "Posar ordre als tipus d'equacions i construir la guia col·lectiva de comprovació."
+        },
+        {
+          "num": 9,
+          "title": "Reptes en equilibri",
+          "subtitle": "Inventar, resoldre i comprovar un enigma propi, i proposar-lo als companys."
+        },
+        {
+          "num": 10,
+          "title": "Examen de la unitat",
+          "subtitle": "Prova individual sobre tota la unitat, seguida de l'autoavaluació amb la rúbrica."
+        }
+      ]
+    },
+    {
+      "num": 5,
+      "title": "Del pla a l'espai",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Les Fotomàtiques prenen volum",
+          "subtitle": "Recuperar les figures planes de 1r i fer el salt a l'espai: mirar l'entorn amb ulls geomètrics tridimensionals."
+        },
+        {
+          "num": 2,
+          "title": "Àrea i perímetre",
+          "subtitle": "Distingir àrea de perímetre amb claredat i calcular àrees de polígons i del cercle."
+        },
+        {
+          "num": 3,
+          "title": "Semblança i escales",
+          "subtitle": "Reconèixer figures semblants, ampliar i reduir amb una raó de semblança i treballar amb escales."
+        },
+        {
+          "num": 4,
+          "title": "El teorema de Pitàgores",
+          "subtitle": "Descobrir la relació entre les àrees dels quadrats dels costats d'un triangle rectangle i aplicar-la per trobar longituds."
+        },
+        {
+          "num": 5,
+          "title": "Tales i la mesura indirecta",
+          "subtitle": "Aplicar el teorema de Tales i la semblança per mesurar altures i distàncies impossibles d'amidar directament."
+        },
+        {
+          "num": 6,
+          "title": "Els poliedres",
+          "subtitle": "Reconèixer i anomenar poliedres i els seus elements: cares, arestes, vèrtexs i diagonals."
+        },
+        {
+          "num": 7,
+          "title": "La fórmula d'Euler i els desenvolupaments",
+          "subtitle": "Descobrir la relació d'Euler comptant, i connectar el cos amb el seu desenvolupament pla."
+        },
+        {
+          "num": 8,
+          "title": "Els cossos de revolució",
+          "subtitle": "Reconèixer cilindre, con i esfera com a cossos generats per gir, i identificar-ne els elements."
+        },
+        {
+          "num": 9,
+          "title": "Àrees i volums a l'espai",
+          "subtitle": "Calcular el volum dels cossos bàsics entenent que mesurar un volum és comptar unitats cúbiques."
+        },
+        {
+          "num": 10,
+          "title": "El mapa de la geometria",
+          "subtitle": "Posar ordre a tot el que hem vist i decidir, davant d'un problema, quina eina fer servir."
+        },
+        {
+          "num": 11,
+          "title": "Fotomàtiques 3D",
+          "subtitle": "Fotografiar un objecte real, modelitzar-lo geomètricament i calcular-ne una àrea i un volum."
+        },
+        {
+          "num": 12,
+          "title": "Projecte de maqueta a escala",
+          "subtitle": "Dissenyar i construir en grup una maqueta a escala calculant-ne àrees i volums, i optimitzant el material."
+        },
+        {
+          "num": 13,
+          "title": "Examen de la unitat",
+          "subtitle": "Prova individual sobre tota la geometria de la unitat, seguida de l'autoavaluació."
+        }
+      ]
+    },
+    {
+      "num": 6,
+      "title": "Dades que parlen",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Qüestió d'estadística",
+          "subtitle": "Entendre què és una població, una mostra i una variable, i com les dades es poden manipular."
+        },
+        {
+          "num": 2,
+          "title": "Organitzem les dades",
+          "subtitle": "Construir taules de freqüències i triar el gràfic adequat segons el tipus de variable."
+        },
+        {
+          "num": 3,
+          "title": "Resumim la informació",
+          "subtitle": "Calcular i interpretar la mitjana, la mediana i la moda, i saber quina resumeix millor cada situació."
+        },
+        {
+          "num": 4,
+          "title": "Llegir dades amb esperit crític",
+          "subtitle": "Detectar mostres esbiaixades i gràfics enganyosos, i descobrir com les dades han servit per canviar el món."
+        },
+        {
+          "num": 5,
+          "title": "El cicle estadístic",
+          "subtitle": "Posar en ordre totes les fases d'un estudi estadístic i reunir els errors típics."
+        },
+        {
+          "num": 6,
+          "title": "L'estudi estadístic propi",
+          "subtitle": "Presentar l'estudi del grup: dades, taules, gràfics, mesures i conclusions amb mirada crítica."
+        },
+        {
+          "num": 7,
+          "title": "Prova de la unitat",
+          "subtitle": "Prova individual sobre tota l'estadística de la unitat, seguida de l'autoavaluació."
+        }
+      ]
+    }
+  ],
+  "indexPdf": "2eso-index.pdf"
+}
