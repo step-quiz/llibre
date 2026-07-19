@@ -1,0 +1,258 @@
+{
+  "course": "3eso",
+  "label": "3r ESO",
+  "pdfPrefix": "3eso",
+  "units": [
+    {
+      "num": 1,
+      "title": "Del virus a la galàxia: potències i notació científica",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Un nombre que no cap a la pantalla",
+          "subtitle": "Recuperar les potències de 2n, posar en marxa la rutina de càlcul i estimació, i descobrir per què necessitem una manera nova d'escriure els nombres molt grans i molt petits."
+        },
+        {
+          "num": 2,
+          "title": "Les regles del joc de les potències",
+          "subtitle": "Descobrir i formalitzar les propietats del producte i el quocient de potències de la mateixa base, la potència d'una potència i l'exponent zero."
+        },
+        {
+          "num": 3,
+          "title": "L'exponent negatiu i les arrels",
+          "subtitle": "Estendre les potències a l'exponent negatiu seguint el patró del quocient, i conèixer l'arrel com a operació inversa de la potència."
+        },
+        {
+          "num": 4,
+          "title": "Neix la notació científica",
+          "subtitle": "Fer servir les potències de 10 per escriure, llegir i comparar nombres molt grans i molt petits en notació científica."
+        },
+        {
+          "num": 5,
+          "title": "Operar i estimar amb nombres extrems",
+          "subtitle": "Multiplicar i dividir en notació científica, estimar el resultat abans de calcular-lo i comprovar-lo amb la calculadora i el full de càlcul."
+        },
+        {
+          "num": 6,
+          "title": "El mapa del sentit numèric",
+          "subtitle": "Connectar en un sol esquema tot el que hem après de la unitat: potències, propietats, arrels i notació científica."
+        },
+        {
+          "num": 7,
+          "title": "Projecte: del virus a la galàxia",
+          "subtitle": "Aplicar tot el que hem après per construir una escala de l'univers, de la cosa més petita a la més gran, i comunicar-la en un pòster."
+        },
+        {
+          "num": 8,
+          "title": "Prova de la unitat",
+          "subtitle": "Demostrar de manera individual el domini de les potències, les propietats, les arrels i la notació científica."
+        }
+      ]
+    },
+    {
+      "num": 2,
+      "title": "És una qüestió de sort?",
+      "activities": [
+        {
+          "num": 1,
+          "title": "És just aquest joc?",
+          "subtitle": "Despertar les idees prèvies sobre l'atzar amb jocs senzills i plantejar el repte de la unitat: decidir si un joc és just."
+        },
+        {
+          "num": 2,
+          "title": "El llenguatge de l'atzar",
+          "subtitle": "Distingir els fenòmens deterministes dels aleatoris i fixar el vocabulari dels successos: segur, impossible, possible i contrari."
+        },
+        {
+          "num": 3,
+          "title": "Comptar sense oblidar-se de res",
+          "subtitle": "Determinar l'espai mostral d'un experiment i comptar de manera sistemàtica els casos possibles amb diagrames d'arbre."
+        },
+        {
+          "num": 4,
+          "title": "Provar-ho moltes vegades",
+          "subtitle": "Estimar la probabilitat d'un succés amb la freqüència relativa i comprendre com s'estabilitza en repetir molt l'experiment."
+        },
+        {
+          "num": 5,
+          "title": "La regla de Laplace",
+          "subtitle": "Calcular la probabilitat en experiments equiprobables amb la regla de Laplace i expressar-la en fracció, decimal i percentatge."
+        },
+        {
+          "num": 6,
+          "title": "Laboratori d'atzar",
+          "subtitle": "Predir, experimentar i comparar: contrastar la probabilitat que calculem amb la que observem quan tirem daus de veritat."
+        },
+        {
+          "num": 7,
+          "title": "El mapa de la probabilitat",
+          "subtitle": "Connectar en un sol esquema tot el que hem après: fenomen aleatori, recompte, freqüència relativa i regla de Laplace."
+        },
+        {
+          "num": 8,
+          "title": "Projecte: és una qüestió de sort?",
+          "subtitle": "Analitzar diversos jocs d'atzar, calcular la probabilitat de guanyar-hi i decidir, amb arguments, si són justos."
+        },
+        {
+          "num": 9,
+          "title": "Prova de la unitat",
+          "subtitle": "Demostrar de manera individual el domini del recompte, la freqüència relativa i la regla de Laplace en contextos de joc."
+        }
+      ]
+    },
+    {
+      "num": 3,
+      "title": "Quant mesura l'institut?",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Fotomàtiques de mesura",
+          "subtitle": "Recuperar la semblança, les escales i Pitàgores de 2n a partir de l'entorn, i plantejar el repte de la unitat: mesurar allò que no es pot mesurar directament."
+        },
+        {
+          "num": 2,
+          "title": "Tales i els triangles semblants",
+          "subtitle": "Enunciar el teorema de Tales, reconèixer triangles semblants pels seus criteris i relacionar la raó de semblança amb l'escala."
+        },
+        {
+          "num": 3,
+          "title": "Mesurar amb l'ombra",
+          "subtitle": "Aplicar la semblança de triangles per calcular altures inaccessibles a partir d'ombres, i justificar el grau de precisió de la mesura."
+        },
+        {
+          "num": 4,
+          "title": "Àrees i volums dels cossos bàsics",
+          "subtitle": "Calcular àrees i volums de cub, ortoedre, prisma, piràmide i cilindre amb la precisió requerida, sobre objectes reals."
+        },
+        {
+          "num": 5,
+          "title": "Con, esfera i l'efecte de la raó",
+          "subtitle": "Calcular volums de con i esfera i de cossos composts, i entendre com la raó de semblança afecta longituds, àrees i volums."
+        },
+        {
+          "num": 6,
+          "title": "El mapa de la semblança i la mesura",
+          "subtitle": "Connectar en un sol esquema Tales, semblança, raó, escala i les fórmules d'àrees i volums."
+        },
+        {
+          "num": 7,
+          "title": "Projecte: dossier d'agrimensura de l'institut",
+          "subtitle": "Mesurar elements reals del centre: una altura inaccessible amb Tales, i l'àrea i el volum d'objectes reals, amb precisió i comprovació."
+        },
+        {
+          "num": 8,
+          "title": "Prova de la unitat",
+          "subtitle": "Demostrar de manera individual el domini de la semblança, la mesura indirecta i el càlcul d'àrees i volums."
+        }
+      ]
+    },
+    {
+      "num": 4,
+      "title": "Moviments al pla",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Moviments a la vista",
+          "subtitle": "Observar de manera intuïtiva translacions, girs i simetries a l'entorn i plantejar el repte de la unitat: descriure com una figura es transforma en una altra."
+        },
+        {
+          "num": 2,
+          "title": "Translacions i girs",
+          "subtitle": "Descriure i aplicar translacions i girs, identificar-ne els invariants i formalitzar-los amb coordenades."
+        },
+        {
+          "num": 3,
+          "title": "Simetries i composició",
+          "subtitle": "Aplicar simetries axials i centrals amb coordenades, reconèixer eixos de simetria i compondre dos moviments."
+        },
+        {
+          "num": 4,
+          "title": "Frisos i mosaics",
+          "subtitle": "Identificar els moviments que generen frisos i mosaics reals de l'art, les rajoles i la natura, i analitzar-ne l'estructura."
+        },
+        {
+          "num": 5,
+          "title": "El mapa dels moviments",
+          "subtitle": "Connectar en un sol esquema els tres moviments del pla amb els seus invariants i amb les coordenades."
+        },
+        {
+          "num": 6,
+          "title": "Projecte: taller de mosaics",
+          "subtitle": "Recollir i classificar moviments en objectes reals i dissenyar un fris o mosaic propi component moviments."
+        },
+        {
+          "num": 7,
+          "title": "Prova de la unitat",
+          "subtitle": "Demostrar de manera individual el domini de les translacions, els girs i les simetries, també amb coordenades."
+        }
+      ]
+    },
+    {
+      "num": 5,
+      "title": "Parlem en mates",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Lletres que amaguen nombres",
+          "subtitle": "Recuperar el llenguatge algebraic i l'equació de 1r grau de 2n, i plantejar el repte de la unitat amb una fórmula real."
+        },
+        {
+          "num": 2,
+          "title": "Monomis i polinomis",
+          "subtitle": "Conèixer el vocabulari dels polinomis i operar-hi: suma, resta, multiplicació i avaluació numèrica."
+        },
+        {
+          "num": 3,
+          "title": "Les identitats notables",
+          "subtitle": "Descobrir amb models d'àrea el quadrat d'una suma i d'una diferència i la suma per diferència, i aplicar-les."
+        },
+        {
+          "num": 4,
+          "title": "Factor comú i factoritzar",
+          "subtitle": "Extreure factor comú com a operació inversa del desenvolupament i combinar-lo amb les identitats notables."
+        },
+        {
+          "num": 5,
+          "title": "Equacions de 1r grau",
+          "subtitle": "Consolidar la resolució d'equacions de 1r grau amb parèntesis i denominadors, i plantejar-les des d'enunciats."
+        },
+        {
+          "num": 6,
+          "title": "Despejar la incògnita que no és «x»",
+          "subtitle": "Aïllar una variable qualsevol d'una fórmula real i calcular-la amb dades, encara que no s'anomeni «x»."
+        },
+        {
+          "num": 7,
+          "title": "Per què cal un sistema",
+          "subtitle": "Reconèixer situacions amb dues incògnites i dues condicions, traduir-les a un sistema 2×2 i entendre què és una solució."
+        },
+        {
+          "num": 8,
+          "title": "Mètodes de resolució de sistemes",
+          "subtitle": "Resoldre sistemes 2×2 per substitució, igualació i reducció, i triar el mètode segons la forma del sistema."
+        },
+        {
+          "num": 9,
+          "title": "El mètode gràfic i el nombre de solucions",
+          "subtitle": "Interpretar cada equació d'un sistema com una recta, veure la solució com el punt de tall i descobrir els tres tipus de solució."
+        },
+        {
+          "num": 10,
+          "title": "El mapa de l'àlgebra i els sistemes",
+          "subtitle": "Connectar en un sol esquema polinomis, identitats, factorització, equacions, despejaments i sistemes, amb el quadre de dreceres i errors."
+        },
+        {
+          "num": 11,
+          "title": "Manual de fórmules i detectius de dues incògnites",
+          "subtitle": "Aplicar el despejament de fórmules reals i la modelització amb sistemes en dos productes autèntics."
+        },
+        {
+          "num": 12,
+          "title": "Prova de la unitat",
+          "subtitle": "Demostrar de manera individual el domini de l'operatòria amb polinomis, les identitats, les equacions, els despejaments i els sistemes."
+        }
+      ]
+    }
+  ],
+  "indexPdf": null
+}
