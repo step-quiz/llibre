@@ -2,6 +2,7 @@
   "course": "4eso",
   "label": "4t ESO",
   "pdfPrefix": "4eso",
+  "indexPdf": "4eso-index.pdf",
   "units": [
     {
       "num": 2,
@@ -79,7 +80,273 @@
           "subtitle": "Construir en grup un recull on cada identitat notable apareix amb la seva demostració (gràfica i algebraica), i demostrar de manera individual el domini de la unitat."
         }
       ]
+    },
+    {
+      "num": 4,
+      "title": "Equacions, inequacions i sistemes",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Quan una x no n'hi ha prou",
+          "subtitle": "Recuperar la resolució d'equacions de 1r grau i de sistemes (de 3r), i topar amb un problema que obliga a fer aparèixer una $x^2$: la porta a l'equació de 2n grau."
+        },
+        {
+          "num": 2,
+          "title": "Equacions de 2n grau, primers mètodes",
+          "subtitle": "Resoldre equacions de 2n grau senzilles (del tipus $x^2=k$, incompletes i factoritzades) i interpretar què signifiquen les seves solucions."
+        },
+        {
+          "num": 3,
+          "title": "La fórmula general i el discriminant",
+          "subtitle": "Deduir la fórmula general de l'equació de 2n grau completant el quadrat, i fer servir el discriminant per anticipar quantes solucions tindrà abans de resoldre-la."
+        },
+        {
+          "num": 4,
+          "title": "Problemes que amaguen una $x^2$",
+          "subtitle": "Traduir enunciats reals a equacions de 2n grau, resoldre-les i interpretar les solucions descartant les que no tenen sentit; connectar amb els punts de tall."
+        },
+        {
+          "num": 5,
+          "title": "Inequacions: de la igualtat a la desigualtat",
+          "subtitle": "Resoldre inequacions lineals com una extensió natural de les equacions, dominar la regla del canvi de sentit i representar les solucions a la recta."
+        },
+        {
+          "num": 6,
+          "title": "Síntesi: el mapa i el discriminant",
+          "subtitle": "Reunir en un mapa tots els mètodes de resolució, situar el paper del discriminant i construir el quadre d'errors típics abans del dossier i la prova."
+        },
+        {
+          "num": 7,
+          "title": "Dossier d'equacions i inequacions",
+          "subtitle": "Aplicar en grup tot el domini de la unitat en un dossier raonat, i demostrar de manera individual la resolució d'equacions de 2n grau, l'ús del discriminant i les inequacions."
+        }
+      ]
+    },
+    {
+      "num": 5,
+      "title": "La paràbola: estudi de la funció quadràtica",
+      "activities": [
+        {
+          "num": 1,
+          "title": "De l'equació a la corba",
+          "subtitle": "Enllaçar l'equació de 2n grau (Unitat 4) amb la seva gràfica: descobrir que resoldre $x^2-k=0$ és trobar on la corba $y=x^2-k$ talla l'eix, i plantejar l'estudi de la paràbola."
+        },
+        {
+          "num": 2,
+          "title": "L'efecte dels coeficients",
+          "subtitle": "Descobrir com el coeficient $a$ canvia l'orientació i l'obertura de la paràbola, i com $c$ la desplaça amunt o avall, treballant amb les famílies $y=ax^2$ i $y=ax^2+c$."
+        },
+        {
+          "num": 3,
+          "title": "Vèrtex, eix i punts de tall",
+          "subtitle": "Determinar el vèrtex, l'eix de simetria i els punts de tall d'una paràbola $y=ax^2+bx+c$, tant gràficament com algebraicament (resolent l'equació associada, connexió amb la Unitat 4)."
+        },
+        {
+          "num": 4,
+          "title": "Estudiar i interpretar una paràbola",
+          "subtitle": "Fer l'estudi complet d'una paràbola i, sobretot, interpretar-ne els elements en un context real (tir, arc, benefici): què vol dir el vèrtex, els talls i l'orientació en cada cas."
+        },
+        {
+          "num": 5,
+          "title": "Síntesi: coeficients i elements",
+          "subtitle": "Reunir en dos quadres el que sabem: com els coeficients determinen la forma, i com es troben els elements d'una paràbola; construir el quadre d'errors abans del producte i la prova."
+        },
+        {
+          "num": 6,
+          "title": "Estudi de la paràbola",
+          "subtitle": "Estudiar en grup, de manera completa, una família de funcions quadràtiques i presentar-ne l'estudi; demostrar de manera individual el domini de la unitat."
+        }
+      ]
+    },
+    {
+      "num": 6,
+      "title": "Famílies de funcions i logaritmes: atles de funcions",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Més enllà de la recta i la paràbola",
+          "subtitle": "Recuperar les funcions conegudes (lineal, quadràtica) i topar amb fenòmens que cap d'elles modela bé —creixement, desintegració, repartiment invers— per obrir la necessitat de noves famílies de funcions."
+        },
+        {
+          "num": 2,
+          "title": "La hipèrbola",
+          "subtitle": "Estudiar la funció de proporcionalitat inversa $y=k/x$: la seva forma (dues branques), l'efecte del signe de $k$, el domini i les asímptotes."
+        },
+        {
+          "num": 3,
+          "title": "La funció exponencial",
+          "subtitle": "Estudiar $y=b^x$: el creixement ($b>1$) i el decreixement ($0<b<1$), l'asímptota horitzontal i el domini; modelitzar interès compost i desintegració."
+        },
+        {
+          "num": 4,
+          "title": "Logaritmes",
+          "subtitle": "Entendre el logaritme com l'operació que desfà l'exponencial, calcular logaritmes senzills, conèixer-ne les propietats i les bases habituals (10 i neperià) i llegir escales logarítmiques (Richter, pH)."
+        },
+        {
+          "num": 5,
+          "title": "La funció logarítmica",
+          "subtitle": "Estudiar $y=\\log_b x$: el seu domini, la seva gràfica i la seva relació d'inversa amb l'exponencial (simetria respecte de la recta $y=x$)."
+        },
+        {
+          "num": 6,
+          "title": "Síntesi: l'atles de famílies",
+          "subtitle": "Reunir totes les famílies en un sol quadre comparatiu (forma, domini, asímptotes, creixement, fenomen) i consolidar el quadre d'errors abans del producte i la prova."
+        },
+        {
+          "num": 7,
+          "title": "Atles de funcions",
+          "subtitle": "Elaborar en grup un atles estudiat de les famílies de la unitat, i demostrar de manera individual el domini de hipèrbola, exponencial i logaritmes."
+        }
+      ]
+    },
+    {
+      "num": 7,
+      "title": "Trigonometria: mesurar l'inabastable",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Mesurar l'inabastable",
+          "subtitle": "Assegurar la base geomètrica (teorema de Pitàgores i semblança de triangles) i plantejar el repte de la unitat: mesurar distàncies i altures on no es pot arribar."
+        },
+        {
+          "num": 2,
+          "title": "Sinus, cosinus i tangent",
+          "subtitle": "Definir sin, cos i tan d'un angle agut com a raons entre els costats d'un triangle rectangle, introduir la circumferència goniomètrica i conèixer els angles notables."
+        },
+        {
+          "num": 3,
+          "title": "Resoldre triangles rectangles",
+          "subtitle": "Usar les raons trigonomètriques per trobar costats i angles desconeguts d'un triangle rectangle, i aplicar-ho a problemes reals de mesura (altures, distàncies, rampes)."
+        },
+        {
+          "num": 4,
+          "title": "Els teoremes del sinus i del cosinus",
+          "subtitle": "Resoldre triangles qualssevol (no només rectangles) amb els teoremes del sinus i del cosinus, i aplicar-los a problemes reals de mesura i navegació."
+        },
+        {
+          "num": 5,
+          "title": "Síntesi: el mapa de la trigonometria",
+          "subtitle": "Reunir en un mapa les raons, les relacions i els teoremes, amb el criteri per triar l'eina adequada, i consolidar el quadre d'errors abans del producte i la prova."
+        },
+        {
+          "num": 6,
+          "title": "Expedició de mesura trigonomètrica",
+          "subtitle": "Resoldre en grup un repte de mesura real (una altura o distància inaccessible) modelitzant-lo amb triangles, i demostrar de manera individual el domini de la trigonometria."
+        }
+      ]
+    },
+    {
+      "num": 8,
+      "title": "Vectors i rectes: geometria amb coordenades",
+      "activities": [
+        {
+          "num": 1,
+          "title": "El pla de Descartes",
+          "subtitle": "Recuperar la representació de punts i figures amb coordenades, i plantejar el repte de la unitat: descriure rectes i transformacions amb àlgebra, no només amb el dibuix."
+        },
+        {
+          "num": 2,
+          "title": "Vectors, distàncies i punts mitjans",
+          "subtitle": "Introduir el vector com a segment orientat, calcular-ne les components i el mòdul, i trobar la distància entre dos punts i el punt mitjà d'un segment amb coordenades."
+        },
+        {
+          "num": 3,
+          "title": "Les expressions de la recta",
+          "subtitle": "Conèixer les diferents expressions algebraiques d'una recta (punt-pendent, explícita, general, vectorial i contínua), i —marca de B— triar la més adequada segons les dades del problema."
+        },
+        {
+          "num": 4,
+          "title": "Transformacions amb coordenades",
+          "subtitle": "Analitzar les transformacions elementals del pla (translació, simetria, gir i homotècia) amb coordenades, connectant amb els moviments de 3r."
+        },
+        {
+          "num": 5,
+          "title": "Síntesi: rectes i transformacions",
+          "subtitle": "Reunir en dos quadres el que sabem: quina expressió de la recta convé segons les dades, i quina regla algebraica té cada transformació; consolidar el quadre d'errors."
+        },
+        {
+          "num": 6,
+          "title": "Geometria amb coordenades",
+          "subtitle": "Resoldre en grup un projecte de geometria analítica (rectes triades segons les dades i transformacions d'una figura), i demostrar de manera individual el domini de la unitat."
+        }
+      ]
+    },
+    {
+      "num": 9,
+      "title": "Estadística de dues variables: relació i regressió",
+      "activities": [
+        {
+          "num": 1,
+          "title": "D'una a dues variables",
+          "subtitle": "Recuperar l'estadística d'una variable (2n) i fer el salt a dues variables amb un núvol de punts real, plantejant la pregunta clau: estan relacionades?"
+        },
+        {
+          "num": 2,
+          "title": "Posició i dispersió",
+          "subtitle": "Resumir una variable amb rigor: mesures de posició (mitjana, mediana, moda) i de dispersió (rang, desviació típica), i comparar distribucions que tenen la mateixa mitjana però diferent dispersió."
+        },
+        {
+          "num": 3,
+          "title": "Mitjana ponderada i taules de dues variables",
+          "subtitle": "Calcular la mitjana ponderada quan les dades tenen pesos diferents, i organitzar dades de dues variables en taules de freqüències conjuntes amb els seus gràfics."
+        },
+        {
+          "num": 4,
+          "title": "Correlació i regressió gràfica",
+          "subtitle": "Valorar, a partir del núvol de punts, el grau i el sentit de la relació entre dues variables i si té sentit ajustar-hi una recta —sense càlcul formal dels coeficients—, i distingir correlació de causalitat."
+        },
+        {
+          "num": 5,
+          "title": "Síntesi: el mapa de l'estadística",
+          "subtitle": "Reunir en un mapa l'estadística d'una i de dues variables (posició, dispersió, correlació, regressió) i consolidar el quadre d'errors, amb l'avís central de correlació $\\neq$ causalitat."
+        },
+        {
+          "num": 6,
+          "title": "Informe estadístic de dues variables",
+          "subtitle": "Estudiar en grup un conjunt de dades reals de dues variables i presentar-ne un informe, i demostrar de manera individual el domini de la posició, la dispersió, la mitjana ponderada i la lectura de la correlació."
+        }
+      ]
+    },
+    {
+      "num": 10,
+      "title": "Combinatòria i probabilitat: de quantes maneres pot passar?",
+      "activities": [
+        {
+          "num": 1,
+          "title": "De quantes maneres pot passar?",
+          "subtitle": "Distingir situacions deterministes d'aleatòries, i despertar la necessitat de comptar de manera sistemàtica; plantejar el dossier de l'atzar."
+        },
+        {
+          "num": 2,
+          "title": "Comptar amb arbre",
+          "subtitle": "Fer recomptes sistemàtics amb el diagrama d'arbre i entendre el significat de variacions, permutacions i combinacions (sense exigir-ne les fórmules), distingint quan importa l'ordre i quan es pot repetir."
+        },
+        {
+          "num": 3,
+          "title": "Mesurar l'atzar",
+          "subtitle": "Calcular probabilitats amb la regla de Laplace, operar amb successos (unió, intersecció, contrari) amb diagrames de Venn, i connectar la freqüència relativa amb la probabilitat (llei dels grans nombres)."
+        },
+        {
+          "num": 4,
+          "title": "Experiments compostos",
+          "subtitle": "Calcular probabilitats d'experiments de diverses etapes amb arbres de probabilitat, i distingir successos dependents i independents (amb i sense reposició) per prendre decisions."
+        },
+        {
+          "num": 5,
+          "title": "Decisions davant l'atzar",
+          "subtitle": "Fer servir la idea intuïtiva de valor esperat per valorar si un joc és just, i desenvolupar pensament crític davant apostes, loteries i estadístiques enganyoses."
+        },
+        {
+          "num": 6,
+          "title": "Síntesi: recompte i probabilitat",
+          "subtitle": "Reunir en un mapa les eines de recompte (arbre, V/P/C) i de probabilitat (Laplace, Venn, arbre, condicionada, valor esperat), i consolidar el quadre d'errors."
+        },
+        {
+          "num": 7,
+          "title": "Dossier de l'atzar",
+          "subtitle": "Resoldre en grup un recull de reptes de recompte i probabilitat aplicats a una decisió real, i demostrar de manera individual el domini de la combinatòria i la probabilitat."
+        }
+      ]
     }
-  ],
-  "indexPdf": null
+  ]
 }
