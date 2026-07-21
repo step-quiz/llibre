@@ -1,0 +1,19 @@
+{
+  "course": "1eso",
+  "label": "1r ESO",
+  "pdfPrefix": "1eso",
+  "indexPdf": null,
+  "units": [
+    {
+      "num": 1,
+      "title": "Nombres naturals: comptar, escriure i ordenar",
+      "activities": [
+        {
+          "num": 1,
+          "title": "D'on venen els nombres?",
+          "subtitle": "Recordar el que ja sabem de comptar i escriure nombres, i entendre què és un sistema de numeració."
+        }
+      ]
+    }
+  ]
+}

@@ -2,6 +2,7 @@
   "course": "3eso",
   "label": "3r ESO",
   "pdfPrefix": "3eso",
+  "indexPdf": "3eso-index.pdf",
   "units": [
     {
       "num": 1,
@@ -252,7 +253,62 @@
           "subtitle": "Demostrar de manera individual el domini de l'operatòria amb polinomis, les identitats, les equacions, els despejaments i els sistemes."
         }
       ]
+    },
+    {
+      "num": 6,
+      "title": "La funció més recta",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Coses que canvien alhora",
+          "subtitle": "Recuperar la proporcionalitat y=mx de 2n i el pla cartesià, i plantejar el repte de la unitat: descriure com una cosa canvia quan en canvia una altra."
+        },
+        {
+          "num": 2,
+          "title": "Què és una funció i les seves quatre cares",
+          "subtitle": "Formalitzar el concepte de funció, distingir variable dependent i independent, i passar entre text, taula, gràfic i fórmula."
+        },
+        {
+          "num": 3,
+          "title": "La funció lineal $y=mx$: pendent i creixement",
+          "subtitle": "Calcular i interpretar el pendent com a ritme de canvi, i relacionar-ne el signe amb el creixement o decreixement."
+        },
+        {
+          "num": 4,
+          "title": "Movem la recta: la funció afí $y=mx+n$",
+          "subtitle": "Descobrir l'ordenada a l'origen movent la recta i interpretar $m$ i $n$ en contextos reals."
+        },
+        {
+          "num": 5,
+          "title": "De l'enunciat a la fórmula i tornada",
+          "subtitle": "Obtenir la fórmula d'una funció afí a partir de dades, taula o gràfic, i calcular valors, punts de tall i prediccions."
+        },
+        {
+          "num": 6,
+          "title": "Estudiar i comparar funcions; pont amb els sistemes",
+          "subtitle": "Llegir les característiques d'una funció, comparar-ne dues i interpretar el punt de tall com a solució comuna, recuperant els sistemes de la Unitat 5."
+        },
+        {
+          "num": 7,
+          "title": "El mapa de les funcions",
+          "subtitle": "Connectar en un sol esquema les quatre representacions, el significat de m i n i els tipus de creixement."
+        },
+        {
+          "num": 8,
+          "title": "Retrat funcional del món real",
+          "subtitle": "Triar una situació real modelitzable amb una funció afí i presentar-la amb les quatre representacions, interpretant m i n, un punt de tall i una predicció."
+        },
+        {
+          "num": 9,
+          "title": "La galeria de funcions",
+          "subtitle": "Agrupar i contrastar funcions segons el signe del pendent i discutir què significa cada cas en la realitat."
+        },
+        {
+          "num": 10,
+          "title": "Prova de la unitat",
+          "subtitle": "Demostrar de manera individual el domini de la modelització amb funcions afins, el pas entre representacions i la interpretació de m i n."
+        }
+      ]
     }
-  ],
-  "indexPdf": null
+  ]
 }
