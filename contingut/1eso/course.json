@@ -2,7 +2,7 @@
   "course": "1eso",
   "label": "1r ESO",
   "pdfPrefix": "1eso",
-  "indexPdf": null,
+  "indexPdf": "1eso-index.pdf",
   "units": [
     {
       "num": 1,
@@ -12,6 +12,316 @@
           "num": 1,
           "title": "D'on venen els nombres?",
           "subtitle": "Recordar el que ja sabem de comptar i escriure nombres, i entendre què és un sistema de numeració."
+        },
+        {
+          "num": 2,
+          "title": "Les taules, per fi enteses",
+          "subtitle": "Recuperar les taules de multiplicar entenent què volen dir, no només memoritzant-les."
+        },
+        {
+          "num": 3,
+          "title": "Multiplicar nombres grans",
+          "subtitle": "Fer servir les taules per multiplicar nombres de dues i tres xifres, i entendre la divisió amb residu."
+        },
+        {
+          "num": 4,
+          "title": "Les propietats que fan fàcil el càlcul",
+          "subtitle": "Descobrir les propietats de la suma i la multiplicació i fer-les servir per calcular més ràpid i millor."
+        },
+        {
+          "num": 5,
+          "title": "Potències, la drecera de multiplicar",
+          "subtitle": "Entendre la potència com un producte repetit i fer-la servir amb quadrats, cubs i potències de 10."
+        },
+        {
+          "num": 6,
+          "title": "L'ordre de les operacions",
+          "subtitle": "Aprendre en quin ordre s'han de fer les operacions d'un càlcul amb parèntesis, potències i les quatre operacions."
+        },
+        {
+          "num": 7,
+          "title": "Enfonsar la flota",
+          "subtitle": "Repassar tot el que hem après de la unitat jugant per parelles i comprovant que els resultats són raonables."
+        },
+        {
+          "num": 8,
+          "title": "Examen de la unitat",
+          "subtitle": "Demostrar, de manera individual, que dominem els nombres naturals i les operacions de la unitat."
+        }
+      ]
+    },
+    {
+      "num": 2,
+      "title": "Divisibilitat: l'ADN dels nombres",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Primer contacte amb la divisibilitat",
+          "subtitle": "Presentar el repte de la unitat i mirar què recordem de múltiples i divisors de primària."
+        },
+        {
+          "num": 2,
+          "title": "El camí del nombre",
+          "subtitle": "Aprofundir en els múltiples i els divisors i descobrir-ne les primeres propietats."
+        },
+        {
+          "num": 3,
+          "title": "L'ADN dels nombres",
+          "subtitle": "Descobrir els nombres primers i aprendre a descompondre qualsevol nombre en els seus factors primers."
+        },
+        {
+          "num": 4,
+          "title": "Repartint! i Curses a Mathland!",
+          "subtitle": "Descobrir, amb situacions concretes, dues idees noves: repartir en parts iguals i saber quan dues coses tornen a coincidir."
+        },
+        {
+          "num": 5,
+          "title": "Criteris, MCD i mcm amb factorització",
+          "subtitle": "Aprendre a saber si un nombre és divisible sense dividir, i a calcular el MCD i el mcm amb els factors primers."
+        },
+        {
+          "num": 6,
+          "title": "La successió de Fibonacci",
+          "subtitle": "Descobrir un patró numèric famós, trobar-ne la regla de formació i veure on apareix a la natura."
+        },
+        {
+          "num": 7,
+          "title": "El garbell d'Eratòstenes",
+          "subtitle": "Aprendre un mètode antic i infal·lible per trobar tots els nombres primers fins a un nombre donat."
+        },
+        {
+          "num": 8,
+          "title": "El triangle de Tartaglia",
+          "subtitle": "Construir un triangle de nombres famós i descobrir els molts patrons que amaga a dins."
+        },
+        {
+          "num": 9,
+          "title": "El projecte final: caçadors de patrons",
+          "subtitle": "Fer servir tot el que hem après de la unitat per estudiar patrons i les seves connexions, treballant en equip."
+        },
+        {
+          "num": 10,
+          "title": "Examen de la unitat",
+          "subtitle": "Demostrar, de manera individual, que dominem la divisibilitat, la factorització, el MCD i el mcm."
+        }
+      ]
+    },
+    {
+      "num": 3,
+      "title": "Com és de gran Gaza?",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Primer contacte",
+          "subtitle": "Presentar el repte de la unitat i mirar què recordem de les fraccions de primària."
+        },
+        {
+          "num": 2,
+          "title": "Què és més gran?",
+          "subtitle": "Aprendre a comparar fraccions i a situar-les a la recta numèrica."
+        },
+        {
+          "num": 3,
+          "title": "La història del metre i del quilòmetre",
+          "subtitle": "Conèixer les unitats de longitud, aprendre a passar d'unes a altres i entendre per què cal una unitat comuna."
+        },
+        {
+          "num": 4,
+          "title": "Com podem mesurar àrees?",
+          "subtitle": "Entendre què és l'àrea, mesurar-la amb quadrats unitat i calcular la de rectangles i quadrats."
+        },
+        {
+          "num": 5,
+          "title": "Sumem àrees irregulars usant fraccions",
+          "subtitle": "Aprendre a mesurar l'àrea d'una forma irregular quadriculant-la i sumant quadrats sencers i trossos de quadrat."
+        },
+        {
+          "num": 6,
+          "title": "Fraccions equivalents",
+          "subtitle": "Descobrir que una mateixa quantitat es pot escriure amb fraccions diferents i aprendre a simplificar-les."
+        },
+        {
+          "num": 7,
+          "title": "Suma i resta de fraccions",
+          "subtitle": "Aprendre a sumar i restar fraccions, tinguin o no el mateix denominador."
+        },
+        {
+          "num": 8,
+          "title": "Quants km$^2$ mesura Barcelona?",
+          "subtitle": "Posar en pràctica tot el que hem après mesurant l'àrea d'un territori conegut i proper."
+        },
+        {
+          "num": 9,
+          "title": "Com és de gran Gaza?",
+          "subtitle": "Aplicar el mètode de mesura d'àrees per calcular la superfície de Gaza i entendre què signifiquen aquestes xifres."
+        },
+        {
+          "num": 10,
+          "title": "Activitat avaluativa individual",
+          "subtitle": "Demostrar, de manera individual, que dominem les fraccions i el càlcul d'àrees."
+        },
+        {
+          "num": 11,
+          "title": "Coavaluació i autoavaluació",
+          "subtitle": "Presentar el projecte final, valorar la feina dels altres grups amb criteris justos i reflexionar sobre el que hem après."
+        }
+      ]
+    },
+    {
+      "num": 4,
+      "title": "És gran l'ou del kiwi?",
+      "activities": [
+        {
+          "num": 1,
+          "title": "És gran o petit?",
+          "subtitle": "Descobrir que la mida d'una cosa depèn d'amb què la comparem, i recordar què sabem de fraccions."
+        },
+        {
+          "num": 2,
+          "title": "De dobles o de triples",
+          "subtitle": "Aprendre a multiplicar una fracció per un nombre natural, entenent-ho com sumar-la unes quantes vegades."
+        },
+        {
+          "num": 3,
+          "title": "Fracció d'un nombre",
+          "subtitle": "Aprendre a calcular quina quantitat representa una fracció d'un total."
+        },
+        {
+          "num": 4,
+          "title": "Fracció d'una fracció",
+          "subtitle": "Entendre què vol dir prendre una fracció d'una altra fracció, amb el model de l'àrea."
+        },
+        {
+          "num": 5,
+          "title": "Multipliquem fraccions",
+          "subtitle": "Dominar la multiplicació de fraccions i aprendre a simplificar abans de multiplicar."
+        },
+        {
+          "num": 6,
+          "title": "Dividim fraccions",
+          "subtitle": "Aprendre a dividir fraccions convertint la divisió en una multiplicació."
+        },
+        {
+          "num": 7,
+          "title": "Percentatges",
+          "subtitle": "Entendre què és un percentatge i saber passar entre fracció, decimal i percentatge."
+        },
+        {
+          "num": 8,
+          "title": "Quin percentatge del kiwi és l'ou?",
+          "subtitle": "Ajuntar tot el que hem après per calcular quina part d'un tot ocupa un objecte, i dir-ho amb fracció, decimal i percentatge."
+        },
+        {
+          "num": 9,
+          "title": "Dibuixem monstres!",
+          "subtitle": "Practicar les fraccions d'una manera creativa, dissenyant un monstre amb les parts mesurades en fraccions i percentatges."
+        },
+        {
+          "num": 10,
+          "title": "Projecte final: quin percentatge ocupa?",
+          "subtitle": "Aplicar tot el que hem après per calcular quina part d'una foto ocupa un objecte que triïs tu."
+        },
+        {
+          "num": 11,
+          "title": "Avaluació individual i autoavaluació",
+          "subtitle": "Demostrar de manera individual que dominem les operacions amb fraccions i els percentatges, i reflexionar sobre el projecte."
+        }
+      ]
+    },
+    {
+      "num": 5,
+      "title": "Decimals i arrel quadrada",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Què en sabem?",
+          "subtitle": "Recordar els decimals de primària i descobrir, amb quadrats de cartolina, la idea d'arrel quadrada."
+        },
+        {
+          "num": 2,
+          "title": "Els decimals",
+          "subtitle": "Entendre com s'escriuen i s'ordenen els decimals, i aprendre a arrodonir-los i truncar-los."
+        },
+        {
+          "num": 3,
+          "title": "Operacions amb decimals",
+          "subtitle": "Sumar, restar, multiplicar i dividir decimals amb agilitat, i comprovar que el resultat és raonable."
+        },
+        {
+          "num": 4,
+          "title": "De la fracció al decimal",
+          "subtitle": "Convertir una fracció en decimal i distingir els decimals exactes dels periòdics."
+        },
+        {
+          "num": 5,
+          "title": "Quadrats perfectes i arrel quadrada",
+          "subtitle": "Calcular arrels quadrades exactes i aproximar les que no ho són."
+        },
+        {
+          "num": 6,
+          "title": "El mapa dels nombres",
+          "subtitle": "Connectar tot el que hem après sobre nombres al llarg del curs i veure com les idees es relacionen entre elles."
+        },
+        {
+          "num": 7,
+          "title": "Projecte: quantes rajoles per a l'aula?",
+          "subtitle": "Aplicar tot el bloc numèric per resoldre un problema real de mesura, triant la representació adequada i aproximant amb criteri."
+        }
+      ]
+    },
+    {
+      "num": 6,
+      "title": "Sentit espacial: el món en formes",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Fotomàtiques",
+          "subtitle": "Descobrir que la geometria és pertot i aprendre a mirar l'entorn amb ulls matemàtics."
+        },
+        {
+          "num": 2,
+          "title": "Les peces bàsiques de la geometria",
+          "subtitle": "Aprendre el vocabulari fonamental: punt, recta, segment, i com es relacionen dues rectes."
+        },
+        {
+          "num": 3,
+          "title": "Angles",
+          "subtitle": "Entendre què és un angle, mesurar-lo amb el transportador i reconèixer els diferents tipus."
+        },
+        {
+          "num": 4,
+          "title": "Polígons",
+          "subtitle": "Conèixer les parts d'un polígon, saber-los anomenar segons els costats i classificar-los."
+        },
+        {
+          "num": 5,
+          "title": "Triangles",
+          "subtitle": "Classificar els triangles, saber que els seus angles sumen 180° i quan tres segments en poden formar un."
+        },
+        {
+          "num": 6,
+          "title": "Laboratori de conjectures amb GeoGebra",
+          "subtitle": "Fer servir la geometria dinàmica per descobrir i comprovar propietats de les figures per nosaltres mateixos."
+        },
+        {
+          "num": 7,
+          "title": "El mural de la geometria",
+          "subtitle": "Ordenar i connectar tot el que hem après de geometria plana en un mapa conceptual col·lectiu."
+        },
+        {
+          "num": 8,
+          "title": "Preparem les Fotomàtiques",
+          "subtitle": "Triar les tres fotografies del projecte i preparar-ne l'anàlisi amb el vocabulari geomètric après."
+        },
+        {
+          "num": 9,
+          "title": "Presentem les Fotomàtiques",
+          "subtitle": "Presentar el dossier de fotomàtiques a la classe i valorar la feina dels companys amb criteris justos."
+        },
+        {
+          "num": 10,
+          "title": "Examen i reflexió",
+          "subtitle": "Demostrar de manera individual que dominem la geometria plana bàsica, i reflexionar sobre el que hem après."
         }
       ]
     }
