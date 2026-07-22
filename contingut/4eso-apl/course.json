@@ -1,0 +1,306 @@
+{
+  "course": "4eso-apl",
+  "label": "4t ESO · Aplicades",
+  "pdfPrefix": "4eso-apl",
+  "indexPdf": null,
+  "units": [
+    {
+      "num": 1,
+      "title": "Nombres reals des de l'estimació",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Quant fa, més o menys?",
+          "subtitle": "Obrir el curs mesurant coses que la calculadora «no acaba mai» i instal·lar la rutina d'estimar abans de calcular."
+        },
+        {
+          "num": 2,
+          "title": "Els nombres que no s'acaben",
+          "subtitle": "Reconèixer nombres irracionals en situacions reals ($\\sqrt{2}$, $\\pi$, el nombre auri) i situar-los a la recta al costat dels racionals."
+        },
+        {
+          "num": 3,
+          "title": "La recta real i les representacions",
+          "subtitle": "Comparar i ordenar nombres reals, i triar per a cada problema la forma —fracció, decimal o arrel— que va més bé."
+        },
+        {
+          "num": 4,
+          "title": "La calculadora amb cap",
+          "subtitle": "Fer servir la calculadora amb criteri: decidir quants decimals copiem i entendre com l'arrodoniment arrossega error en un càlcul encadenat."
+        },
+        {
+          "num": 5,
+          "title": "El mapa dels reals",
+          "subtitle": "Posar ordre a tot el que hem vist: quins conjunts de nombres hi ha, com encaixen i quins errors d'arrodoniment hem d'evitar."
+        },
+        {
+          "num": 6,
+          "title": "Producte: «El full de l'estimador»",
+          "subtitle": "Posar en joc tot el que hem après: davant de situacions reals de mesura, decidir la precisió, estimar, calcular i justificar-ho."
+        },
+        {
+          "num": 7,
+          "title": "Prova de la unitat i autoavaluació",
+          "subtitle": "Demostrar de manera individual què has après i reflexionar sobre els teus propis errors d'arrodoniment."
+        }
+      ]
+    },
+    {
+      "num": 2,
+      "title": "Percentatges i matemàtica financera",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Qui hi surt guanyant?",
+          "subtitle": "Descobrir amb una compra real que sumar percentatges enganya, i que hi ha una manera segura de decidir quina oferta convé."
+        },
+        {
+          "num": 2,
+          "title": "El factor multiplicador",
+          "subtitle": "Convertir qualsevol pujada o baixada de preu en un número pel qual multiplicar, i fer servir aquesta eina amb soltesa."
+        },
+        {
+          "num": 3,
+          "title": "Percentatges encadenats",
+          "subtitle": "Encadenar diversos canvis multiplicant els factors, i descobrir que pujar i baixar el mateix percentatge no torna al preu inicial."
+        },
+        {
+          "num": 4,
+          "title": "Impostos i IVA en context",
+          "subtitle": "Llegir tiquets, factures i rebuts reals, calcular l'IVA amb els tipus correctes i representar despeses amb un diagrama de sectors."
+        },
+        {
+          "num": 5,
+          "title": "L'interès i el cost d'un crèdit",
+          "subtitle": "Entendre què és l'interès, calcular la quota i el cost total d'un crèdit, i llegir la lletra petita d'un finançament."
+        },
+        {
+          "num": 6,
+          "title": "Comptat, terminis o crèdit?",
+          "subtitle": "Comparar el cost total real de diverses maneres de pagar una mateixa compra i prendre una decisió amb dades."
+        },
+        {
+          "num": 7,
+          "title": "Síntesi financera",
+          "subtitle": "Posar en ordre tota l'eina financera de la unitat i recollir les trampes típiques abans del producte final."
+        },
+        {
+          "num": 8,
+          "title": "Producte: «Informe de decisió de compra»",
+          "subtitle": "Aplicar tota la unitat a una decisió de consum real: calcular el cost total de dues opcions de pagament i recomanar-ne una, amb dades."
+        },
+        {
+          "num": 9,
+          "title": "Prova de la unitat i autoavaluació",
+          "subtitle": "Demostrar de manera individual què has après sobre percentatges i finances, i reflexionar sobre les trampes en què has caigut."
+        }
+      ]
+    },
+    {
+      "num": 3,
+      "title": "Proporcionalitat i escales",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Directa o inversa?",
+          "subtitle": "Recuperar la proporcionalitat de cursos anteriors classificant situacions reals, i descobrir que no totes les magnituds es relacionen igual."
+        },
+        {
+          "num": 2,
+          "title": "Proporcionalitat directa i inversa",
+          "subtitle": "Resoldre problemes de proporcionalitat amb dues eines segures —reducció a la unitat i regla de tres— i saber quan la situació NO és proporcional."
+        },
+        {
+          "num": 3,
+          "title": "Escales i plànols",
+          "subtitle": "Interpretar i dibuixar plànols i mapes a escala, i passar de la mesura del paper a la mesura real (i a l'inrevés)."
+        },
+        {
+          "num": 4,
+          "title": "Síntesi: proporcionalitat i escales",
+          "subtitle": "Posar en ordre tot el que hem après i recollir els errors típics abans del producte i la prova."
+        },
+        {
+          "num": 5,
+          "title": "Producte «A escala real» i prova",
+          "subtitle": "Aplicar tota la unitat elaborant un plànol a escala d'un espai real i resolent un cas de consum i un de proporcionalitat inversa; després, prova individual i autoavaluació."
+        }
+      ]
+    },
+    {
+      "num": 4,
+      "title": "Mesura indirecta",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Mesurar l'impossible",
+          "subtitle": "Descobrir que es pot mesurar l'altura d'un arbre o d'un edifici sense enfilar-s'hi, fent servir ombres i triangles semblants."
+        },
+        {
+          "num": 2,
+          "title": "Semblança i mesura indirecta",
+          "subtitle": "Usar triangles semblants per calcular altures i distàncies que no podem mesurar directament, amb el mètode de les ombres i variants."
+        },
+        {
+          "num": 3,
+          "title": "El teorema de Pitàgores per mesurar",
+          "subtitle": "Deduir longituds en triangles rectangles amb Pitàgores, i valorar la fiabilitat del resultat estimant l'error."
+        },
+        {
+          "num": 4,
+          "title": "Síntesi: mètodes de mesura indirecta",
+          "subtitle": "Posar en ordre les dues eines —semblança i Pitàgores— i saber quina triar segons la situació, recollint els errors típics."
+        },
+        {
+          "num": 5,
+          "title": "Producte «Els mesuradors» i prova",
+          "subtitle": "Sortir a mesurar de veritat un element inaccessible del centre, donar el resultat amb el seu error i contrastar-lo amb una segona tècnica; després, prova individual."
+        }
+      ]
+    },
+    {
+      "num": 5,
+      "title": "Equacions de 2n grau",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Quan una recta no arriba",
+          "subtitle": "Descobrir amb un problema d'àrea que hi ha situacions que una equació de 1r grau no pot resoldre, i que necessitem una eina nova."
+        },
+        {
+          "num": 2,
+          "title": "Equacions de 2n grau senzilles",
+          "subtitle": "Resoldre els casos més fàcils —$x^2=k$ i les incompletes— i començar a interpretar què volen dir les dues solucions."
+        },
+        {
+          "num": 3,
+          "title": "Factoritzada i completa",
+          "subtitle": "Resoldre equacions ja factoritzades i, per als casos que no surten fàcil, disposar d'una eina que sempre funciona: la fórmula general."
+        },
+        {
+          "num": 4,
+          "title": "Modelitzar amb equacions",
+          "subtitle": "Traduir problemes reals —àrees, tirs, productes— a una equació de 2n grau i resoldre'ls amb el mètode més eficient."
+        },
+        {
+          "num": 5,
+          "title": "Interpretar i decidir",
+          "subtitle": "Llegir què diuen les solucions d'una equació en el context real i decidir quines valen i quines cal descartar."
+        },
+        {
+          "num": 6,
+          "title": "Mapa de les equacions",
+          "subtitle": "Posar en ordre tots els mètodes i saber, mirant una equació, quin camí és el més eficient; recollir els errors típics."
+        },
+        {
+          "num": 7,
+          "title": "Producte «El cas resolt» i prova",
+          "subtitle": "Aplicar tota la unitat a un cas real: modelitzar-lo amb una equació de 2n grau, resoldre'l, interpretar les solucions i justificar la decisió; després, prova individual."
+        }
+      ]
+    },
+    {
+      "num": 6,
+      "title": "La paràbola",
+      "activities": [
+        {
+          "num": 1,
+          "title": "La forma dels fenòmens",
+          "subtitle": "Reconèixer que moltes situacions reals —un tir, un arc de pont, un sortidor— tenen la mateixa forma corba: la paràbola."
+        },
+        {
+          "num": 2,
+          "title": "Llegir una paràbola",
+          "subtitle": "Identificar en una gràfica els quatre elements clau —orientació, vèrtex, punts de tall i eix de simetria— i saber-los localitzar."
+        },
+        {
+          "num": 3,
+          "title": "De la gràfica al significat",
+          "subtitle": "Passar de veure els elements d'una paràbola a dir què signifiquen en el fenomen: altura màxima, abast, moment òptim."
+        },
+        {
+          "num": 4,
+          "title": "Paràbola i equació de 2n grau",
+          "subtitle": "Descobrir que els punts de tall d'una paràbola són exactament les solucions de l'equació de 2n grau, i moure's entre gràfica i equació."
+        },
+        {
+          "num": 5,
+          "title": "Mapa de la paràbola",
+          "subtitle": "Posar en ordre com es llegeix una paràbola i què significa cada element, recollint els errors de lectura més típics."
+        },
+        {
+          "num": 6,
+          "title": "Producte «El fenomen parabòlic» i prova",
+          "subtitle": "Triar un fenomen real amb forma de paràbola, construir-ne la gràfica, llegir-ne els elements i explicar què signifiquen; després, prova individual."
+        }
+      ]
+    },
+    {
+      "num": 7,
+      "title": "Funcions: llegir i interpretar gràfics",
+      "activities": [
+        {
+          "num": 1,
+          "title": "El gràfic parla",
+          "subtitle": "Descobrir que un gràfic explica una història sobre un fenomen real, i que llegir-lo bé és una competència clau."
+        },
+        {
+          "num": 2,
+          "title": "Famílies de funcions des del gràfic",
+          "subtitle": "Reconèixer d'un cop d'ull les tres famílies bàsiques —recta, paràbola i hipèrbola— i saber quin tipus de fenomen descriu cadascuna."
+        },
+        {
+          "num": 3,
+          "title": "L'exponencial com a fenomen",
+          "subtitle": "Reconèixer el creixement exponencial en fenòmens reals —poblacions, interès compost, medicaments— i llegir-ne la tendència."
+        },
+        {
+          "num": 4,
+          "title": "Síntesi, gràfics enganyosos i producte",
+          "subtitle": "Recollir les famílies de funcions, aprendre a detectar gràfics que enganyen, i tancar la unitat amb el producte i l'autoavaluació."
+        }
+      ]
+    },
+    {
+      "num": 8,
+      "title": "Estadística: projecte amb dades reals",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Dades que decideixen",
+          "subtitle": "Descobrir amb dos conjunts de dades que la mitjana sola no explica prou: cal saber si les dades estan juntes o escampades."
+        },
+        {
+          "num": 2,
+          "title": "Recollida i organització de dades",
+          "subtitle": "Formular una bona pregunta, triar una mostra representativa i organitzar les dades en taules de freqüències i gràfics adequats."
+        },
+        {
+          "num": 3,
+          "title": "Mesures de posició i mitjana ponderada",
+          "subtitle": "Resumir un conjunt de dades amb un sol número —i saber quin triar— incorporant la novetat de 4t: la mitjana ponderada."
+        },
+        {
+          "num": 4,
+          "title": "La dispersió com a variabilitat",
+          "subtitle": "Mesurar si les dades estan concentrades o escampades, i comparar dos conjunts amb la mateixa mitjana."
+        },
+        {
+          "num": 5,
+          "title": "Llegir dades amb esperit crític",
+          "subtitle": "Detectar mostres esbiaixades, titulars enganyosos i comparacions injustes en les dades que ens arriben cada dia."
+        },
+        {
+          "num": 6,
+          "title": "Mapa del cicle estadístic",
+          "subtitle": "Posar en ordre les cinc fases d'un estudi i recollir els errors típics abans de fer el projecte."
+        },
+        {
+          "num": 7,
+          "title": "Producte «Estudi estadístic propi» i prova",
+          "subtitle": "Dur a terme un estudi estadístic complet amb dades reals i comunicar-ne les conclusions; després, prova individual."
+        }
+      ]
+    }
+  ]
+}
