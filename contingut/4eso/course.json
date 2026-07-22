@@ -16,7 +16,7 @@
         {
           "num": 2,
           "title": "El mapa dels reals i la recta",
-          "subtitle": "Classificar nombres pels subconjunts $\\mathbb{N}\\subset\\mathbb{Z}\\subset\\mathbb{Q}\\subset\\mathbb{R}$ justificant-ho, entendre per què $\\sqrt{2}$ és irracional i situar reals a la recta amb precisió."
+          "subtitle": "Classificar nombres pels subconjunts N ⊂ Z ⊂ Q ⊂ R justificant-ho, entendre per què √2 és irracional i situar reals a la recta amb precisió."
         },
         {
           "num": 3,
@@ -57,7 +57,7 @@
         {
           "num": 2,
           "title": "El factor multiplicador, a fons",
-          "subtitle": "Dominar augments i disminucions successius amb $\\times(1\\pm r)$, treballar percentatges més grans del 100\\% i més petits de l'1\\%, i justificar per què els percentatges no se sumen."
+          "subtitle": "Dominar augments i disminucions successius amb ×(1 ± r), treballar percentatges més grans del 100% i més petits de l'1%, i justificar per què els percentatges no se sumen."
         },
         {
           "num": 3,
@@ -129,12 +129,12 @@
         {
           "num": 1,
           "title": "Quan una x no n'hi ha prou",
-          "subtitle": "Recuperar la resolució d'equacions de 1r grau i de sistemes (de 3r), i topar amb un problema que obliga a fer aparèixer una $x^2$: la porta a l'equació de 2n grau."
+          "subtitle": "Recuperar la resolució d'equacions de 1r grau i de sistemes (de 3r), i topar amb un problema que obliga a fer aparèixer una x²: la porta a l'equació de 2n grau."
         },
         {
           "num": 2,
           "title": "Equacions de 2n grau, primers mètodes",
-          "subtitle": "Resoldre equacions de 2n grau senzilles (del tipus $x^2=k$, incompletes i factoritzades) i interpretar què signifiquen les seves solucions."
+          "subtitle": "Resoldre equacions de 2n grau senzilles (del tipus x² = k, incompletes i factoritzades) i interpretar què signifiquen les seves solucions."
         },
         {
           "num": 3,
@@ -143,7 +143,7 @@
         },
         {
           "num": 4,
-          "title": "Problemes que amaguen una $x^2$",
+          "title": "Problemes que amaguen una x²",
           "subtitle": "Traduir enunciats reals a equacions de 2n grau, resoldre-les i interpretar les solucions descartant les que no tenen sentit; connectar amb els punts de tall."
         },
         {
@@ -170,17 +170,17 @@
         {
           "num": 1,
           "title": "De l'equació a la corba",
-          "subtitle": "Enllaçar l'equació de 2n grau (Unitat 4) amb la seva gràfica: descobrir que resoldre $x^2-k=0$ és trobar on la corba $y=x^2-k$ talla l'eix, i plantejar l'estudi de la paràbola."
+          "subtitle": "Enllaçar l'equació de 2n grau (Unitat 4) amb la seva gràfica: descobrir que resoldre x² − k = 0 és trobar on la corba y = x² − k talla l'eix, i plantejar l'estudi de la paràbola."
         },
         {
           "num": 2,
           "title": "L'efecte dels coeficients",
-          "subtitle": "Descobrir com el coeficient $a$ canvia l'orientació i l'obertura de la paràbola, i com $c$ la desplaça amunt o avall, treballant amb les famílies $y=ax^2$ i $y=ax^2+c$."
+          "subtitle": "Descobrir com el coeficient a canvia l'orientació i l'obertura de la paràbola, i com c la desplaça amunt o avall, treballant amb les famílies y = ax² i y = ax² + c."
         },
         {
           "num": 3,
           "title": "Vèrtex, eix i punts de tall",
-          "subtitle": "Determinar el vèrtex, l'eix de simetria i els punts de tall d'una paràbola $y=ax^2+bx+c$, tant gràficament com algebraicament (resolent l'equació associada, connexió amb la Unitat 4)."
+          "subtitle": "Determinar el vèrtex, l'eix de simetria i els punts de tall d'una paràbola y = ax² + bx + c, tant gràficament com algebraicament (resolent l'equació associada, connexió amb la Unitat 4)."
         },
         {
           "num": 4,
@@ -211,12 +211,12 @@
         {
           "num": 2,
           "title": "La hipèrbola",
-          "subtitle": "Estudiar la funció de proporcionalitat inversa $y=k/x$: la seva forma (dues branques), l'efecte del signe de $k$, el domini i les asímptotes."
+          "subtitle": "Estudiar la funció de proporcionalitat inversa y = k/x: la seva forma (dues branques), l'efecte del signe de k, el domini i les asímptotes."
         },
         {
           "num": 3,
           "title": "La funció exponencial",
-          "subtitle": "Estudiar $y=b^x$: el creixement ($b>1$) i el decreixement ($0<b<1$), l'asímptota horitzontal i el domini; modelitzar interès compost i desintegració."
+          "subtitle": "Estudiar y = bˣ: el creixement (b > 1) i el decreixement (0 < b < 1), l'asímptota horitzontal i el domini; modelitzar interès compost i desintegració."
         },
         {
           "num": 4,
@@ -226,7 +226,7 @@
         {
           "num": 5,
           "title": "La funció logarítmica",
-          "subtitle": "Estudiar $y=\\log_b x$: el seu domini, la seva gràfica i la seva relació d'inversa amb l'exponencial (simetria respecte de la recta $y=x$)."
+          "subtitle": "Estudiar y = log_b(x): el seu domini, la seva gràfica i la seva relació d'inversa amb l'exponencial (simetria respecte de la recta y = x)."
         },
         {
           "num": 6,
@@ -339,7 +339,7 @@
         {
           "num": 5,
           "title": "Síntesi: el mapa de l'estadística",
-          "subtitle": "Reunir en un mapa l'estadística d'una i de dues variables (posició, dispersió, correlació, regressió) i consolidar el quadre d'errors, amb l'avís central de correlació $\\neq$ causalitat."
+          "subtitle": "Reunir en un mapa l'estadística d'una i de dues variables (posició, dispersió, correlació, regressió) i consolidar el quadre d'errors, amb l'avís central de correlació ≠ causalitat."
         },
         {
           "num": 6,

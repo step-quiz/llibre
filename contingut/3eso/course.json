@@ -270,13 +270,13 @@
         },
         {
           "num": 3,
-          "title": "La funció lineal $y=mx$: pendent i creixement",
+          "title": "La funció lineal y = mx: pendent i creixement",
           "subtitle": "Calcular i interpretar el pendent com a ritme de canvi, i relacionar-ne el signe amb el creixement o decreixement."
         },
         {
           "num": 4,
-          "title": "Movem la recta: la funció afí $y=mx+n$",
-          "subtitle": "Descobrir l'ordenada a l'origen movent la recta i interpretar $m$ i $n$ en contextos reals."
+          "title": "Movem la recta: la funció afí y = mx + n",
+          "subtitle": "Descobrir l'ordenada a l'origen movent la recta i interpretar m i n en contextos reals."
         },
         {
           "num": 5,
