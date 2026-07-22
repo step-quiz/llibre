@@ -5,6 +5,47 @@
   "indexPdf": "4eso-index.pdf",
   "units": [
     {
+      "num": 1,
+      "title": "Nombres reals: exacte i aproximat, del sentit al formalisme",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Quant és exacte?",
+          "subtitle": "Reprendre el sentit numèric de 3r, posar en marxa la rutina d'estimació i descobrir que hi ha mesures que no tenen un valor decimal exacte: obrir el fil «quan és exacte, quan és aproximat, i com ho justifico»."
+        },
+        {
+          "num": 2,
+          "title": "El mapa dels reals i la recta",
+          "subtitle": "Classificar nombres pels subconjunts $\\mathbb{N}\\subset\\mathbb{Z}\\subset\\mathbb{Q}\\subset\\mathbb{R}$ justificant-ho, entendre per què $\\sqrt{2}$ és irracional i situar reals a la recta amb precisió."
+        },
+        {
+          "num": 3,
+          "title": "Radicals, amb totes les de la llei",
+          "subtitle": "Donar significat als radicals, simplificar-los extraient factors, operar-hi (suma, producte, quocient) i traduir-los a potències d'exponent racional."
+        },
+        {
+          "num": 4,
+          "title": "Denominadors nets i errors controlats",
+          "subtitle": "Racionalitzar denominadors senzills per guanyar eficiència i elegància, i mesurar la qualitat d'una aproximació amb l'error absolut i relatiu."
+        },
+        {
+          "num": 5,
+          "title": "Síntesi: el nombre real, a la mà",
+          "subtitle": "Reunir en un sol full tot el que sabem del nombre real —subconjunts, radicals, exponent racional, racionalització i error— i tornar-hi amb problemes que barregen les eines."
+        },
+        {
+          "num": 6,
+          "title": "El Dossier del nombre real",
+          "subtitle": "Aplicar en grup tot el que sap la unitat per construir un dossier que expliqui, amb exemples propis, què és el nombre real i quan cal el valor exacte o l'aproximat."
+        },
+        {
+          "num": 7,
+          "title": "Prova de la unitat",
+          "subtitle": "Demostrar de manera individual el domini dels nombres reals: classificació, radicals, exponent racional, racionalització i el criteri exacte/aproximat amb l'error."
+        }
+      ]
+    },
+    {
       "num": 2,
       "title": "Percentatges i matemàtica financera",
       "activities": [
