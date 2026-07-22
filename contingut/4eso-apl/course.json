@@ -2,7 +2,7 @@
   "course": "4eso-apl",
   "label": "4t ESO · Aplicades",
   "pdfPrefix": "4eso-apl",
-  "indexPdf": null,
+  "indexPdf": "4eso-apl-index.pdf",
   "units": [
     {
       "num": 1,
@@ -299,6 +299,47 @@
           "num": 7,
           "title": "Producte «Estudi estadístic propi» i prova",
           "subtitle": "Dur a terme un estudi estadístic complet amb dades reals i comunicar-ne les conclusions; després, prova individual."
+        }
+      ]
+    },
+    {
+      "num": 9,
+      "title": "Atzar i decisions",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Em convé jugar?",
+          "subtitle": "Descobrir amb una travessa real la diferència entre el que sembla que pot passar i el que realment és probable."
+        },
+        {
+          "num": 2,
+          "title": "Comptar amb arbre",
+          "subtitle": "Comptar totes les possibilitats d'una situació de manera sistemàtica, sense deixar-se'n cap ni repetir-ne, amb el diagrama d'arbre."
+        },
+        {
+          "num": 3,
+          "title": "Probabilitat amb Laplace i experimentació",
+          "subtitle": "Assignar probabilitats comptant casos favorables i possibles, i comprovar experimentalment que la freqüència s'hi acosta quan repetim molts cops."
+        },
+        {
+          "num": 4,
+          "title": "Probabilitat composta amb arbre",
+          "subtitle": "Calcular la probabilitat de fets encadenats —dos llançaments, dues extraccions— multiplicant al llarg de les branques de l'arbre."
+        },
+        {
+          "num": 5,
+          "title": "Atzar i decisions crítiques",
+          "subtitle": "Entendre amb números per què els jocs d'atzar estan dissenyats perquè la casa guanyi, i detectar els paranys que fan que semblin bons."
+        },
+        {
+          "num": 6,
+          "title": "Mapa de l'atzar",
+          "subtitle": "Posar en ordre el camí complet —comptar, assignar probabilitat i decidir— i recollir els errors i paranys típics."
+        },
+        {
+          "num": 7,
+          "title": "Producte «Analistes de l'atzar» i prova",
+          "subtitle": "Analitzar un joc o aposta real de dalt a baix —recompte, probabilitat, experimentació i recomanació— i tancar el curs."
         }
       ]
     }
