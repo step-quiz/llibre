@@ -20,9 +20,35 @@ let lastMergeBlob = null;
 const state = {
   selected: new Set(),
   activeFile: null,
+  expandedUnit: null,
 };
 
 function pdfUrl(filename) { return `${coursePath}/pdfs/${filename}`; }
+
+/* ─── MEMÒRIA DEL NAVEGADOR (recorda on es va deixar cada llibre) ────
+   Es guarda un únic registre per curs (window.COURSE) amb la unitat
+   desplegada i el fitxer/activitat que s'estava consultant, perquè la
+   propera vegada que s'obri el mateix llibre en aquest navegador es
+   reprengui exactament al mateix lloc. */
+const LAST_VIEW_KEY = `llibre:lastView:${coursePath}`;
+
+function saveLastView() {
+  try {
+    localStorage.setItem(LAST_VIEW_KEY, JSON.stringify({
+      expandedUnit: state.expandedUnit,
+      activeFile: state.activeFile,
+    }));
+  } catch (_) { /* localStorage no disponible (mode privat, quota, etc.) */ }
+}
+
+function loadLastView() {
+  try {
+    const raw = localStorage.getItem(LAST_VIEW_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch (_) {
+    return null;
+  }
+}
 
 /* ─── ORDENACIÓ CANÒNICA D'UNA SELECCIÓ (per fusionar/descarregar) ──── */
 function orderedSelection() {
@@ -55,14 +81,24 @@ function showInFrame(url, title) {
 
 function selectActivity(unit, act, filename, title) {
   state.activeFile = filename;
+  state.expandedUnit = unit;
   showInFrame(pdfUrl(filename), title);
   paint();
+  saveLastView();
 }
 
 function selectBonus(filename, title) {
   state.activeFile = filename;
   showInFrame(pdfUrl(filename), title);
   paint();
+  saveLastView();
+}
+
+/* ─── PLEGAR / DESPLEGAR UNITATS (una de sola oberta alhora) ───────── */
+function toggleExpand(unit) {
+  state.expandedUnit = (state.expandedUnit === unit) ? null : unit;
+  paint();
+  saveLastView();
 }
 
 /* ─── SELECCIÓ (checkboxes) ─────────────────────────────────────────── */
@@ -204,6 +240,7 @@ function paint() {
     onToggleBonus: toggleBonus,
     onSelectActivity: selectActivity,
     onSelectBonus: selectBonus,
+    onToggleExpand: toggleExpand,
   });
   updateSelectionBar();
 }
@@ -227,8 +264,47 @@ async function loadApp() {
   document.getElementById('btnClear').addEventListener('click', onClearSelection);
 
   paint();
+  openInitialView();
+}
 
-  // vista inicial: primera activitat de la primera unitat disponible
+/* ─── VISTA INICIAL ──────────────────────────────────────────────────
+   1) Si el navegador recorda on es va deixar aquest llibre (memòria
+      local), es reprèn exactament allà: mateixa unitat desplegada i
+      mateixa activitat (o l'Índex del curs) seleccionada.
+   2) Si no hi ha res guardat (primera visita, o memòria esborrada), es
+      mostra per defecte l'"Índex del curs" (si el curs en té un).
+   3) Si tampoc hi ha Índex del curs, es cau a l'antic comportament:
+      la primera activitat de la primera unitat disponible.
+   En tots els casos, la resta d'unitats queden plegades ("collapsed"):
+   només es desplega, com a molt, la unitat de l'activitat mostrada. */
+function openInitialView() {
+  const last = loadLastView();
+
+  if (last && last.activeFile && pdfSet.has(last.activeFile)) {
+    if (last.activeFile === courseMeta.indexPdf) {
+      selectBonus(last.activeFile, 'Índex del curs');
+      // l'Índex no pertany a cap unitat: es respecta la unitat que
+      // l'usuari tenia desplegada (si encara existeix al curs).
+      state.expandedUnit = validExpandedUnit(last.expandedUnit);
+      paint();
+      saveLastView();
+      return;
+    }
+    const found = findActivityByFilename(last.activeFile);
+    if (found) {
+      selectActivity(found.unit.num, found.activity.num, last.activeFile,
+        `UD${found.unit.num} \u00b7 Activitat ${found.activity.num} \u2014 ${found.activity.title}`);
+      return;
+    }
+  }
+
+  // sense memòria vàlida: Índex del curs per defecte
+  if (courseMeta.indexPdf && pdfSet.has(courseMeta.indexPdf)) {
+    selectBonus(courseMeta.indexPdf, 'Índex del curs');
+    return;
+  }
+
+  // últim recurs: primera activitat de la primera unitat disponible
   const firstUnit = courseMeta.units.find(u => u.activities.some(a =>
     pdfSet.has(activityFilename(courseMeta.pdfPrefix, u.num, a.num))));
   if (firstUnit) {
@@ -238,6 +314,24 @@ async function loadApp() {
     selectActivity(firstUnit.num, firstAct.num, filename,
       `UD${firstUnit.num} \u00b7 Activitat ${firstAct.num} \u2014 ${firstAct.title}`);
   }
+}
+
+/* Troba unitat+activitat a partir d'un nom de fitxer (per restaurar memòria). */
+function findActivityByFilename(filename) {
+  for (const u of courseMeta.units) {
+    for (const a of u.activities) {
+      if (activityFilename(courseMeta.pdfPrefix, u.num, a.num) === filename) {
+        return { unit: u, activity: a };
+      }
+    }
+  }
+  return null;
+}
+
+/* Comprova que la unitat guardada com a "desplegada" encara existeix al curs. */
+function validExpandedUnit(unitNum) {
+  if (unitNum == null) return null;
+  return courseMeta.units.some(u => u.num === unitNum) ? unitNum : null;
 }
 
 loadApp();

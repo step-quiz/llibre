@@ -6,8 +6,9 @@
    Exposa (global): renderTree(root, courseMeta, pdfSet, state, handlers)
 
    state = {
-     selected: Set<string>   // noms de fitxer PDF seleccionats (checkbox)
-     activeFile: string|null // fitxer mostrat actualment al visor
+     selected: Set<string>     // noms de fitxer PDF seleccionats (checkbox)
+     activeFile: string|null   // fitxer mostrat actualment al visor
+     expandedUnit: number|null // unitat actualment desplegada (o null = cap)
    }
    handlers = {
      onToggleActivity(unit, act, filename, checked)
@@ -16,6 +17,7 @@
      onToggleBonus(filename, checked)
      onSelectActivity(unit, act, filename, title)
      onSelectBonus(filename, title)
+     onToggleExpand(unit)   // l'usuari ha clicat la capçalera d'una unitat
    } */
 
 function activityFilename(pdfPrefix, unit, act) {
@@ -70,7 +72,8 @@ function renderTree(root, courseMeta, pdfSet, state, handlers) {
     const uSelCount = u.activities.filter(a => selected.has(activityFilename(pdfPrefix, u.num, a.num))).length;
     const uTotal = u.activities.length;
     const badgeCls = uSelCount === uTotal ? ' all' : '';
-    html += `<div class="unit-block" data-unit="${u.num}">
+    const isExpanded = state.expandedUnit === u.num;
+    html += `<div class="unit-block${isExpanded ? '' : ' collapsed'}" data-unit="${u.num}">
       <div class="unit-header" data-unit-header="${u.num}">
         <span class="unit-collapse">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>
@@ -154,7 +157,8 @@ function renderTree(root, courseMeta, pdfSet, state, handlers) {
   root.querySelectorAll('.unit-header').forEach(header => {
     header.addEventListener('click', (e) => {
       if (e.target.closest('.unit-check')) return; // el checkbox té la seva pròpia lògica
-      header.closest('.unit-block').classList.toggle('collapsed');
+      const unit = Number(header.dataset.unitHeader);
+      handlers.onToggleExpand(unit);
     });
   });
 }
