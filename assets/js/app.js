@@ -277,7 +277,55 @@ async function loadApp() {
       la primera activitat de la primera unitat disponible.
    En tots els casos, la resta d'unitats queden plegades ("collapsed"):
    només es desplega, com a molt, la unitat de l'activitat mostrada. */
+/* ─── ENLLAÇ PROFUND (#ud2 · #ud2-3) ─────────────────────────────────
+   Permet que un altre lloc obri una activitat concreta d'aquest llibre.
+   El fa servir `repas` (repas.step-quiz.net): quan un alumne s'encalla en
+   un exercici, l'enllaça amb la teoria que hi ha al darrere.
+
+   Formats acceptats:
+     #ud2      → desplega la unitat 2 i n'obre la primera activitat
+     #ud2-3    → obre la unitat 2, activitat 3
+
+   Té PRIORITAT sobre la memòria del navegador: si algú arriba amb un enllaç
+   a una activitat concreta, és perquè vol aquella, no la que va deixar
+   oberta l'última vegada. Si l'àncora no és vàlida (unitat inexistent, PDF
+   que no hi és) s'ignora i es fa el de sempre, sense error: un enllaç trencat
+   des de fora no ha de deixar el llibre en blanc. */
+function objectiuDeLancora() {
+  const m = /^#ud(\d+)(?:-(\d+))?$/.exec(location.hash || "");
+  if (!m) return null;
+  const unitNum = parseInt(m[1], 10);
+  const unit = courseMeta.units.find(u => u.num === unitNum);
+  if (!unit) return null;
+
+  const actNum = m[2] ? parseInt(m[2], 10) : null;
+  const candidates = actNum
+    ? unit.activities.filter(a => a.num === actNum)
+    : unit.activities;
+  for (const a of candidates) {
+    const filename = activityFilename(courseMeta.pdfPrefix, unit.num, a.num);
+    if (pdfSet.has(filename)) return { unit, activity: a, filename };
+  }
+  /* La unitat existeix però l'activitat demanada no té PDF: val més obrir la
+     unitat desplegada que no pas ignorar l'enllaç del tot. */
+  return { unit, activity: null, filename: null };
+}
+
 function openInitialView() {
+  const desDeFora = objectiuDeLancora();
+  if (desDeFora) {
+    if (desDeFora.filename) {
+      selectActivity(desDeFora.unit.num, desDeFora.activity.num,
+        desDeFora.filename,
+        `UD${desDeFora.unit.num} \u00b7 Activitat ${desDeFora.activity.num}`
+        + ` \u2014 ${desDeFora.activity.title}`);
+    } else {
+      state.expandedUnit = desDeFora.unit.num;
+      paint();
+    }
+    return;
+  }
+
   const last = loadLastView();
 
   if (last && last.activeFile && pdfSet.has(last.activeFile)) {
