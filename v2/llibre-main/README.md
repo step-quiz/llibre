@@ -1,2 +1,0 @@
-# llibre
-Llibre de matemàtiques
