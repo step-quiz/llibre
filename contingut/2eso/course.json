@@ -2,6 +2,7 @@
   "course": "2eso",
   "label": "2n ESO",
   "pdfPrefix": "2eso",
+  "indexPdf": "2eso-index.pdf",
   "units": [
     {
       "num": 1,
@@ -91,7 +92,7 @@
         {
           "num": 3,
           "title": "Percentatges en context",
-          "subtitle": "Calcular descomptes, IVA i canvis de divisa raonant la raó, i treballar percentatges més grans que 100\\% i més petits que 1\\%."
+          "subtitle": "Calcular descomptes, IVA i canvis de divisa raonant la raó, i treballar percentatges més grans que 100% i més petits que 1%."
         },
         {
           "num": 4,
@@ -304,6 +305,5 @@
         }
       ]
     }
-  ],
-  "indexPdf": "2eso-index.pdf"
+  ]
 }

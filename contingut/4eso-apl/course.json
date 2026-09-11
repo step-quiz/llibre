@@ -1,6 +1,6 @@
 {
   "course": "4eso-apl",
-  "label": "4t ESO · Aplicades",
+  "label": "4t ESO Aplicades",
   "pdfPrefix": "4eso-apl",
   "indexPdf": "4eso-apl-index.pdf",
   "units": [
@@ -16,7 +16,7 @@
         {
           "num": 2,
           "title": "Els nombres que no s'acaben",
-          "subtitle": "Reconèixer nombres irracionals en situacions reals (√2, π, el nombre auri) i situar-los a la recta al costat dels racionals."
+          "subtitle": "Reconèixer nombres irracionals en situacions reals ($\\sqrt2"
         },
         {
           "num": 3,

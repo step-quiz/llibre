@@ -266,6 +266,11 @@
           "num": 7,
           "title": "Projecte: quantes rajoles per a l'aula?",
           "subtitle": "Aplicar tot el bloc numèric per resoldre un problema real de mesura, triant la representació adequada i aproximant amb criteri."
+        },
+        {
+          "num": 8,
+          "title": "Examen de la unitat",
+          "subtitle": "Demostrar, de manera individual, que dominem els decimals, el pas de fracció a decimal i l'arrel quadrada."
         }
       ]
     },
