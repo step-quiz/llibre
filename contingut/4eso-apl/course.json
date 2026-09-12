@@ -342,6 +342,37 @@
           "subtitle": "Analitzar un joc o aposta real de dalt a baix —recompte, probabilitat, experimentació i recomanació— i tancar el curs."
         }
       ]
+    },
+    {
+      "num": 10,
+      "title": "Sistemes d'equacions",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Quan una incògnita no basta",
+          "subtitle": "Descobrir amb un problema de tiquets que hi ha situacions amb dues quantitats desconegudes lligades per dues condicions, i que ens cal una eina nova: el sistema."
+        },
+        {
+          "num": 2,
+          "title": "Tres camins segurs",
+          "subtitle": "Resoldre un sistema amb els tres mètodes clàssics —substitució, igualació i reducció— i començar a triar el que estalvia més feina en cada cas."
+        },
+        {
+          "num": 3,
+          "title": "Del problema al sistema",
+          "subtitle": "Traduir situacions reals —preus, edats, monedes, barrils, alumnat— a un sistema, resoldre'l i tornar al problema per comprovar que la resposta té sentit."
+        },
+        {
+          "num": 4,
+          "title": "Veure la solució",
+          "subtitle": "Dibuixar cada equació com una recta a partir d'una taula de valors, entendre que la solució és el punt de tall i classificar el sistema segons com es tallen."
+        },
+        {
+          "num": 5,
+          "title": "Mapa, producte i prova",
+          "subtitle": "Posar en ordre tot el que has après, aplicar-ho a un producte de grup («la tarifa justa») i demostrar-ho individualment."
+        }
+      ]
     }
   ]
 }
