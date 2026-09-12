@@ -36,7 +36,7 @@ navegador**.
 
 ```
 llibre-pdf-viewer/
-  index.html                   selector de curs (1r ESO = "properament")
+  index.html                   selector de curs (els cinc cursos)
   2eso.html / 3eso.html / 4eso.html   defineixen window.COURSE i carreguen l'app
   assets/
     css/  tokens.css, layout.css, components.css, index.css, responsive.css
@@ -74,8 +74,8 @@ Afegir un curs nou = crear un HTML nou (còpia d'un existent canviant
   ]
 }
 ```
-`indexPdf` és opcional (`null` si no n'hi ha); només 2n ESO en té un, generat
-a partir del document `index-2eso.tex` del repositori font.
+`indexPdf` és opcional (`null` si no n'hi ha). Es genera a partir del document
+`index-{curs}.tex` del repositori font.
 
 **`pdfs/manifest.json`**
 ```json
@@ -88,18 +88,50 @@ compilació, mai s'escaneja per xarxa activitat per activitat.
 
 | Curs | Unitats | Activitats |
 |---|---|---|
+| 1r ESO | 8 (UD1–UD8) | 76 + 1 document d'índex |
 | 2n ESO | 6 (UD1–UD6) | 53 + 1 document d'índex |
-| 3r ESO | 5 (UD1–UD5) | 44 |
-| 4t ESO | 2 (UD2, UD3) | 13 |
-| 1r ESO | — | encara no iniciat al llibre font |
+| 3r ESO | 6 (UD1–UD6) | 54 + 1 document d'índex |
+| 4t ESO · Acadèmiques | 10 (UD1–UD10) | 65 + 1 document d'índex |
+| 4t ESO · Aplicades | 9 (UD1–UD9) | 57 + 1 document d'índex |
+
+> Les unitats UD10 i UD11 de 4t Aplicades existeixen al repositori font però
+> encara no s'han publicat: `sync.py` no inclou al manifest ni a `course.json`
+> cap activitat que no tingui PDF compilat.
 
 ## Origen del contingut i com regenerar-lo
 
 Els PDFs d'aquest lloc **no es generen en temps real**: són la sortida
-compilada d'un repositori LaTeX separat (`llibre_text_ESO`, no inclòs aquí).
+compilada d'un repositori LaTeX separat (`llibre_text_ESO`, no inclòs aquí),
+que s'edita a Overleaf. **El `.tex` és l'única font de veritat:** els títols i
+els subtítols de `course.json` es llegeixen de la macro
+`\horatitol{títol}{subtítol}` de cada activitat, i el recompte de
+l'`index.html` es deriva dels PDFs que existeixen. Res d'això s'edita a mà.
+
 Cada activitat és un fitxer `.tex` sense preàmbul propi, inclòs mitjançant la
-macro `\mostra{curs}{unitat}{activitat}` definida a `defs.tex`. Per regenerar
-un PDF (des de l'arrel del repositori LaTeX):
+macro `\mostra{curs}{unitat}{activitat}` definida a `defs.tex`.
+
+### Regenerar-ho amb `eines/sync.py`
+
+El flux habitual es fa des d'un **GitHub Codespace** d'aquest mateix repositori,
+que porta LaTeX instal·lat (vegeu `.devcontainer/devcontainer.json`). Es baixa
+el font d'Overleaf (**Download → Source**), es descomprimeix a `_font/`
+(carpeta ignorada per git) i s'executa:
+
+```bash
+python3 eines/sync.py 1eso --check   --font _font   # què hi ha al .tex i què falta publicar
+python3 eines/sync.py 1eso --compile --font _font   # compila i actualitza les metadades
+python3 eines/sync.py 1eso --compile --ud 3 --font _font   # només una unitat
+```
+
+`--compile` desa cada PDF a `contingut/{curs}/pdfs/{curs}-ud{U}-{A}.pdf` i
+reescriu `course.json`, `pdfs/manifest.json` i el recompte de l'`index.html`.
+Si una activitat dona error de LaTeX, **no se'n substitueix el PDF publicat**, i
+si una activitat del `.tex` encara no té PDF, no es publica enlloc.
+
+`defs.tex` i `headers.tex` són **compartits pels cinc cursos**: qualsevol canvi
+demana recompilar-los tots.
+
+### Regenerar un sol PDF a mà
 
 ```bash
 cat > _tmp.tex <<'EOF'
@@ -112,11 +144,6 @@ cat > _tmp.tex <<'EOF'
 EOF
 pdflatex -interaction=batchmode -halt-on-error _tmp.tex
 ```
-
-El PDF resultant es copia a `contingut/{curs}/pdfs/{curs}-ud{U}-{A}.pdf` i el
-seu nom s'afegeix a `manifest.json`. Els títols i subtítols de `course.json`
-s'extreuen automàticament dels comentaris de capçalera i de la comanda
-`\horatitol{títol}{subtítol}` de cada fitxer `.tex`.
 
 ## Desplegament
 

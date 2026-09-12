@@ -164,6 +164,83 @@ def escriu_metadades(curs, inv):
 
 
 # ---------------------------------------------------------------------
+#  MODE --import-zip : porta un .zip baixat d'Overleaf cap al repo font
+# ---------------------------------------------------------------------
+def importa_zip(zip_path: Path):
+    import zipfile, shutil as sh
+
+    if not zip_path.exists():
+        sys.exit(f"No trobo {zip_path}")
+
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        with zipfile.ZipFile(zip_path) as zf:
+            zf.extractall(tmp)
+
+        # Overleaf sol exportar pla (defs.tex a l'arrel del zip), però per si
+        # algun dia ve dins d'una carpeta, cerquem on és defs.tex de debò.
+        trobats = list(tmp.rglob("defs.tex"))
+        if not trobats:
+            sys.exit("Al zip no hi ha cap defs.tex enlloc. Segur que és "
+                     "el 'Download > Source' d'Overleaf?")
+        arrel = trobats[0].parent
+
+        canviats, nous, del_zip = [], [], set()
+        for origen in arrel.rglob("*"):
+            if origen.is_dir():
+                continue
+            relatiu = origen.relative_to(arrel)
+            if origen.suffix == ".tex":
+                del_zip.add(str(relatiu))
+            desti = TEX / relatiu
+            contingut_nou = origen.read_bytes()
+            if desti.exists():
+                if desti.read_bytes() == contingut_nou:
+                    continue
+                canviats.append(str(relatiu))
+            else:
+                nous.append(str(relatiu))
+            desti.parent.mkdir(parents=True, exist_ok=True)
+            sh.copy2(origen, desti)
+
+    # Fitxers .tex que hi ha al font i NO al zip. No els esborrem: un zip
+    # parcial buidaria el font sense avisar. Pero cal dir-ho, perque si no
+    # una activitat esborrada a Overleaf es continua compilant i publicant
+    # des d'una carpeta que ningu no mira.
+    sobrants = sorted(
+        str(f.relative_to(TEX)) for f in TEX.rglob("*.tex")
+        if str(f.relative_to(TEX)) not in del_zip
+        and not f.name.startswith("main-")
+    )
+
+    print(f"Importat des de {zip_path.name}.")
+    if nous:
+        print(f"  {len(nous)} fitxer(s) nou(s):")
+        for n in nous[:15]:
+            print(f"    + {n}")
+        if len(nous) > 15:
+            print(f"    ... i {len(nous) - 15} més")
+    if canviats:
+        print(f"  {len(canviats)} fitxer(s) modificat(s):")
+        for c in canviats[:15]:
+            print(f"    * {c}")
+        if len(canviats) > 15:
+            print(f"    ... i {len(canviats) - 15} més")
+    if not nous and not canviats:
+        print("  Cap canvi: ja tenies aquesta versió importada.")
+    if sobrants:
+        print(f"\n  !  {len(sobrants)} fitxer(s) .tex al font que NO són al zip:")
+        for x in sobrants[:15]:
+            print(f"    ? {x}")
+        if len(sobrants) > 15:
+            print(f"    ... i {len(sobrants) - 15} més")
+        print("     Si els has esborrat o reanomenat a Overleaf, esborra'ls també")
+        print("     aquí; si no, es continuaran compilant i publicant.")
+    print("\nRepassa'ls amb 'git status' i 'git diff' dins del repo font "
+          "abans de fer commit.")
+
+
+# ---------------------------------------------------------------------
 #  MODE --main : genera el fitxer per compilar a Overleaf
 # ---------------------------------------------------------------------
 def fes_main(curs, inv):
@@ -266,12 +343,53 @@ def compila(curs, ud, act, desti: Path) -> bool:
 
 
 # ---------------------------------------------------------------------
+#  MODE --index : compila l'index del curs (index-{curs}.tex)
+# ---------------------------------------------------------------------
+def compila_index(curs) -> bool:
+    """Compila {curs}/index-{curs}.tex i el publica com a {curs}-index.pdf."""
+    font = TEX / curs / f"index-{curs}.tex"
+    if not font.is_file():
+        print(f"  !  no hi ha {font.relative_to(TEX)}: res a fer.")
+        return False
+    with tempfile.TemporaryDirectory() as tmp:
+        aux = Path(tmp) / "i.tex"
+        aux.write_text("\\documentclass[11pt,a4paper]{article}\n"
+                       "\\input{headers.tex}\n\\input{defs.tex}\n"
+                       "\\begin{document}\n"
+                       f"\\input{{{curs}/index-{curs}}}\n"
+                       "\\end{document}\n", encoding="utf-8")
+        for _ in range(2):
+            subprocess.run(["pdflatex", "-interaction=batchmode",
+                            f"-output-directory={tmp}", str(aux)],
+                           cwd=TEX, capture_output=True)
+        pdf = Path(tmp) / "i.pdf"
+        log = Path(tmp) / "i.log"
+        errors = [l for l in log.read_text(errors="replace").splitlines()
+                  if l.startswith("!")] if log.exists() else []
+        if errors or not pdf.exists():
+            print(f"      {errors[0] if errors else 'no ha sortit cap PDF'}")
+            return False
+        desti = WEB / "contingut" / curs / "pdfs" / f"{curs}-index.pdf"
+        desti.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy(pdf, desti)
+        from pypdf import PdfReader
+        print(f"  {desti.name}: ok ({len(PdfReader(str(desti)).pages)} pag.)")
+        return True
+
+
+# ---------------------------------------------------------------------
 def main():
     ap = argparse.ArgumentParser(description="Sincronitza el LaTeX amb el lloc web.")
-    ap.add_argument("curs", help="1eso, 2eso, 3eso, 4eso o 4eso-apl")
+    ap.add_argument("curs", nargs="?",
+                    help="1eso, 2eso, 3eso, 4eso o 4eso-apl (no cal amb --import-zip)")
     g = ap.add_mutually_exclusive_group(required=True)
+    g.add_argument("--import-zip", metavar="ZIP",
+                   help="porta el .zip exportat d'Overleaf cap al repo font "
+                        "i diu quins fitxers han canviat")
     g.add_argument("--main", action="store_true", help="genera main-{curs}.tex per a Overleaf")
     g.add_argument("--split", metavar="PDF", help="parteix el PDF gran d'Overleaf")
+    g.add_argument("--index", action="store_true",
+                   help="compila index-{curs}.tex i el publica com a {curs}-index.pdf")
     g.add_argument("--check", action="store_true", help="informa; no toca res")
     g.add_argument("--compile", action="store_true", help="compila localment (cal LaTeX)")
     ap.add_argument("--ud", type=int, help="amb --compile: nomes aquesta unitat")
@@ -286,6 +404,12 @@ def main():
         TEX = Path(args.font).expanduser().resolve()
     WEB = Path(args.web).expanduser().resolve() if args.web else troba_web(TEX)
 
+    if args.import_zip:
+        importa_zip(Path(args.import_zip).expanduser())
+        return
+
+    if not args.curs:
+        sys.exit("Falta dir quin curs (1eso, 2eso, 3eso, 4eso o 4eso-apl).")
     curs = args.curs
     if not (TEX / curs).is_dir():
         sys.exit(f"No trobo la carpeta {TEX / curs}")
@@ -300,6 +424,11 @@ def main():
     if not WEB.is_dir():
         sys.exit(f"No trobo el repo del web (cap carpeta amb contingut/).\n"
                  f"Indica-la amb --web, per exemple:  --web /workspaces/llibre")
+
+    if args.index:
+        compila_index(curs)
+        escriu_metadades(curs, inv)
+        return
 
     if args.check:
         falten = 0

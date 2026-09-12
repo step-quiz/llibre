@@ -329,6 +329,108 @@
           "subtitle": "Demostrar de manera individual que dominem la geometria plana bàsica, i reflexionar sobre el que hem après."
         }
       ]
+    },
+    {
+      "num": 7,
+      "title": "El sentit de la mesura",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Què és mesurar? Magnituds i unitats",
+          "subtitle": "Entendre què vol dir mesurar, distingir magnitud, quantitat i unitat, i veure que tota mesura té una precisió."
+        },
+        {
+          "num": 2,
+          "title": "Longitud, massa i capacitat",
+          "subtitle": "Conèixer el sistema mètric decimal i canviar d'unitat amb seguretat, per graons de 10 en 10."
+        },
+        {
+          "num": 3,
+          "title": "La superfície i el metre quadrat",
+          "subtitle": "Mesurar superfícies amb quadrats unitat i entendre per què les unitats de superfície van de 100 en 100."
+        },
+        {
+          "num": 4,
+          "title": "Les escales: plànols i mapes",
+          "subtitle": "Llegir i fer servir l'escala numèrica i l'escala gràfica per passar de mides del dibuix a mides reals, i a l'inrevés."
+        },
+        {
+          "num": 5,
+          "title": "Perímetres",
+          "subtitle": "Calcular el perímetre de quadrats, rectangles, polígons regulars i figures compostes, i no confondre'l amb l'àrea."
+        },
+        {
+          "num": 6,
+          "title": "La circumferència i el nombre pi",
+          "subtitle": "Descobrir amb una mesura que la longitud d'una circumferència és sempre unes 3,14 vegades el seu diàmetre, i calcular-la."
+        },
+        {
+          "num": 7,
+          "title": "Àrees de figures planes",
+          "subtitle": "Deduir i aplicar les fórmules de l'àrea del rectangle, el triangle i el paral·lelogram, amb l'altura ben triada."
+        },
+        {
+          "num": 8,
+          "title": "L'àrea del cercle i les figures compostes",
+          "subtitle": "Calcular l'àrea d'un cercle i descompondre figures complicades en trossos que ja sabem mesurar."
+        },
+        {
+          "num": 9,
+          "title": "El mapa de la mesura i les Fotomàtiques",
+          "subtitle": "Ordenar totes les fórmules de la unitat i fer servir una referència de mida coneguda per mesurar sobre una foto."
+        },
+        {
+          "num": 10,
+          "title": "Projecte: mesurem el pati",
+          "subtitle": "Mesurar un espai real en equip, dibuixar-lo a escala i calcular-ne el perímetre i l'àrea amb criteri."
+        },
+        {
+          "num": 11,
+          "title": "Examen de la unitat",
+          "subtitle": "Demostrar, de manera individual, que dominem les unitats, les escales, els perímetres i les àrees."
+        }
+      ]
+    },
+    {
+      "num": 8,
+      "title": "Patrons i llenguatge algebraic",
+      "activities": [
+        {
+          "num": 1,
+          "title": "Què hi veiem? Patrons a l'entorn",
+          "subtitle": "Reconèixer patrons al nostre voltant, descriure'n la regla amb paraules i distingir un patró d'una casualitat."
+        },
+        {
+          "num": 2,
+          "title": "Patrons numèrics i geomètrics",
+          "subtitle": "Distingir els patrons que creixen sumant dels que creixen multiplicant, i llegir un patró a partir de figures."
+        },
+        {
+          "num": 3,
+          "title": "De la paraula al símbol: variable i expressió",
+          "subtitle": "Fer servir una lletra per representar un nombre qualsevol, escriure expressions i calcular-ne el valor."
+        },
+        {
+          "num": 4,
+          "title": "El terme general d'un patró",
+          "subtitle": "Escriure amb una expressió el terme de la posició n, justificant-la amb la figura i comprovant-la amb la taula."
+        },
+        {
+          "num": 5,
+          "title": "Interpretar gràfics i taules de la vida real",
+          "subtitle": "Llegir la informació d'una taula o d'un gràfic, explicar què hi passa i detectar quan un gràfic ens vol enganyar."
+        },
+        {
+          "num": 6,
+          "title": "El mapa de tot el curs",
+          "subtitle": "Ordenar el que hem après durant el curs, veure com les unitats es connecten i detectar què cal repassar."
+        },
+        {
+          "num": 7,
+          "title": "El dossier i el tancament del curs",
+          "subtitle": "Reunir en un dossier els patrons trobats, escriure'n la regla amb símbols i mirar enrere tot el curs."
+        }
+      ]
     }
   ]
 }
