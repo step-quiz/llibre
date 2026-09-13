@@ -219,7 +219,7 @@
         },
         {
           "num": 6,
-          "title": "Despejar la incògnita que no és «x»",
+          "title": "Aïllar la incògnita que no és «x»",
           "subtitle": "Aïllar una variable qualsevol d'una fórmula real i calcular-la amb dades, encara que no s'anomeni «x»."
         },
         {
@@ -240,17 +240,17 @@
         {
           "num": 10,
           "title": "El mapa de l'àlgebra i els sistemes",
-          "subtitle": "Connectar en un sol esquema polinomis, identitats, factorització, equacions, despejaments i sistemes, amb el quadre de dreceres i errors."
+          "subtitle": "Connectar en un sol esquema polinomis, identitats, factorització, equacions, aïllaments i sistemes, amb el quadre de dreceres i errors."
         },
         {
           "num": 11,
           "title": "Manual de fórmules i detectius de dues incògnites",
-          "subtitle": "Aplicar el despejament de fórmules reals i la modelització amb sistemes en dos productes autèntics."
+          "subtitle": "Aplicar l'aïllament de fórmules reals i la modelització amb sistemes en dos productes autèntics."
         },
         {
           "num": 12,
           "title": "Prova de la unitat",
-          "subtitle": "Demostrar de manera individual el domini de l'operatòria amb polinomis, les identitats, les equacions, els despejaments i els sistemes."
+          "subtitle": "Demostrar de manera individual el domini de l'operatòria amb polinomis, les identitats, les equacions, els aïllaments i els sistemes."
         }
       ]
     },
