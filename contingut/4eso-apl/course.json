@@ -373,6 +373,22 @@
           "subtitle": "Posar en ordre tot el que has après, aplicar-ho a un producte de grup («la tarifa justa») i demostrar-ho individualment."
         }
       ]
+    },
+    {
+      "num": 11,
+      "title": "Polinomis: la idea",
+      "activities": [
+        {
+          "num": 1,
+          "title": "La idea de polinomi",
+          "subtitle": "Entendre què és un polinomi i per què s'assembla tant a un número escrit en base deu: grau, coeficients, valor numèric i suma o resta terme a terme."
+        },
+        {
+          "num": 2,
+          "title": "Apèndix — Trencar un polinomi en trossos",
+          "subtitle": "[Ampliació opcional] Escriure un polinomi com un producte: factor comú, igualtats notables i, si arribes, la regla de Ruffini."
+        }
+      ]
     }
   ]
 }
