@@ -32,6 +32,7 @@
 import argparse, json, re, shutil, subprocess, sys, tempfile
 from pathlib import Path
 
+REFS_SENSE = 0
 TEX = Path(__file__).resolve().parent           # font LaTeX (per defecte, aquesta carpeta)
 WEB = None                                      # repo del web (es detecta a main())
 
@@ -236,6 +237,30 @@ def importa_zip(zip_path: Path):
             print(f"    ... i {len(sobrants) - 15} més")
         print("     Si els has esborrat o reanomenat a Overleaf, esborra'ls també")
         print("     aquí; si no, es continuaran compilant i publicant.")
+    tocats = nous + canviats
+    compartits = [f for f in tocats if f in ("headers.tex", "defs.tex", "quadern.tex", "numeracio.tex")]
+    per_curs, indexs = {}, set()
+    for f in tocats:
+        m = re.fullmatch(r"([^/\\]+)[/\\]ud(\d+)[/\\]\1-ud\2-(\d+)\.tex", f)
+        if m:
+            per_curs.setdefault(m.group(1), set()).add((int(m.group(2)), int(m.group(3))))
+        m = re.fullmatch(r"([^/\\]+)[/\\]index-\1\.tex", f)
+        if m:
+            indexs.add(m.group(1))
+    try:
+        font = str(TEX.relative_to(Path.cwd()))
+    except ValueError:
+        font = str(TEX)
+    if compartits:
+        print(f"\n  !  Han canviat fitxers compartits ({', '.join(compartits)}):")
+        print("     cal compilar els cursos sencers (sense --act).")
+    elif per_curs or indexs:
+        print("\nPer compilar només el que ha canviat:")
+        for c in sorted(per_curs):
+            llista = " ".join(f"{u}.{a}" for u, a in sorted(per_curs[c]))
+            print(f"  python3 eines/sync.py {c} --compile --act {llista} --font {font}")
+        for c in sorted(indexs):
+            print(f"  python3 eines/sync.py {c} --index --font {font}")
     print("\nRepassa'ls amb 'git status' i 'git diff' dins del repo font "
           "abans de fer commit.")
 
@@ -314,13 +339,22 @@ def parteix(curs, inv, pdf_gran: Path):
 # ---------------------------------------------------------------------
 #  MODE --compile : compila localment (nomes si tens LaTeX)
 # ---------------------------------------------------------------------
-def compila(curs, ud, act, desti: Path) -> bool:
+def compila(curs, ud, act, desti: Path, inici=None, taula=(), einici=None):
+    """Compila una activitat. Torna (ok, fi, q): fi és l'últim número d'exercici
+    de la unitat fins a aquesta activitat; q, el nombre de preguntes Q (proves)."""
     with tempfile.TemporaryDirectory() as tmp:
         aux = Path(tmp) / "a.tex"
         aux.write_text("\\documentclass[11pt,a4paper]{article}\n"
                        "\\input{headers.tex}\n\\input{defs.tex}\n"
                        "\\begin{document}\n"
-                       f"\\mostra{{{curs}}}{{{ud}}}{{{act}}}\n"
+                       + ("\\providecommand{\\numeraciodesde}[3]{}\n"
+                          f"\\numeraciodesde{{{curs}}}{{{ud}}}{{{inici}}}\n" if inici is not None else "")
+                       + ("\\providecommand{\\numeracioexemples}[1]{}\n"
+                          f"\\numeracioexemples{{{einici}}}\n" if einici is not None else "")
+                       + "".join("\\providecommand{\\numeracioact}[4]{}\n" if i == 0 else ""
+                                 for i in range(1 if taula else 0))
+                       + "".join(f"\\numeracioact{{{curs}}}{{{k}}}{{{ini}}}{{{q}}}\n" for k, ini, q in taula)
+                       + f"\\mostra{{{curs}}}{{{ud}}}{{{act}}}\n"
                        "\\end{document}\n", encoding="utf-8")
         for _ in range(2):
             subprocess.run(["pdflatex", "-interaction=batchmode",
@@ -336,10 +370,14 @@ def compila(curs, ud, act, desti: Path) -> bool:
             # Amb errors, pdflatex a vegades escup igualment un PDF trencat:
             # no el copiem, perquè no substitueixi el que ja està publicat.
             print(f"\n      {errors[0] if errors else 'no ha sortit cap PDF'}", end=" ")
-            return False
+            return False, None
         desti.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy(pdf, desti)
-        return True
+        text = log.read_text(errors="replace")
+        m = re.search(rf"NUMERACIO {re.escape(curs)} {ud}\.{act} fi=(\d+) q=(\d+) e=(\d+) l=(\d+) x=(\d+)", text)
+        global REFS_SENSE
+        REFS_SENSE = text.count("NUMERACIO-REF-UNDEF")
+        return True, (dict(zip(("fi", "q", "e_fi", "llistes", "x"), map(int, m.groups()))) if m else None)
 
 
 # ---------------------------------------------------------------------
@@ -393,6 +431,8 @@ def main():
     g.add_argument("--check", action="store_true", help="informa; no toca res")
     g.add_argument("--compile", action="store_true", help="compila localment (cal LaTeX)")
     ap.add_argument("--ud", type=int, help="amb --compile: nomes aquesta unitat")
+    ap.add_argument("--act", nargs="+", metavar="U.A",
+                    help="amb --compile: nomes aquestes activitats (p. ex. --act 1.4 9.5)")
     ap.add_argument("--web", metavar="CARPETA",
                     help="ruta del repo del web (per defecte, es detecta sol)")
     ap.add_argument("--font", metavar="CARPETA",
@@ -448,20 +488,92 @@ def main():
         print(f"\n{n} activitats partides.")
     else:
         fallides = []
+        seleccio = None
+        if args.act:
+            seleccio = set()
+            for tros in args.act:
+                for x in re.split(r"[,\s]+", tros.strip()):
+                    m = re.fullmatch(r"(\d+)\.(\d+)", x)
+                    if not m:
+                        sys.exit(f"--act: '{x}' no té la forma U.A (p. ex. 1.4)")
+                    seleccio.add((int(m.group(1)), int(m.group(2))))
+            falten = sorted(seleccio - {(u, a) for u, a, *_ in inv})
+            if falten:
+                sys.exit(f"--act: no existeixen a {curs}: "
+                         + ", ".join(f"{u}.{a}" for u, a in falten))
+        # Numeració: 1, 2, 3... per unitat. numeracio.json guarda on comença i on
+        # acaba cada activitat; si una activitat canvia de nombre d'exercicis, les
+        # següents de la unitat es recompilen soles (les proves, amb Q, no cal).
+        num_path = WEB / "contingut" / curs / "numeracio.json"
+        try:
+            num = json.loads(num_path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            num = {}
+        per_ud = {}
         for ud, act, *_ in inv:
+            per_ud.setdefault(ud, []).append(act)
+        sense_marca = False
+        for ud in sorted(per_ud):
             if args.ud and ud != args.ud:
                 continue
-            nom = f"{curs}-ud{ud}-{act}.pdf"
-            print(f"  compilant {nom} ... ", end="", flush=True)
-            desti = WEB / "contingut" / curs / "pdfs" / nom
-            if compila(curs, ud, act, desti):
+            esperat, eesperat = 0, 0
+            for act in per_ud[ud]:
+                clau, ant = f"{ud}.{act}", num.get(f"{ud}.{act}")
+                if ant is not None and not all(k in ant for k in ("inici", "fi", "q", "e_inici", "e_fi", "llistes", "x")):
+                    ant = None                      # dades d'una versió anterior: cal recompilar
+                triada = seleccio is None or (ud, act) in seleccio
+                if ant is None:
+                    motiu = "" if triada else "  <- calia per a la numeració"
+                elif triada:
+                    motiu = ""
+                elif ((ant["inici"] != esperat and (ant["fi"] != ant["inici"] or ant["x"]))
+                      or (ant["e_inici"] != eesperat and ant["e_fi"] != ant["e_inici"])):
+                    motiu = "  <- renumerada"
+                else:
+                    # res del que surt al PDF depèn del desplaçament: només s'actualitzen les dades
+                    if ant["inici"] != esperat:
+                        ant = dict(ant, inici=esperat, fi=esperat, llistes=esperat)
+                    if ant["e_inici"] != eesperat:
+                        ant = dict(ant, e_inici=eesperat, e_fi=eesperat)
+                    num[clau] = ant
+                    esperat, eesperat = ant["fi"], ant["e_fi"]
+                    continue
+                nom = f"{curs}-ud{ud}-{act}.pdf"
+                print(f"  compilant {nom} ... ", end="", flush=True)
+                desti = WEB / "contingut" / curs / "pdfs" / nom
+                taula = [(k, v.get("llistes", v["inici"]), v["q"]) for k, v in num.items()
+                         if k.split(".")[0] == str(ud)]
+                ok, dades = compila(curs, ud, act, desti, esperat, taula, eesperat)
+                if not ok:
+                    print("ERROR"); fallides.append(nom)
+                    if ant:
+                        esperat, eesperat = ant["fi"], ant["e_fi"]
+                    continue
                 try:
                     from pypdf import PdfReader
-                    print(f"ok ({len(PdfReader(str(desti)).pages)} pag.)")
+                    pags = f"{len(PdfReader(str(desti)).pages)} pag., "
                 except Exception:
-                    print("ok")
-            else:
-                print("ERROR"); fallides.append(nom)
+                    pags = ""
+                if dades is None:
+                    sense_marca = True
+                    print(f"ok ({pags}sense numeració){motiu}")
+                    continue
+                fi, q = dades["fi"], dades["q"]
+                rang = (f"Q1-Q{q}" if q else
+                        f"{esperat + 1}-{fi}" if fi > esperat else "sense exercicis")
+                avis = (f"  !! {REFS_SENSE} referència(es) \\exref sense resoldre" if REFS_SENSE else "")
+                print(f"ok ({pags}{rang}){motiu}{avis}")
+                num[clau] = dict(dades, inici=esperat, e_inici=eesperat)
+                esperat, eesperat = fi, dades["e_fi"]
+        if sense_marca:
+            print("\n  !  El font no escriu la numeració: falta \\input{numeracio.tex} a defs.tex.")
+        else:
+            existents = {f"{u}.{a}" for u, a, *_ in inv}
+            num = {k: v for k, v in sorted(num.items(),
+                   key=lambda kv: tuple(int(x) for x in kv[0].split(".")))
+                   if k in existents}
+            num_path.write_text(json.dumps(num, ensure_ascii=False) .replace("}, ", "},\n ")
+                                + "\n", encoding="utf-8")
         if fallides:
             print(f"\n  !  {len(fallides)} fallides: {', '.join(fallides)}")
 

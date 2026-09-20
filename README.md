@@ -121,6 +121,7 @@ el font d'Overleaf (**Download → Source**), es descomprimeix a `_font/`
 python3 eines/sync.py 1eso --check   --font _font   # què hi ha al .tex i què falta publicar
 python3 eines/sync.py 1eso --compile --font _font   # compila i actualitza les metadades
 python3 eines/sync.py 1eso --compile --ud 3 --font _font   # només una unitat
+python3 eines/sync.py 1eso --compile --act 3.2 3.5 --font _font   # només aquestes activitats
 ```
 
 `--compile` desa cada PDF a `contingut/{curs}/pdfs/{curs}-ud{U}-{A}.pdf` i
