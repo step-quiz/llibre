@@ -16,7 +16,7 @@
         {
           "num": 2,
           "title": "Els nombres que no s'acaben",
-          "subtitle": "Reconèixer nombres irracionals en situacions reals ($\\sqrt2"
+          "subtitle": "Reconèixer nombres irracionals en situacions reals (arrels no exactes, el nombre pi, el nombre auri) i situar-los a la recta al costat dels racionals."
         },
         {
           "num": 3,
@@ -40,8 +40,8 @@
         },
         {
           "num": 7,
-          "title": "Prova de la unitat i autoavaluació",
-          "subtitle": "Demostrar de manera individual què has après i reflexionar sobre els teus propis errors d'arrodoniment."
+          "title": "Estudi per a la prova escrita",
+          "subtitle": "Preparar la prova escrita amb exercicis del mateix tipus i reflexionar sobre els teus propis errors d'arrodoniment."
         }
       ]
     },
@@ -91,8 +91,8 @@
         },
         {
           "num": 9,
-          "title": "Prova de la unitat i autoavaluació",
-          "subtitle": "Demostrar de manera individual què has après sobre percentatges i finances, i reflexionar sobre les trampes en què has caigut."
+          "title": "Estudi per a la prova escrita",
+          "subtitle": "Preparar la prova escrita amb exercicis del mateix tipus i reflexionar sobre les trampes financeres en què has caigut."
         }
       ]
     },
