@@ -122,8 +122,13 @@
         },
         {
           "num": 5,
-          "title": "Producte «A escala real» i estudi per a la prova",
-          "subtitle": "Aplicar tota la unitat elaborant un plànol a escala d'un espai real i resolent un cas de consum i un de proporcionalitat inversa; després, estudi per a la prova escrita i autoavaluació."
+          "title": "Producte: «A escala real»",
+          "subtitle": "Aplicar tota la unitat elaborant, en parella, un plànol a escala d'un espai real i resolent dos casos aplicats."
+        },
+        {
+          "num": 6,
+          "title": "Estudi per a la prova escrita",
+          "subtitle": "Preparar la prova escrita amb exercicis del mateix tipus i reflexionar sobre els errors de proporcionalitat i d'escala."
         }
       ]
     },
@@ -153,8 +158,13 @@
         },
         {
           "num": 5,
-          "title": "Producte «Els mesuradors» i estudi per a la prova",
-          "subtitle": "Sortir a mesurar de veritat un element inaccessible del centre, donar el resultat amb el seu error i contrastar-lo amb una segona tècnica; després, estudi per a la prova escrita."
+          "title": "Producte: «Els mesuradors»",
+          "subtitle": "Mesurar de manera indirecta objectes reals del centre, en grup i amb sortida."
+        },
+        {
+          "num": 6,
+          "title": "Estudi per a la prova escrita",
+          "subtitle": "Preparar la prova escrita amb exercicis del mateix tipus i reflexionar sobre els errors de mesura."
         }
       ]
     },
@@ -194,8 +204,13 @@
         },
         {
           "num": 7,
-          "title": "Producte «El cas resolt» i estudi per a la prova",
-          "subtitle": "Aplicar tota la unitat a un cas real: modelitzar-lo amb una equació de 2n grau, resoldre'l, interpretar les solucions i justificar la decisió; després, estudi per a la prova escrita."
+          "title": "Producte: «El cas resolt»",
+          "subtitle": "Aplicar tota la unitat resolent i explicant, en grup, un cas amb equacions de 2n grau."
+        },
+        {
+          "num": 8,
+          "title": "Estudi per a la prova escrita",
+          "subtitle": "Preparar la prova escrita amb exercicis del mateix tipus i reflexionar sobre els errors en resoldre equacions."
         }
       ]
     },
@@ -230,8 +245,13 @@
         },
         {
           "num": 6,
-          "title": "Producte «El fenomen parabòlic» i estudi per a la prova",
-          "subtitle": "Triar un fenomen real amb forma de paràbola, construir-ne la gràfica, llegir-ne els elements i explicar què signifiquen; després, estudi per a la prova escrita."
+          "title": "Producte: «El fenomen parabòlic»",
+          "subtitle": "Aplicar tota la unitat descrivint, en grup, un fenomen parabòlic real."
+        },
+        {
+          "num": 7,
+          "title": "Estudi per a la prova escrita",
+          "subtitle": "Preparar la prova escrita amb exercicis del mateix tipus i reflexionar sobre els errors en llegir paràboles."
         }
       ]
     },
@@ -256,8 +276,13 @@
         },
         {
           "num": 4,
-          "title": "Síntesi, gràfics enganyosos i producte",
-          "subtitle": "Recollir les famílies de funcions, aprendre a detectar gràfics que enganyen, i tancar la unitat amb el producte i l'autoavaluació."
+          "title": "Gràfics enganyosos i producte «El gràfic parla»",
+          "subtitle": "Aprendre a detectar gràfics que enganyen i tancar la unitat amb el producte en grup."
+        },
+        {
+          "num": 5,
+          "title": "Estudi per a la prova escrita",
+          "subtitle": "Preparar la prova escrita repassant les famílies de funcions i la lectura crítica de gràfics."
         }
       ]
     },
@@ -297,8 +322,13 @@
         },
         {
           "num": 7,
-          "title": "Producte «Estudi estadístic propi» i estudi per a la prova",
-          "subtitle": "Dur a terme un estudi estadístic complet amb dades reals i comunicar-ne les conclusions; després, estudi per a la prova escrita."
+          "title": "Producte: «Estudi estadístic propi»",
+          "subtitle": "Fer, en grup, un estudi estadístic propi amb dades reals, de la pregunta a les conclusions."
+        },
+        {
+          "num": 8,
+          "title": "Estudi per a la prova escrita",
+          "subtitle": "Preparar la prova escrita amb exercicis del mateix tipus i reflexionar sobre els errors en estadística."
         }
       ]
     },
@@ -338,8 +368,13 @@
         },
         {
           "num": 7,
-          "title": "Producte «Analistes de l'atzar» i estudi per a la prova",
-          "subtitle": "Analitzar un joc o aposta real de dalt a baix —recompte, probabilitat, experimentació i recomanació— i tancar el curs."
+          "title": "Producte: «Analistes de l'atzar»",
+          "subtitle": "Analitzar, en grup, un joc d'atzar i presentar-ne les conclusions."
+        },
+        {
+          "num": 8,
+          "title": "Estudi per a la prova escrita",
+          "subtitle": "Preparar la prova escrita amb exercicis del mateix tipus i reflexionar sobre els errors amb l'atzar."
         }
       ]
     },
@@ -369,8 +404,13 @@
         },
         {
           "num": 5,
-          "title": "Mapa, producte i estudi per a la prova",
-          "subtitle": "Posar en ordre tot el que has après, aplicar-ho a un producte de grup («la tarifa justa») i preparar la prova escrita."
+          "title": "Mapa de mètodes i producte",
+          "subtitle": "Posar en ordre els mètodes de resolució de sistemes i aplicar-los en un producte de grup."
+        },
+        {
+          "num": 6,
+          "title": "Estudi per a la prova escrita",
+          "subtitle": "Preparar la prova escrita amb exercicis del mateix tipus i reflexionar sobre els errors amb els sistemes."
         }
       ]
     },
