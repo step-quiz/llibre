@@ -79,10 +79,18 @@ Afegir un curs nou = crear un HTML nou (còpia d'un existent canviant
 
 **`pdfs/manifest.json`**
 ```json
-{ "pdfs": ["2eso-ud1-1.pdf", "2eso-ud1-2.pdf", "…", "2eso-index.pdf"] }
+{ "pdfs": ["2eso-ud1-1.pdf", "2eso-ud1-2.pdf", "…", "2eso-index.pdf"],
+  "solucions": { "2eso-ud1-1.pdf": 4, "…": 3 } }
 ```
 Font de veritat sobre quins PDFs existeixen realment; es genera en temps de
 compilació, mai s'escaneja per xarxa activitat per activitat.
+
+`solucions` diu, per a cada activitat, a quina pàgina (comptant des de 1)
+comença el «Full del professorat — Solucions» (d'allà fins al final tot són
+solucions). `sync.py` el calcula sol amb pypdf. El fa servir el botó **SOL**
+que hi ha al costat del títol del visor: actiu, els PDFs (visor, selecció i
+descàrrega) porten les solucions; inactiu, se'ls treuen. L'elecció es recorda
+al navegador.
 
 ## Contingut actual
 

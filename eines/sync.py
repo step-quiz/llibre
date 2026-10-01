@@ -112,6 +112,30 @@ def inventari(curs: str):
 # ---------------------------------------------------------------------
 #  Escriptura dels fitxers del web
 # ---------------------------------------------------------------------
+def pagines_solucions(pdfs: Path, noms):
+    """{fitxer: pàgina} amb la primera pàgina (comptant des de 1) del «Full
+    del professorat — Solucions»; d'allà fins al final tot són solucions.
+    El web ho fa servir per al botó SOL (treure les solucions del PDF).
+    Sense pypdf es conserven els valors que ja hi havia al manifest."""
+    vell = {}
+    try:
+        vell = json.loads((pdfs / "manifest.json").read_text(encoding="utf-8")).get("solucions", {})
+    except Exception:
+        pass
+    try:
+        from pypdf import PdfReader
+    except ImportError:
+        print("  !  sense pypdf no puc localitzar les solucions; conservo les d'abans")
+        return {n: vell[n] for n in noms if n in vell}
+    out = {}
+    for n in noms:
+        for i, pag in enumerate(PdfReader(str(pdfs / n)).pages):
+            if "Full del professorat" in " ".join((pag.extract_text() or "").split()):
+                out[n] = i + 1
+                break
+    return out
+
+
 def escriu_metadades(curs, inv):
     base = WEB / "contingut" / curs
     (base / "pdfs").mkdir(parents=True, exist_ok=True)
@@ -142,7 +166,8 @@ def escriu_metadades(curs, inv):
     noms = [f"{curs}-ud{ud}-{act}.pdf" for ud, act, *_ in inv]
 
     (base / "pdfs" / "manifest.json").write_text(
-        json.dumps({"pdfs": ([index_pdf] if te_index else []) + noms},   # mateix ordre que ara
+        json.dumps({"pdfs": ([index_pdf] if te_index else []) + noms,   # mateix ordre que ara
+                    "solucions": pagines_solucions(base / "pdfs", noms)},
                    ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     (base / "course.json").write_text(json.dumps({

@@ -111,6 +111,16 @@
 .viewer-topbar #viewerTitle { font-size: 14.5px; font-weight: 700; color: var(--navy);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .viewer-topbar .topbar-spacer { flex: 1; }
+/* Botó SOL: inclou (actiu) o treu (inactiu) el full de solucions dels PDFs */
+.sol-btn {
+  flex-shrink: 0; padding: 2px 9px; border-radius: 12px;
+  border: 1px solid var(--line); background: var(--card); color: var(--hint);
+  font: inherit; font-size: 11.5px; font-weight: 700; letter-spacing: .06em;
+  cursor: pointer; transition: .12s; text-decoration: line-through;
+}
+.sol-btn:hover { border-color: var(--navy); color: var(--navy); }
+.sol-btn.on { background: var(--blue); border-color: var(--blue); color: #fff; text-decoration: none; }
+.sol-btn.on:hover { filter: brightness(1.1); }
 .pdf-frame { flex: 1 1 auto; width: 100%; border: none; background: #525659; }
 .viewer-empty {
   flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
