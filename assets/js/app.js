@@ -13,7 +13,10 @@
 const coursePath = window.COURSE;
 let courseMeta = null;
 let pdfSet = new Set();
+let solucions = {};      // fitxer → pàgina (1, 2, …) on comença el full de solucions
 let currentBlobUrl = null;
+let currentView = null;  // què hi ha al visor: {filename, title} o {selection: true}
+let viewToken = 0;       // evita que una generació lenta trepitgi una vista més nova
 let lastMergeKey = null;
 let lastMergeBlob = null;
 
@@ -50,6 +53,45 @@ function loadLastView() {
   }
 }
 
+/* ─── BOTÓ SOL (incloure o no el full de solucions) ───────────────────
+   manifest.json porta un mapa "solucions": {fitxer: pàgina}, on pàgina és
+   la primera pàgina (comptant des de 1) del «Full del professorat —
+   Solucions»; a partir d'aquí fins al final tot són solucions. Quan SOL està
+   desactivat, el visor, la selecció i la descàrrega es generen sense
+   aquestes pàgines. L'elecció es recorda al navegador (per a tots els cursos). */
+const SOL_KEY = 'llibre:sol';
+
+function loadShowSol() {
+  try { return localStorage.getItem(SOL_KEY) !== 'off'; } catch (_) { return true; }
+}
+let showSol = loadShowSol();
+
+function paintSolButton() {
+  const b = document.getElementById('solToggle');
+  if (!b) return;
+  b.classList.toggle('on', showSol);
+  b.setAttribute('aria-pressed', String(showSol));
+  b.title = showSol
+    ? 'Solucions incloses al PDF (clica per treure-les)'
+    : 'Solucions excloses del PDF (clica per incloure-les)';
+}
+
+/* Nombre de pàgines a conservar d'un fitxer (null = totes). */
+function pageLimit(filename) {
+  if (showSol) return null;
+  const p = solucions[filename];
+  return (p && p > 1) ? p - 1 : null;
+}
+
+function onToggleSol() {
+  showSol = !showSol;
+  try { localStorage.setItem(SOL_KEY, showSol ? 'on' : 'off'); } catch (_) {}
+  paintSolButton();
+  if (!currentView) return;
+  if (currentView.selection) onViewSelection();
+  else displayFile(currentView.filename, currentView.title);
+}
+
 /* ─── ORDENACIÓ CANÒNICA D'UNA SELECCIÓ (per fusionar/descarregar) ──── */
 function orderedSelection() {
   const files = [];
@@ -66,8 +108,9 @@ function orderedSelection() {
 }
 
 /* ─── VISOR ──────────────────────────────────────────────────────────── */
-function showInFrame(url, title) {
+function showInFrame(url, title, isBlob = false) {
   if (currentBlobUrl) { URL.revokeObjectURL(currentBlobUrl); currentBlobUrl = null; }
+  if (isBlob) currentBlobUrl = url;
   const frame = document.getElementById('pdfFrame');
   const empty = document.getElementById('viewerEmpty');
   frame.src = url;
@@ -79,17 +122,33 @@ function showInFrame(url, title) {
   openBtn.hidden = false;
 }
 
+/* Mostra un PDF sencer, o retallat sense solucions si SOL està desactivat. */
+async function displayFile(filename, title) {
+  currentView = { filename, title };
+  const token = ++viewToken;
+  const limit = pageLimit(filename);
+  if (limit == null) { showInFrame(pdfUrl(filename), title); return; }
+  try {
+    const blob = await mergeSelected([pdfUrl(filename)], [limit]);
+    if (token !== viewToken) return;
+    showInFrame(URL.createObjectURL(blob), title, true);
+  } catch (err) {
+    if (token !== viewToken) return;
+    showInFrame(pdfUrl(filename), title);
+  }
+}
+
 function selectActivity(unit, act, filename, title) {
   state.activeFile = filename;
   state.expandedUnit = unit;
-  showInFrame(pdfUrl(filename), title);
+  displayFile(filename, title);
   paint();
   saveLastView();
 }
 
 function selectBonus(filename, title) {
   state.activeFile = filename;
-  showInFrame(pdfUrl(filename), title);
+  displayFile(filename, title);
   paint();
   saveLastView();
 }
@@ -177,10 +236,10 @@ function setBusy(busy) {
 
 async function getMergedBlob() {
   const files = orderedSelection();
-  const key = files.join('|');
+  const key = (showSol ? 'sol|' : 'nosol|') + files.join('|');
   if (lastMergeBlob && lastMergeKey === key) return lastMergeBlob;
   const urls = files.map(pdfUrl);
-  const blob = await mergeSelected(urls);
+  const blob = await mergeSelected(urls, files.map(pageLimit));
   lastMergeKey = key;
   lastMergeBlob = blob;
   return blob;
@@ -188,13 +247,15 @@ async function getMergedBlob() {
 
 async function onViewSelection() {
   if (!state.selected.size) return;
+  currentView = { selection: true };
+  const token = ++viewToken;
   setBusy(true);
   try {
     const blob = await getMergedBlob();
+    if (token !== viewToken) return;
     const url = URL.createObjectURL(blob);
     const n = state.selected.size;
-    showInFrame(url, `Selecció (${n} ${pluralCat(n, 'activitat', 'activitats')})`);
-    currentBlobUrl = url;
+    showInFrame(url, `Selecció (${n} ${pluralCat(n, 'activitat', 'activitats')})`, true);
     state.activeFile = null;
     paint();
   } catch (err) {
@@ -258,6 +319,10 @@ async function loadApp() {
 
   const manifest = await fetchJson(`${coursePath}/pdfs/manifest.json`, { cache: 'no-store' });
   pdfSet = new Set(manifest && Array.isArray(manifest.pdfs) ? manifest.pdfs : []);
+  solucions = (manifest && manifest.solucions) || {};
+
+  paintSolButton();
+  document.getElementById('solToggle').addEventListener('click', onToggleSol);
 
   document.getElementById('btnView').addEventListener('click', onViewSelection);
   document.getElementById('btnDownload').addEventListener('click', onDownloadSelection);
