@@ -5,7 +5,7 @@ i descarregar el llibre de text de Matemàtiques de l'ESO (INS Miquel
 Tarradell) a **qualsevol granularitat**: tot un curs, una unitat didàctica, o
 qualsevol combinació d'activitats soltes.
 
-Pensat com a lloc "germà" de `pd-main` (Programació Didàctica): reutilitza el
+Pensat com a lloc "germà" de `pd` (Programació Didàctica, repositori `step-quiz/pd`): reutilitza el
 mateix sistema de disseny i la mateixa filosofia (`course.json` + descoberta
 per `fetch()`, cap registre central, cap dependència de servidor), afegint-hi
 l'única capacitat nova que calia: **selecció múltiple + fusió de PDFs al
@@ -15,7 +15,7 @@ navegador**.
 
 - Cada activitat del llibre es distribueix com un **PDF atòmic** ja compilat:
   `{curs}-ud{unitat}-{activitat}.pdf` (p. ex. `2eso-ud3-4.pdf`).
-- La pàgina d'un curs (`2eso.html`, `3eso.html`, `4eso.html`) llegeix
+- La pàgina d'un curs (`1eso.html`, `2eso.html`, `3eso.html`, `4eso.html`, `4eso-apl.html`) llegeix
   `contingut/{curs}/course.json` i `contingut/{curs}/pdfs/manifest.json` i
   construeix un arbre Unitat → Activitat a la barra lateral, amb una casella
   de selecció a cada nivell (activitat, unitat amb estat tri-state, i "tot el
@@ -35,22 +35,28 @@ navegador**.
 ## Estructura del lloc
 
 ```
-llibre-pdf-viewer/
+llibre/
   index.html                   selector de curs (els cinc cursos)
-  2eso.html / 3eso.html / 4eso.html   defineixen window.COURSE i carreguen l'app
+  1eso.html, 2eso.html, 3eso.html, 4eso.html, 4eso-apl.html
+                               defineixen window.COURSE i carreguen l'app
   assets/
     css/  tokens.css, layout.css, components.css, index.css, responsive.css
-          (portats gairebé literals de pd-main, mateixa paleta/tipografia)
+          (portats gairebé literals de pd, mateixa paleta/tipografia)
           viewer.css (nou: arbre de checkboxes, unitats, barra de selecció)
-    js/   utils.js        (escHtml, fetchJson — portat de pd-main)
+    js/   utils.js        (escHtml, fetchJson — portat de pd)
           course-tree.js  (pinta l'arbre Unitat→Activitat i el tri-state)
           pdf-merge.js    (mergeSelected(urls) → Blob, embolcall de pdf-lib)
           app.js          (punt d'entrada de cada pàgina de curs)
     lib/  pdf-lib.min.js  (vendoritzat via npm, no CDN)
   contingut/
-    2eso/{course.json, pdfs/{2eso-ud1-1.pdf … 2eso-index.pdf, manifest.json}}
-    3eso/{course.json, pdfs/{…}, manifest.json}
-    4eso/{course.json, pdfs/{…}, manifest.json}
+    {curs}/course.json         (1eso, 2eso, 3eso, 4eso, 4eso-apl)
+    {curs}/numeracio.json      on comença i acaba la numeració d'exercicis de cada
+                               activitat (el fa servir sync.py, no la web)
+    {curs}/pdfs/{curs}-ud1-1.pdf … {curs}-index.pdf, manifest.json
+  eines/sync.py                sincronitza el LaTeX amb la web (vegeu més avall)
+  .devcontainer/               Codespace amb LaTeX instal·lat
+  NOVETATS.md                  notes de l'última entrega gran (1r d'ESO i format nou)
+  e.json                       sortida d'un `git diff --stat` desada per error; no la fa servir res
 ```
 
 Afegir un curs nou = crear un HTML nou (còpia d'un existent canviant
@@ -100,11 +106,10 @@ al navegador.
 | 2n ESO | 6 (UD1–UD6) | 53 + 1 document d'índex |
 | 3r ESO | 6 (UD1–UD6) | 54 + 1 document d'índex |
 | 4t ESO · Acadèmiques | 10 (UD1–UD10) | 65 + 1 document d'índex |
-| 4t ESO · Aplicades | 9 (UD1–UD9) | 57 + 1 document d'índex |
+| 4t ESO · Aplicades | 11 (UD1–UD11) | 72 + 1 document d'índex |
 
-> Les unitats UD10 i UD11 de 4t Aplicades existeixen al repositori font però
-> encara no s'han publicat: `sync.py` no inclou al manifest ni a `course.json`
-> cap activitat que no tingui PDF compilat.
+`sync.py` no inclou al manifest ni a `course.json` cap activitat que no tingui PDF
+compilat.
 
 ## Origen del contingut i com regenerar-lo
 
@@ -125,6 +130,8 @@ que porta LaTeX instal·lat (vegeu `.devcontainer/devcontainer.json`). Es baixa
 el font d'Overleaf (**Download → Source**), es descomprimeix a `_font/`
 (carpeta ignorada per git) i s'executa:
 
+Cursos: `1eso`, `2eso`, `3eso`, `4eso` i `4eso-apl`.
+
 ```bash
 python3 eines/sync.py 1eso --check   --font _font   # què hi ha al .tex i què falta publicar
 python3 eines/sync.py 1eso --compile --font _font   # compila i actualitza les metadades
@@ -133,11 +140,23 @@ python3 eines/sync.py 1eso --compile --act 3.2 3.5 --font _font   # només aques
 ```
 
 `--compile` desa cada PDF a `contingut/{curs}/pdfs/{curs}-ud{U}-{A}.pdf` i
-reescriu `course.json`, `pdfs/manifest.json` i el recompte de l'`index.html`.
+reescriu `course.json`, `pdfs/manifest.json`, `numeracio.json` i el recompte de
+l'`index.html`. Si una activitat canvia de nombre d'exercicis, les següents de la
+mateixa unitat es recompilen soles perquè la numeració `unitat.activitat.exercici`
+quadri.
+
+Altres ordres de `sync.py`:
+
+- `--import-zip ZIP` porta el `.zip` exportat d'Overleaf al font i diu quins fitxers
+  han canviat (si en canvia un de compartit, cal recompilar tots els cursos).
+- `--main` + `--split PDF`: alternativa sense LaTeX local. `--main` escriu
+  `main-{curs}.tex` per compilar-lo a Overleaf, i `--split` parteix el PDF resultant
+  en un PDF per activitat.
+- `--index` compila `index-{curs}.tex` i el publica com a `{curs}-index.pdf`.
 Si una activitat dona error de LaTeX, **no se'n substitueix el PDF publicat**, i
 si una activitat del `.tex` encara no té PDF, no es publica enlloc.
 
-`defs.tex` i `headers.tex` són **compartits pels cinc cursos**: qualsevol canvi
+`defs.tex`, `headers.tex`, `quadern.tex` i `numeracio.tex` són **compartits pels cinc cursos**: qualsevol canvi
 demana recompilar-los tots.
 
 ### Regenerar un sol PDF a mà
@@ -161,6 +180,9 @@ Cap build, cap backend. Es pot servir des de qualsevol allotjament estàtic
 en local…): només cal pujar el contingut d'aquesta carpeta tal qual.
 
 ## Comprovacions fetes
+
+(Fetes quan es va construir el visor, amb els tres primers cursos publicats; no hi ha
+cap test automàtic.)
 
 - Compilació de les 110 activitats + el document d'índex: 0 errors.
 - Recompte de pàgines del PDF fusionat = suma exacta de pàgines dels PDFs
