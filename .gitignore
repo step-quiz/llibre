@@ -2,3 +2,4 @@ _font/
 /*.zip
 /main-*.tex
 /main-*.pdf
+__pycache__/

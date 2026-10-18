@@ -56,7 +56,6 @@ llibre/
   eines/sync.py                sincronitza el LaTeX amb la web (vegeu més avall)
   .devcontainer/               Codespace amb LaTeX instal·lat
   NOVETATS.md                  notes de l'última entrega gran (1r d'ESO i format nou)
-  e.json                       sortida d'un `git diff --stat` desada per error; no la fa servir res
 ```
 
 Afegir un curs nou = crear un HTML nou (còpia d'un existent canviant
