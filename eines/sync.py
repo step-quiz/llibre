@@ -53,12 +53,26 @@ ETIQUETES = {"1eso": "1r ESO", "2eso": "2n ESO", "3eso": "3r ESO",
 # ---------------------------------------------------------------------
 #  Lectura dels títols des del .tex
 # ---------------------------------------------------------------------
+# Ordres de mode matemàtic que tenen un caràcter que les representa. La resta
+# s'esborren (\left, \displaystyle...), que és el que es feia abans per a totes.
+SIMBOLS = {"subset": "\u2282", "subseteq": "\u2286", "in": "\u2208", "notin": "\u2209",
+           "cup": "\u222a", "cap": "\u2229", "cdot": "\u00b7", "times": "\u00d7",
+           "le": "\u2264", "leq": "\u2264", "ge": "\u2265", "geq": "\u2265",
+           "ne": "\u2260", "neq": "\u2260", "approx": "\u2248", "pm": "\u00b1",
+           "to": "\u2192", "infty": "\u221e", "pi": "\u03c0"}
+DOBLES = {"N": "\u2115", "Z": "\u2124", "Q": "\u211a", "R": "\u211d", "C": "\u2102"}
+
+
 def _mates(m):
     """Normalitza el contingut d'un $...$ perquè s'assembli al PDF."""
     t = m.group(1)
     t = t.replace("^2", "\u00b2").replace("^3", "\u00b3")
+    t = re.sub(r"\\mathbb\s*\{?\s*([A-Z])\s*\}?", lambda x: DOBLES.get(x.group(1), x.group(1)), t)
+    t = re.sub(r"\\sqrt\s*\{([^{}]*)\}", "\u221a\\1", t)
+    t = re.sub(r"\\sqrt\s*(\w)", "\u221a\\1", t)
     t = re.sub(r"\s*([=+])\s*", r" \1 ", t)
-    t = re.sub(r"\\[a-zA-Z]+", "", t)
+    t = re.sub(r"\\([a-zA-Z]+)",
+               lambda x: f" {SIMBOLS[x.group(1)]} " if x.group(1) in SIMBOLS else "", t)
     return " ".join(t.split())
 
 
@@ -72,14 +86,51 @@ def tex_a_text(s: str) -> str:
     return " ".join(s.split())
 
 
+def _arguments(s: str, i: int, n: int):
+    """Els n arguments {...} que comencen a la posició i, amb les claus niades
+    ben aparellades ({\\mathbb{N}}, \\emph{...}). Entre un argument i el següent
+    hi pot haver espais, salts de línia i comentaris (%). None si no hi són."""
+    args = []
+    for _ in range(n):
+        while True:
+            while i < len(s) and s[i].isspace():
+                i += 1
+            if s.startswith("%", i):
+                j = s.find("\n", i)
+                i = len(s) if j < 0 else j + 1
+                continue
+            break
+        if i >= len(s) or s[i] != "{":
+            return None
+        prof, j = 0, i
+        while j < len(s):
+            c = s[j]
+            if c == "\\":
+                j += 2
+                continue
+            if c == "{":
+                prof += 1
+            elif c == "}":
+                prof -= 1
+                if prof == 0:
+                    break
+            j += 1
+        else:
+            return None
+        args.append(s[i + 1:j])
+        i = j + 1
+    return args
+
+
 def llegeix_activitat(f: Path):
     """Retorna (titol, subtitol, titol_de_la_unitat) o None."""
     s = f.read_text(encoding="utf-8")
-    m = re.search(r"\\horatitol\{(.+?)\}%?\s*\n?\{(.+?)\}", s, re.S)
-    if not m:
+    k = s.find("\\horatitol")
+    args = _arguments(s, k + len("\\horatitol"), 2) if k >= 0 else None
+    if not args:
         return None
-    titol = re.sub(r"^Activitat\s+\d+\s+\u2014\s*", "", tex_a_text(m.group(1)))
-    subtitol = tex_a_text(m.group(2))
+    titol = re.sub(r"^Activitat\s+\d+\s+\u2014\s*", "", tex_a_text(args[0]))
+    subtitol = tex_a_text(args[1])
     mu = re.search(r"^%\s+UD\d+\s+\u2014\s*(.+?)\s*$", s, re.M)
     titol_ud = None
     if mu:
@@ -566,8 +617,10 @@ def main():
                 nom = f"{curs}-ud{ud}-{act}.pdf"
                 print(f"  compilant {nom} ... ", end="", flush=True)
                 desti = WEB / "contingut" / curs / "pdfs" / nom
+                # (una entrada d'una versió anterior de numeracio.json, sense "q",
+                # no hi entra: es recompilarà quan li toqui)
                 taula = [(k, v.get("llistes", v["inici"]), v["q"]) for k, v in num.items()
-                         if k.split(".")[0] == str(ud)]
+                         if k.split(".")[0] == str(ud) and "inici" in v and "q" in v]
                 ok, dades = compila(curs, ud, act, desti, esperat, taula, eesperat)
                 if not ok:
                     print("ERROR"); fallides.append(nom)

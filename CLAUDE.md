@@ -35,4 +35,10 @@ repositori, si n'hi ha més avall, manen sobre aquestes quan diuen una altra cos
 - [`README.md`](README.md)
 - [`NOVETATS.md`](NOVETATS.md)
 
-No hi ha proves automàtiques: comprova els canvis obrint les pàgines al navegador.
+Proves (des de l'arrel del repositori):
+
+```
+python3 eines/test_sync.py
+```
+
+El visor no té proves automàtiques: comprova'n els canvis obrint les pàgines al navegador.

@@ -54,6 +54,7 @@ llibre/
                                activitat (el fa servir sync.py, no la web)
     {curs}/pdfs/{curs}-ud1-1.pdf … {curs}-index.pdf, manifest.json
   eines/sync.py                sincronitza el LaTeX amb la web (vegeu més avall)
+  eines/test_sync.py           proves de sync.py i de les dades publicades
   .devcontainer/               Codespace amb LaTeX instal·lat
   NOVETATS.md                  notes de l'última entrega gran (1r d'ESO i format nou)
 ```
@@ -84,7 +85,7 @@ Afegir un curs nou = crear un HTML nou (còpia d'un existent canviant
 
 **`pdfs/manifest.json`**
 ```json
-{ "pdfs": ["2eso-ud1-1.pdf", "2eso-ud1-2.pdf", "…", "2eso-index.pdf"],
+{ "pdfs": ["2eso-index.pdf", "2eso-ud1-1.pdf", "2eso-ud1-2.pdf", "…"],
   "solucions": { "2eso-ud1-1.pdf": 4, "…": 3 } }
 ```
 Font de veritat sobre quins PDFs existeixen realment; es genera en temps de
@@ -154,6 +155,23 @@ Altres ordres de `sync.py`:
 - `--index` compila `index-{curs}.tex` i el publica com a `{curs}-index.pdf`.
 Si una activitat dona error de LaTeX, **no se'n substitueix el PDF publicat**, i
 si una activitat del `.tex` encara no té PDF, no es publica enlloc.
+
+Els títols i subtítols es llegeixen de `\horatitol{…}{…}` respectant les claus
+niades (`$\mathbb{N}$`, `\emph{…}`), i el mode matemàtic es converteix en text:
+`\mathbb{N}` → ℕ, `\subset` → ⊂, `\sqrt{2}` → √2, `x^2` → x², etc.
+
+### Proves
+
+```bash
+python3 eines/test_sync.py
+```
+
+Només cal Python (si hi ha `pypdf`, també es comproven les pàgines de solucions).
+No cal LaTeX: la compilació se substitueix per una de mentida, i així es prova
+la numeració (què es recompila, què es renumera i què es deixa estar), el
+manifest, `course.json` i el recompte de l'`index.html`. També es comprova que
+les dades publicades a `contingut/` diguin totes el mateix. Passa-les abans de
+fer commit d'un canvi a `sync.py` o d'una tanda de PDFs nous.
 
 `defs.tex`, `headers.tex`, `quadern.tex` i `numeracio.tex` són **compartits pels cinc cursos**: qualsevol canvi
 demana recompilar-los tots.
