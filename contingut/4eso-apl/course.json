@@ -404,11 +404,16 @@
         },
         {
           "num": 5,
+          "title": "Com a mínim, com a màxim: inequacions",
+          "subtitle": "Escriure i resoldre inequacions d'una incògnita per respondre preguntes de «com a mínim», «com a màxim» i «a partir de», i donar la solució amb paraules, a la recta i com a interval."
+        },
+        {
+          "num": 6,
           "title": "Mapa de mètodes i producte",
           "subtitle": "Posar en ordre els mètodes de resolució de sistemes i aplicar-los en un producte de grup."
         },
         {
-          "num": 6,
+          "num": 7,
           "title": "Estudi per a la prova escrita",
           "subtitle": "Preparar la prova escrita amb exercicis del mateix tipus i reflexionar sobre els errors amb els sistemes."
         }
