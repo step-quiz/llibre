@@ -389,18 +389,18 @@
         },
         {
           "num": 2,
-          "title": "Tres camins segurs",
-          "subtitle": "Resoldre un sistema amb els tres mètodes clàssics —substitució, igualació i reducció— i començar a triar el que estalvia més feina en cada cas."
+          "title": "Dos camins segurs",
+          "subtitle": "Repassar els dos mètodes més útils per resoldre un sistema —substitució i reducció—, triar el que estalvia feina i treure les fraccions abans de començar."
         },
         {
           "num": 3,
           "title": "Del problema al sistema",
-          "subtitle": "Traduir situacions reals —preus, edats, monedes, barrils, alumnat— a un sistema, resoldre'l i tornar al problema per comprovar que la resposta té sentit."
+          "subtitle": "Traduir situacions reals —preus, edats, monedes, trajectes— a un sistema, resoldre'l i tornar al problema per comprovar que la resposta té sentit; i saber reconèixer quan n'hi ha prou amb una incògnita."
         },
         {
           "num": 4,
           "title": "Veure la solució",
-          "subtitle": "Dibuixar cada equació com una recta a partir d'una taula de valors, entendre que la solució és el punt de tall i classificar el sistema segons com es tallen."
+          "subtitle": "Dibuixar cada equació com una recta —a mà amb una taula de valors, o amb GeoGebra—, entendre que la solució és el punt de tall i classificar el sistema segons com es tallen."
         },
         {
           "num": 5,
@@ -422,11 +422,6 @@
           "num": 1,
           "title": "La idea de polinomi",
           "subtitle": "Entendre què és un polinomi i per què s'assembla tant a un número escrit en base deu: grau, coeficients, valor numèric i suma o resta terme a terme."
-        },
-        {
-          "num": 2,
-          "title": "Apèndix — Trencar un polinomi en trossos",
-          "subtitle": "[Ampliació opcional] Escriure un polinomi com un producte: factor comú, igualtats notables i, si arribes, la regla de Ruffini."
         }
       ]
     }
