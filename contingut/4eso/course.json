@@ -20,28 +20,28 @@
         },
         {
           "num": 3,
+          "title": "Trossos de recta: intervals",
+          "subtitle": "Descriure tots els nombres reals d'un tros de recta de tres maneres —amb desigualtats, a la recta i amb la notació d'interval— i fer servir els intervals per expressar toleràncies, franges i condicions."
+        },
+        {
+          "num": 4,
           "title": "Radicals, amb totes les de la llei",
           "subtitle": "Donar significat als radicals, simplificar-los extraient factors, operar-hi (suma, producte, quocient) i traduir-los a potències d'exponent racional."
         },
         {
-          "num": 4,
+          "num": 5,
           "title": "Denominadors nets i errors controlats",
           "subtitle": "Racionalitzar denominadors senzills per guanyar eficiència i elegància, i mesurar la qualitat d'una aproximació amb l'error absolut i relatiu."
         },
         {
-          "num": 5,
-          "title": "Síntesi: el nombre real, a la mà",
-          "subtitle": "Reunir en un sol full tot el que sabem del nombre real —subconjunts, radicals, exponent racional, racionalització i error— i tornar-hi amb problemes que barregen les eines."
-        },
-        {
           "num": 6,
-          "title": "El Dossier del nombre real",
-          "subtitle": "Aplicar en grup tot el que sap la unitat per construir un dossier que expliqui, amb exemples propis, què és el nombre real i quan cal el valor exacte o l'aproximat."
+          "title": "Síntesi i estudi per a la prova",
+          "subtitle": "Reunir en un sol full tot el que sabem del nombre real —subconjunts, intervals, radicals, exponent racional, racionalització i error— i preparar la prova escrita amb exercicis del mateix tipus."
         },
         {
           "num": 7,
-          "title": "Prova de la unitat",
-          "subtitle": "Demostrar de manera individual el domini dels nombres reals: classificació, radicals, exponent racional, racionalització i el criteri exacte/aproximat amb l'error."
+          "title": "El Dossier del nombre real",
+          "subtitle": "Aplicar en grup tot el que sap la unitat per construir un dossier que expliqui, amb exemples propis, què és el nombre real i quan cal el valor exacte o l'aproximat."
         }
       ]
     },
@@ -66,18 +66,13 @@
         },
         {
           "num": 4,
-          "title": "Síntesi: el mapa i les trampes",
-          "subtitle": "Reunir en un full el mètode del factor multiplicador i les aplicacions financeres, i construir un «quadre de trampes» amb els errors típics per no tornar-hi a caure."
+          "title": "Síntesi i estudi per a la prova",
+          "subtitle": "Reunir en un full el mètode del factor multiplicador i les aplicacions financeres, construir un «quadre de trampes» i preparar la prova escrita amb exercicis del mateix tipus."
         },
         {
           "num": 5,
           "title": "Informe breu de decisió financera",
           "subtitle": "Aplicar en grup tot el mètode de la unitat per analitzar una situació real —una compra amb opcions de pagament o un estalvi amb interès— i recomanar, amb taula i diagrama de sectors, l'opció més convenient."
-        },
-        {
-          "num": 6,
-          "title": "Prova de la unitat",
-          "subtitle": "Demostrar de manera individual el domini del factor multiplicador, els percentatges encadenats, els impostos, els interessos i la comparació d'opcions."
         }
       ]
     },
@@ -107,13 +102,18 @@
         },
         {
           "num": 5,
-          "title": "Síntesi: desenvolupar i factoritzar",
-          "subtitle": "Reunir en un mapa les dues direccions del treball algebraic —desenvolupar i factoritzar— i construir el quadre d'errors típics per no tornar-hi a caure."
+          "title": "Ruffini i les arrels d'un polinomi",
+          "subtitle": "Dividir un polinomi entre x-a amb la regla de Ruffini, fer servir el teorema del residu per trobar-ne les arrels i factoritzar polinomis que no són cap identitat notable."
         },
         {
           "num": 6,
+          "title": "Síntesi i estudi per a la prova",
+          "subtitle": "Reunir en un mapa les dues direccions del treball algebraic —desenvolupar i factoritzar—, construir el quadre d'errors i preparar la prova escrita amb exercicis del mateix tipus."
+        },
+        {
+          "num": 7,
           "title": "El llibre de les demostracions",
-          "subtitle": "Construir en grup un recull on cada identitat notable apareix amb la seva demostració (gràfica i algebraica), i demostrar de manera individual el domini de la unitat."
+          "subtitle": "Construir en grup un recull on cada identitat notable apareix amb la seva demostració (gràfica i algebraica), amb exemples i aplicacions propis."
         }
       ]
     },
@@ -143,18 +143,18 @@
         },
         {
           "num": 5,
-          "title": "Inequacions: de la igualtat a la desigualtat",
-          "subtitle": "Resoldre inequacions lineals com una extensió natural de les equacions, dominar la regla del canvi de sentit i representar les solucions a la recta."
+          "title": "Inequacions d'una i de dues incògnites",
+          "subtitle": "Resoldre inequacions lineals justificant la regla del canvi de sentit, donar-ne la solució a la recta i com a interval, i representar la solució d'una inequació amb dues incògnites com un semiplà."
         },
         {
           "num": 6,
-          "title": "Síntesi: el mapa i el discriminant",
-          "subtitle": "Reunir en un mapa tots els mètodes de resolució, situar el paper del discriminant i construir el quadre d'errors típics abans del dossier i la prova."
+          "title": "Síntesi i estudi per a la prova",
+          "subtitle": "Reunir en un mapa tots els mètodes de resolució, situar el paper del discriminant, construir el quadre d'errors i preparar la prova escrita amb exercicis del mateix tipus."
         },
         {
           "num": 7,
           "title": "Dossier d'equacions i inequacions",
-          "subtitle": "Aplicar en grup tot el domini de la unitat en un dossier raonat, i demostrar de manera individual la resolució d'equacions de 2n grau, l'ús del discriminant i les inequacions."
+          "subtitle": "Aplicar en grup tot el domini de la unitat en un dossier raonat: mètodes de resolució, discriminant, biquadrades, un problema modelitzat i inequacions (també amb dues incògnites)."
         }
       ]
     },
@@ -189,13 +189,13 @@
         },
         {
           "num": 6,
-          "title": "Síntesi: coeficients i elements",
-          "subtitle": "Reunir en dos quadres el que sabem: com els coeficients determinen la forma, i com es troben els elements d'una paràbola; construir el quadre d'errors abans del producte i la prova."
+          "title": "Síntesi i estudi per a la prova",
+          "subtitle": "Reunir en quadres el que sabem —característiques d'una funció, coeficients i forma, elements d'una paràbola—, construir el quadre d'errors i preparar la prova escrita amb exercicis del mateix tipus."
         },
         {
           "num": 7,
           "title": "Estudi de la paràbola",
-          "subtitle": "Estudiar en grup, de manera completa, una família de funcions quadràtiques i presentar-ne l'estudi; demostrar de manera individual el domini de la unitat."
+          "subtitle": "Estudiar en grup, de manera completa, una família de funcions quadràtiques i presentar-ne l'estudi amb gràfica, elements i interpretació en context."
         }
       ]
     },
@@ -230,13 +230,13 @@
         },
         {
           "num": 6,
-          "title": "Síntesi: l'atles de famílies",
-          "subtitle": "Reunir totes les famílies en un sol quadre comparatiu (forma, domini, asímptotes, creixement, fenomen) i consolidar el quadre d'errors abans del producte i la prova."
+          "title": "Síntesi i estudi per a la prova",
+          "subtitle": "Reunir totes les famílies en un sol quadre comparatiu, repassar l'interès compost i els logaritmes, consolidar el quadre d'errors i preparar la prova escrita amb exercicis del mateix tipus."
         },
         {
           "num": 7,
           "title": "Atles de funcions",
-          "subtitle": "Elaborar en grup un atles estudiat de les famílies de la unitat, i demostrar de manera individual el domini de hipèrbola, exponencial i logaritmes."
+          "subtitle": "Elaborar en grup un atles de les famílies de la unitat —hipèrbola, exponencial i logarítmica—, cadascuna estudiada i lligada a un fenomen real."
         }
       ]
     },
@@ -266,13 +266,13 @@
         },
         {
           "num": 5,
-          "title": "Síntesi: el mapa de la trigonometria",
-          "subtitle": "Reunir en un mapa les raons, les relacions i els teoremes, amb el criteri per triar l'eina adequada, i consolidar el quadre d'errors abans del producte i la prova."
+          "title": "Síntesi i estudi per a la prova",
+          "subtitle": "Reunir en un mapa la semblança, les raons, les relacions i els teoremes, amb el criteri per triar l'eina adequada, consolidar el quadre d'errors i preparar la prova escrita amb exercicis del mateix tipus."
         },
         {
           "num": 6,
           "title": "Expedició de mesura trigonomètrica",
-          "subtitle": "Resoldre en grup un repte de mesura real (una altura o distància inaccessible) modelitzant-lo amb triangles, i demostrar de manera individual el domini de la trigonometria."
+          "subtitle": "Resoldre en grup un repte de mesura real —una altura o una distància inaccessible— modelitzant-lo amb triangles, prenent les mesures al pati i calculant-ne el resultat amb trigonometria."
         }
       ]
     },
@@ -293,7 +293,7 @@
         {
           "num": 3,
           "title": "Les expressions de la recta",
-          "subtitle": "Conèixer les diferents expressions algebraiques d'una recta (punt-pendent, explícita, general, vectorial i contínua), i —marca de B— triar la més adequada segons les dades del problema."
+          "subtitle": "Conèixer les diferents expressions algebraiques d'una recta (punt-pendent, explícita, general, vectorial i contínua) i triar la més adequada segons les dades del problema."
         },
         {
           "num": 4,
@@ -302,13 +302,13 @@
         },
         {
           "num": 5,
-          "title": "Síntesi: rectes i transformacions",
-          "subtitle": "Reunir en dos quadres el que sabem: quina expressió de la recta convé segons les dades, i quina regla algebraica té cada transformació; consolidar el quadre d'errors."
+          "title": "Síntesi i estudi per a la prova",
+          "subtitle": "Reunir en dos quadres les expressions de la recta i les regles de les transformacions, amb vectors, posicions relatives i el quadre d'errors, i preparar la prova escrita amb exercicis del mateix tipus."
         },
         {
           "num": 6,
           "title": "Geometria amb coordenades",
-          "subtitle": "Resoldre en grup un projecte de geometria analítica (rectes triades segons les dades i transformacions d'una figura), i demostrar de manera individual el domini de la unitat."
+          "subtitle": "Resoldre en grup un projecte de geometria analítica: rectes triades segons les dades, la posició relativa de dues d'elles i les transformacions d'una figura que dissenyeu."
         }
       ]
     },
@@ -338,13 +338,13 @@
         },
         {
           "num": 5,
-          "title": "Síntesi: el mapa de l'estadística",
-          "subtitle": "Reunir en un mapa l'estadística d'una i de dues variables (posició, dispersió, correlació, regressió) i consolidar el quadre d'errors, amb l'avís central de correlació ≠ causalitat."
+          "title": "Síntesi i estudi per a la prova",
+          "subtitle": "Reunir en un mapa l'estadística d'una i de dues variables (posició, dispersió, correlació, regressió), consolidar el quadre d'errors i preparar la prova escrita amb exercicis del mateix tipus."
         },
         {
           "num": 6,
           "title": "Informe estadístic de dues variables",
-          "subtitle": "Estudiar en grup un conjunt de dades reals de dues variables i presentar-ne un informe, i demostrar de manera individual el domini de la posició, la dispersió, la mitjana ponderada i la lectura de la correlació."
+          "subtitle": "Elaborar en grup un informe estadístic amb dades reals de dues variables: resumir-les, representar-les i valorar-ne la relació amb rigor i esperit crític."
         }
       ]
     },
@@ -379,13 +379,13 @@
         },
         {
           "num": 6,
-          "title": "Síntesi: recompte i probabilitat",
-          "subtitle": "Reunir en un mapa les eines de recompte (arbre, V/P/C) i de probabilitat (Laplace, Venn, arbre, condicionada, valor esperat), i consolidar el quadre d'errors."
+          "title": "Síntesi i estudi per a la prova",
+          "subtitle": "Reunir en un mapa les eines de recompte i de probabilitat, amb el valor esperat i les apostes, consolidar el quadre d'errors i preparar la prova escrita amb exercicis del mateix tipus."
         },
         {
           "num": 7,
           "title": "Dossier de l'atzar",
-          "subtitle": "Resoldre en grup un recull de reptes de recompte i probabilitat aplicats a una decisió real, i demostrar de manera individual el domini de la combinatòria i la probabilitat."
+          "subtitle": "Resoldre en grup un recull de reptes de recompte i probabilitat i fer-los servir per analitzar una decisió real davant l'atzar."
         }
       ]
     }
