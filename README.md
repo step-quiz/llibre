@@ -102,7 +102,7 @@ al navegador.
 
 | Curs | Unitats | Activitats |
 |---|---|---|
-| 1r ESO | 8 (UD1–UD8) | 76 + 1 document d'índex |
+| 1r ESO | 8 (UD1–UD8) | 77 + 1 document d'índex |
 | 2n ESO | 6 (UD1–UD6) | 53 + 1 document d'índex |
 | 3r ESO | 6 (UD1–UD6) | 54 + 1 document d'índex |
 | 4t ESO · Acadèmiques | 10 (UD1–UD10) | 65 + 1 document d'índex |

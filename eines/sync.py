@@ -145,10 +145,16 @@ def llegeix_activitat(f: Path):
 
 def inventari(curs: str):
     """Llista ordenada de (unitat, activitat, titol, subtitol, titol_unitat)."""
-    fitxers = sorted(
-        (TEX / curs).glob(f"ud*/{curs}-ud*-*.tex"),
-        key=lambda p: tuple(int(x) for x in
-                            re.search(r"ud(\d+)-(\d+)\.tex$", p.name).groups()))
+    # Només els fitxers {curs}-ud{U}-{A}.tex amb A numèric. Qualsevol altre nom
+    # (p. ex. un 1eso-ud1-7bis.tex de prova) s'ignora i s'avisa, en lloc de petar.
+    fitxers = []
+    for p in (TEX / curs).glob(f"ud*/{curs}-ud*-*.tex"):
+        if re.search(r"ud(\d+)-(\d+)\.tex$", p.name):
+            fitxers.append(p)
+        else:
+            print(f"  !  {p.name}: el nom no és {curs}-ud<U>-<A>.tex; l'ignoro")
+    fitxers.sort(key=lambda p: tuple(int(x) for x in
+                                     re.search(r"ud(\d+)-(\d+)\.tex$", p.name).groups()))
     out = []
     for f in fitxers:
         ud, act = (int(x) for x in re.search(r"ud(\d+)-(\d+)\.tex$", f.name).groups())

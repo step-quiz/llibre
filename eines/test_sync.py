@@ -152,6 +152,17 @@ class Inventari(CursDeMentida):
         self.assertNotIn((1, 4), claus)
         self.assertIn("1eso-ud1-4.tex", sortida.getvalue())
 
+    def test_un_nom_que_no_encaixa_s_ignora_i_s_avisa_sense_petar(self):
+        """Un 1eso-ud1-7bis.tex (o similar) no ha de fer petar l'inventari."""
+        f = self.font / self.CURS / "ud1" / f"{self.CURS}-ud1-7bis.tex"
+        f.write_text(activitat_tex(1, 7, "x", "y", "z"), encoding="utf-8")
+        sync.TEX = self.font
+        sortida = io.StringIO()
+        with contextlib.redirect_stdout(sortida):
+            claus = [(u, a) for u, a, *_ in sync.inventari(self.CURS)]
+        self.assertNotIn((1, 7), claus)
+        self.assertIn("ud1-7bis.tex", sortida.getvalue())
+
     def test_titols_net(self):
         f = self.font / self.CURS / "ud1" / f"{self.CURS}-ud1-1.tex"
         f.write_text("% UD1 \u2014 Sentit numèric · activitat inicial (1 sessió · 55 min)\n"
