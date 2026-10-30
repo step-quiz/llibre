@@ -1,3 +1,36 @@
+# Novetats — 3r d'ESO revisat sencer
+
+**30/10/2026.** Les sis unitats de 3r s'han revisat amb les unitats U1–U6 del
+Departament i el Repartiment de continguts 2026–27.
+
+| Curs | Abans | Ara |
+|---|---|---|
+| 3r ESO | 6 unitats · 48 activitats | **6 unitats · 55 activitats** + document d'índex |
+
+## Què canvia
+
+- **Un repàs abans de cada prova.** Activitat nova «Repàs de l'examen de la
+  unitat N» a les sis unitats (1.8, 2.9, 3.8, 4.7, 5.12 i 6.11): full de treball
+  en blanc i negre, el primer cas de cada exercici resolt i graella «Què he
+  après?».
+- **Proves noves** (no es publiquen): deu preguntes d'1 punt, set germanes dels
+  exercicis del repàs i tres de més exigents.
+- **Activitat nova a la UD6:** la 6.7, «Estudiar una gràfica» (domini, intervals
+  de creixement, màxims i mínims, talls). Les activitats 6.8–6.10 són les
+  antigues 6.7–6.9.
+- **Sabers que hi faltaven:** operacions combinades amb enters (1.2); aproximar
+  abans de la notació científica (1.4); esdeveniments elementals i diagrames de
+  Venn (2.2); raó de semblança més petita que 1 i negativa, i perímetres i àrees
+  de figures semblants (3.2); el vector: mòdul, direcció, sentit i coordenades
+  (4.2); la recta per un punt i el pendent, i rectes paral·leles (6.5).
+- **Sessions a totes les capçaleres** i **índex de 3r** reescrit amb les hores
+  del Repartiment al costat de les sessions del llibre.
+
+Com que cada prova és ara l'última activitat de la seva unitat, la numeració de
+3r al web ja no té forats.
+
+---
+
 # Novetats — 2n d'ESO revisat sencer
 
 **30/10/2026.** Les sis unitats de 2n s'han revisat una per una amb les

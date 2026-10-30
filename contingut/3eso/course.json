@@ -42,6 +42,11 @@
           "num": 7,
           "title": "Projecte: del virus a la galàxia",
           "subtitle": "Aplicar tot el que hem après per construir una escala de l'univers, de la cosa més petita a la més gran, i comunicar-la en un pòster."
+        },
+        {
+          "num": 8,
+          "title": "Repàs de l'examen de la unitat 1",
+          "subtitle": "Practicar, amb un exemple resolt per exercici, el que cal dominar abans de l'examen de la unitat."
         }
       ]
     },
@@ -88,6 +93,11 @@
           "num": 8,
           "title": "Projecte: és una qüestió de sort?",
           "subtitle": "Analitzar diversos jocs d'atzar, calcular la probabilitat de guanyar-hi i decidir, amb arguments, si són justos."
+        },
+        {
+          "num": 9,
+          "title": "Repàs de l'examen de la unitat 2",
+          "subtitle": "Practicar, amb un exemple resolt per exercici, el que cal dominar abans de l'examen de la unitat."
         }
       ]
     },
@@ -129,6 +139,11 @@
           "num": 7,
           "title": "Projecte: dossier d'agrimensura de l'institut",
           "subtitle": "Mesurar elements reals del centre: una altura inaccessible amb Tales, i l'àrea i el volum d'objectes reals, amb precisió i comprovació."
+        },
+        {
+          "num": 8,
+          "title": "Repàs de l'examen de la unitat 3",
+          "subtitle": "Practicar, amb un exemple resolt per exercici, el que cal dominar abans de l'examen de la unitat."
         }
       ]
     },
@@ -165,6 +180,11 @@
           "num": 6,
           "title": "Projecte: taller de mosaics",
           "subtitle": "Recollir i classificar moviments en objectes reals i dissenyar un fris o mosaic propi component moviments."
+        },
+        {
+          "num": 7,
+          "title": "Repàs de l'examen de la unitat 4",
+          "subtitle": "Practicar, amb un exemple resolt per exercici, el que cal dominar abans de l'examen de la unitat."
         }
       ]
     },
@@ -226,6 +246,11 @@
           "num": 11,
           "title": "Manual de fórmules i detectius de dues incògnites",
           "subtitle": "Aplicar l'aïllament de fórmules reals i la modelització amb sistemes en dos productes autèntics."
+        },
+        {
+          "num": 12,
+          "title": "Repàs de l'examen de la unitat 5",
+          "subtitle": "Practicar, amb un exemple resolt per exercici, el que cal dominar abans de l'examen de la unitat."
         }
       ]
     },
@@ -265,18 +290,28 @@
         },
         {
           "num": 7,
+          "title": "Estudiar una gràfica",
+          "subtitle": "Llegir una gràfica qualsevol: si és una funció, el domini, on creix i on decreix, els màxims i els mínims i els punts de tall."
+        },
+        {
+          "num": 8,
           "title": "El mapa de les funcions",
           "subtitle": "Connectar en un sol esquema les quatre representacions, el significat de m i n i els tipus de creixement."
         },
         {
-          "num": 8,
+          "num": 9,
           "title": "Retrat funcional del món real",
           "subtitle": "Triar una situació real modelitzable amb una funció afí i presentar-la amb les quatre representacions, interpretant m i n, un punt de tall i una predicció."
         },
         {
-          "num": 9,
+          "num": 10,
           "title": "La galeria de funcions",
           "subtitle": "Agrupar i contrastar funcions segons el signe del pendent i discutir què significa cada cas en la realitat."
+        },
+        {
+          "num": 11,
+          "title": "Repàs de l'examen de la unitat 6",
+          "subtitle": "Practicar, amb un exemple resolt per exercici, el que cal dominar abans de l'examen de la unitat."
         }
       ]
     }
