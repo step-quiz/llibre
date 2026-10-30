@@ -1,4 +1,40 @@
-# Novetats — 1r d'ESO complet i canvis de format a tots els cursos
+# Novetats — 4t d'ESO Acadèmiques revisat
+
+Aquesta entrega **només toca 4t Acadèmiques** (`contingut/4eso/`). Els altres
+quatre cursos no canvien: 4t Aplicades ja estava al dia.
+
+| Curs | Abans | Ara |
+|---|---|---|
+| 4t ESO · Acadèmiques | 10 unitats · 65 activitats | **10 unitats · 67 activitats** + document d'índex |
+
+## Què canvia a 4t Acadèmiques
+
+Les deu unitats s'han revisat una per una i s'han alineat amb el Repartiment de
+continguts 2026–27 del centre.
+
+- **Dues activitats noves:** la 7.3 «Angles de qualsevol mida» (circumferència
+  goniomètrica i reducció al primer quadrant) i la 10.3 «Fórmules del recompte,
+  Tartaglia i el binomi de Newton». Per això **les activitats 7.3–7.7 i 10.3–10.8
+  es renumeren** (passen a ser 7.4–7.8 i 10.4–10.9).
+- **Sabers del Repartiment que hi faltaven:** angles complementaris (UD7),
+  taules de freqüències, dades agrupades i marca de classe (UD9), probabilitat
+  condicionada a partir d'una taula (UD10), equacions del tipus (x−a)² = k i
+  completar el quadrat (UD4), el logaritme neperià (UD6).
+- **Exercicis amb dades noves** allà on repetien les d'un exemple resolt o d'un
+  altre exercici, i **errades corregides** a totes les unitats.
+- **Dossiers d'estudi** (activitat «Síntesi i estudi per a la prova» de cada
+  unitat) posats al dia amb el contingut nou.
+- **Document d'índex:** el §3 compara el llibre amb el Repartiment bloc per bloc
+  i hora per hora.
+- **La numeració dels exercicis canvia** a les unitats 1, 3, 4, 6, 7, 9 i 10
+  (s'hi han afegit exercicis): les fotocòpies fetes abans no coincideixen. Les
+  unitats 2, 5 i 8 mantenen la numeració.
+
+Les proves escrites de cada unitat no es publiquen (no porten `\horatitol`).
+
+---
+
+# Entrega anterior — 1r d'ESO complet i canvis de format a tots els cursos
 
 Aquesta entrega és la més gran fins ara: **1r d'ESO passa d'estar sense
 començar a estar complet**, i, de retruc, **els PDFs dels cinc cursos canvien de
@@ -19,7 +55,7 @@ format**.
 > s'han revisat, i encara hi ha referències del tipus «exercici 7» que amb la
 > numeració nova haurien de dir «3.7.7».
 
-## 1. Canvis de format (afecten els cinc cursos)
+### 1. Canvis de format (afecten els cinc cursos)
 
 Són canvis a `defs.tex`, que és compartit. **El contingut no canvia.**
 
@@ -34,7 +70,7 @@ Són canvis a `defs.tex`, que és compartit. **El contingut no canvia.**
   redundant: **119 pàgines menys** en total, sense perdre res.
 - **Cap exercici no queda partit** entre dues pàgines.
 
-## 2. 1r d'ESO
+### 2. 1r d'ESO
 
 Vuit unitats, 76 activitats i 89 sessions, alineades amb el Repartiment de
 continguts del centre i amb les set situacions d'aprenentatge.
@@ -67,7 +103,7 @@ Novetats respecte de la versió de treball anterior:
 - **Errades corregides** a totes les unitats, incloses dues figures que estaven
   mal dibuixades (el garbell d'Eratòstenes i l'espiral de Fibonacci).
 
-## 3. Eines
+### 3. Eines
 
 - **`eines/sync.py`**: genera `course.json`, `manifest.json` i el recompte de
   l'`index.html` a partir del `.tex`, i compila les activitats. Només publica el

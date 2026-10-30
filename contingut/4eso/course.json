@@ -16,7 +16,7 @@
         {
           "num": 2,
           "title": "El mapa dels reals i la recta",
-          "subtitle": "Classificar nombres pels subconjunts ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ justificant-ho, entendre per què √2 és irracional i situar reals a la recta amb precisió."
+          "subtitle": "Classificar nombres en naturals, enters, racionals, irracionals i reals justificant-ho, entendre per què l'arrel de 2 és irracional, situar reals a la recta amb precisió i saber quins nombres queden fora dels reals."
         },
         {
           "num": 3,
@@ -129,12 +129,12 @@
         {
           "num": 2,
           "title": "Equacions de 2n grau, primers mètodes",
-          "subtitle": "Resoldre equacions de 2n grau senzilles (del tipus x² = k, incompletes i factoritzades) i interpretar què signifiquen les seves solucions."
+          "subtitle": "Resoldre equacions de 2n grau senzilles (dels tipus x² = k i (x-a)² = k, incompletes i factoritzades) i interpretar què signifiquen les seves solucions."
         },
         {
           "num": 3,
           "title": "La fórmula general i el discriminant",
-          "subtitle": "Deduir la fórmula general de l'equació de 2n grau completant el quadrat, i fer servir el discriminant per anticipar quantes solucions tindrà abans de resoldre-la."
+          "subtitle": "Resoldre equacions completant el quadrat, deduir-ne la fórmula general i fer servir el discriminant per anticipar quantes solucions tindrà una equació abans de resoldre-la."
         },
         {
           "num": 4,
@@ -175,7 +175,7 @@
         {
           "num": 3,
           "title": "L'efecte dels coeficients",
-          "subtitle": "Descobrir com el coeficient a canvia l'orientació i l'obertura de la paràbola, i com c la desplaça amunt o avall, treballant amb les famílies y = ax² i y = ax² + c."
+          "subtitle": "Descobrir com el coeficient a canvia l'orientació (còncava o convexa) i l'obertura de la paràbola, i com c la desplaça amunt o avall, treballant amb les famílies y = ax² i y = ax² + c."
         },
         {
           "num": 4,
@@ -211,7 +211,7 @@
         {
           "num": 2,
           "title": "La hipèrbola",
-          "subtitle": "Estudiar la funció de proporcionalitat inversa y = k/x: la seva forma (dues branques), l'efecte del signe de k, el domini i les asímptotes."
+          "subtitle": "Estudiar la funció de proporcionalitat inversa y = k/x: la seva forma (dues branques), l'efecte del signe de k, el domini i les asímptotes, i fer-la servir en contextos com els rectangles d'àrea fixa."
         },
         {
           "num": 3,
@@ -226,7 +226,7 @@
         {
           "num": 5,
           "title": "La funció logarítmica",
-          "subtitle": "Estudiar y = _b x: el seu domini, la seva gràfica i la seva relació d'inversa amb l'exponencial (simetria respecte de la recta y = x)."
+          "subtitle": "Estudiar y = _b x: el seu domini, la seva gràfica (també en base 10 i en base e) i la seva relació d'inversa amb l'exponencial (simetria respecte de la recta y = x)."
         },
         {
           "num": 6,
@@ -256,21 +256,26 @@
         },
         {
           "num": 3,
+          "title": "Angles de qualsevol mida",
+          "subtitle": "Situar qualsevol angle a la circumferència goniomètrica, saber el signe del sinus i del cosinus segons el quadrant, conèixer les raons de 0^, 90^, 180^ i 270^ i reduir al primer quadrant els angles 180^-A, 180^ + A i 360^-A."
+        },
+        {
+          "num": 4,
           "title": "Resoldre triangles rectangles",
           "subtitle": "Usar les raons trigonomètriques per trobar costats i angles desconeguts d'un triangle rectangle, i aplicar-ho a problemes reals de mesura (altures, distàncies, rampes)."
         },
         {
-          "num": 4,
+          "num": 5,
           "title": "Els teoremes del sinus i del cosinus",
           "subtitle": "Resoldre triangles qualssevol (no només rectangles) amb els teoremes del sinus i del cosinus, i aplicar-los a problemes reals de mesura i navegació."
         },
         {
-          "num": 5,
+          "num": 6,
           "title": "Síntesi i estudi per a la prova",
           "subtitle": "Reunir en un mapa la semblança, les raons, les relacions i els teoremes, amb el criteri per triar l'eina adequada, consolidar el quadre d'errors i preparar la prova escrita amb exercicis del mateix tipus."
         },
         {
-          "num": 6,
+          "num": 7,
           "title": "Expedició de mesura trigonomètrica",
           "subtitle": "Resoldre en grup un repte de mesura real —una altura o una distància inaccessible— modelitzant-lo amb triangles, prenent les mesures al pati i calculant-ne el resultat amb trigonometria."
         }
@@ -328,8 +333,8 @@
         },
         {
           "num": 3,
-          "title": "Mitjana ponderada i taules de dues variables",
-          "subtitle": "Calcular la mitjana ponderada quan les dades tenen pesos diferents, i organitzar dades de dues variables en taules de freqüències conjuntes amb els seus gràfics."
+          "title": "Mitjana ponderada, dades agrupades i taules de dues variables",
+          "subtitle": "Calcular la mitjana ponderada quan les dades tenen pesos diferents, treballar amb taules de freqüències i dades agrupades en intervals (marca de classe), i organitzar dades de dues variables en taules de freqüències conjuntes."
         },
         {
           "num": 4,
@@ -360,30 +365,35 @@
         {
           "num": 2,
           "title": "Comptar amb arbre",
-          "subtitle": "Fer recomptes sistemàtics amb el diagrama d'arbre i entendre el significat de variacions, permutacions i combinacions (sense exigir-ne les fórmules), distingint quan importa l'ordre i quan es pot repetir."
+          "subtitle": "Fer recomptes sistemàtics amb el diagrama d'arbre i entendre el significat de variacions, permutacions i combinacions, distingint quan importa l'ordre i quan es pot repetir (les fórmules arriben a l'Activitat 3)."
         },
         {
           "num": 3,
+          "title": "Fórmules del recompte, Tartaglia i el binomi de Newton",
+          "subtitle": "Calcular permutacions, variacions i combinacions amb el factorial, entendre els nombres combinatoris i el triangle de Tartaglia, i desenvolupar potències d'un binomi amb el binomi de Newton."
+        },
+        {
+          "num": 4,
           "title": "Mesurar l'atzar",
           "subtitle": "Calcular probabilitats amb la regla de Laplace, operar amb successos (unió, intersecció, contrari) amb diagrames de Venn, i connectar la freqüència relativa amb la probabilitat (llei dels grans nombres)."
         },
         {
-          "num": 4,
+          "num": 5,
           "title": "Experiments compostos",
           "subtitle": "Calcular probabilitats d'experiments de diverses etapes amb arbres de probabilitat, i distingir successos dependents i independents (amb i sense reposició) per prendre decisions."
         },
         {
-          "num": 5,
+          "num": 6,
           "title": "Decisions davant l'atzar",
           "subtitle": "Fer servir la idea intuïtiva de valor esperat per valorar si un joc és just, i desenvolupar pensament crític davant apostes, loteries i estadístiques enganyoses."
         },
         {
-          "num": 6,
+          "num": 7,
           "title": "Síntesi i estudi per a la prova",
           "subtitle": "Reunir en un mapa les eines de recompte i de probabilitat, amb el valor esperat i les apostes, consolidar el quadre d'errors i preparar la prova escrita amb exercicis del mateix tipus."
         },
         {
-          "num": 7,
+          "num": 8,
           "title": "Dossier de l'atzar",
           "subtitle": "Resoldre en grup un recull de reptes de recompte i probabilitat i fer-los servir per analitzar una decisió real davant l'atzar."
         }
