@@ -67,6 +67,11 @@
           "num": 12,
           "title": "Repte d'aplicació: el viatge de fi de curs",
           "subtitle": "Fer servir tot el que hem après de la unitat per resoldre una situació real, treballant en equip."
+        },
+        {
+          "num": 13,
+          "title": "Repàs de l'examen de la unitat 1",
+          "subtitle": "Practicar, amb un exemple resolt per exercici, el que cal dominar abans de l'examen de la unitat."
         }
       ]
     },
@@ -180,6 +185,11 @@
           "num": 9,
           "title": "Reptes en equilibri",
           "subtitle": "Inventar, resoldre i comprovar un enigma propi, i proposar-lo als companys."
+        },
+        {
+          "num": 10,
+          "title": "Repàs de l'examen de la unitat 4",
+          "subtitle": "Practicar, amb un exemple resolt per exercici, el que cal dominar abans de l'examen de la unitat."
         }
       ]
     },
@@ -214,38 +224,48 @@
         },
         {
           "num": 6,
+          "title": "Altures i circumferència",
+          "subtitle": "Traçar les tres altures d'un triangle, fer servir el teorema de l'altura i relacionar els angles que es formen dins d'una circumferència."
+        },
+        {
+          "num": 7,
           "title": "Els poliedres",
           "subtitle": "Reconèixer i anomenar poliedres i els seus elements: cares, arestes, vèrtexs i diagonals."
         },
         {
-          "num": 7,
+          "num": 8,
           "title": "La fórmula d'Euler i els desenvolupaments",
           "subtitle": "Descobrir la relació d'Euler comptant, i connectar el cos amb el seu desenvolupament pla."
         },
         {
-          "num": 8,
+          "num": 9,
           "title": "Els cossos de revolució",
           "subtitle": "Reconèixer cilindre, con i esfera com a cossos generats per gir, i identificar-ne els elements."
         },
         {
-          "num": 9,
+          "num": 10,
           "title": "Àrees i volums a l'espai",
           "subtitle": "Calcular el volum dels cossos bàsics entenent que mesurar un volum és comptar unitats cúbiques."
         },
         {
-          "num": 10,
+          "num": 11,
           "title": "El mapa de la geometria",
           "subtitle": "Posar ordre a tot el que hem vist i decidir, davant d'un problema, quina eina fer servir."
         },
         {
-          "num": 11,
+          "num": 12,
           "title": "Fotomàtiques 3D",
           "subtitle": "Fotografiar un objecte real, modelitzar-lo geomètricament i calcular-ne una àrea i un volum."
         },
         {
-          "num": 12,
+          "num": 13,
           "title": "Projecte de maqueta a escala",
           "subtitle": "Dissenyar i construir en grup una maqueta a escala calculant-ne àrees i volums, i optimitzant el material."
+        },
+        {
+          "num": 14,
+          "title": "Repàs de l'examen de la unitat 5",
+          "subtitle": "Practicar, amb un exemple resolt per exercici, el que cal dominar abans de l'examen de la unitat."
         }
       ]
     },
@@ -266,7 +286,7 @@
         {
           "num": 3,
           "title": "Resumim la informació",
-          "subtitle": "Calcular i interpretar la mitjana, la mediana i la moda, i saber quina resumeix millor cada situació."
+          "subtitle": "Calcular i interpretar la mitjana, la mediana, la moda, els quartils i la mitjana ponderada, i saber quina mesura resumeix millor cada situació."
         },
         {
           "num": 4,
@@ -282,6 +302,11 @@
           "num": 6,
           "title": "L'estudi estadístic propi",
           "subtitle": "Presentar l'estudi del grup: dades, taules, gràfics, mesures i conclusions amb mirada crítica."
+        },
+        {
+          "num": 7,
+          "title": "Repàs de l'examen de la unitat 6",
+          "subtitle": "Practicar, amb un exemple resolt per exercici, el que cal dominar abans de l'examen de la unitat."
         }
       ]
     }

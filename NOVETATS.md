@@ -1,3 +1,41 @@
+# Novetats — 2n d'ESO revisat sencer
+
+**30/10/2026.** Les sis unitats de 2n s'han revisat una per una amb les
+Situacions d'Aprenentatge (SA1–SA6) i el Repartiment de continguts 2026–27.
+
+| Curs | Abans | Ara |
+|---|---|---|
+| 2n ESO | 6 unitats · 49 activitats | **6 unitats · 54 activitats** + document d'índex |
+
+## Què canvia
+
+- **Un repàs abans de cada prova (UD1, UD4, UD5 i UD6).** Activitat nova «Repàs
+  de l'examen de la unitat N», amb el model de la 1.8 de 1r: full de treball en
+  blanc i negre, el primer cas de cada exercici resolt com a model i graella «Què
+  he après?». Són la 1.13, la 4.10, la 5.14 i la 6.7. La UD2 i la UD3 no tenen
+  prova.
+- **Proves noves** (no es publiquen): deu preguntes d'1 punt, set germanes dels
+  exercicis del repàs i tres de més exigents.
+- **Activitat nova a la UD5:** la 5.6, «Altures i circumferència» (les tres
+  altures, el teorema de l'altura, angle central i inscrit, arc capaç i polígon
+  regular inscrit). Les activitats de la 5.7 a la 5.13 són les antigues 5.6–5.12.
+- **Sabers que hi faltaven:** veure un percentatge en una graella i a la recta
+  (2.3); patrons de figures traduïts a l'àlgebra (4.2); polígons convexos i
+  còncaus i classificació dels quadrilàters (5.1); construir un metre cúbic
+  (5.10); quartils i mitjana ponderada (6.3).
+- **Errors corregits,** entre d'altres: un canvi de moneda presentat com a actual
+  (2.3); el tipus d'IVA dels aliments (2.5); «el tempteig sempre funciona» (4.3);
+  multiplicar els dos membres per 0 (4.8); un «Caça l'error» de la mediana on
+  l'error no es veia (6.3).
+- **Sessions a totes les capçaleres** i **índex de 2n** reescrit: llista real de
+  la UD1 i hores del Repartiment al costat de les sessions del llibre (84
+  sessions).
+
+Com que cada prova és ara l'última activitat de la seva unitat, la numeració de
+2n al web ja no té forats.
+
+---
+
 # Novetats — 1r d'ESO revisat sencer
 
 **30/10/2026.** Les vuit unitats de 1r s'han revisat una per una amb les
