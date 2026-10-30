@@ -13,7 +13,6 @@
     "2eso-ud1-10.pdf",
     "2eso-ud1-11.pdf",
     "2eso-ud1-12.pdf",
-    "2eso-ud1-13.pdf",
     "2eso-ud2-1.pdf",
     "2eso-ud2-2.pdf",
     "2eso-ud2-3.pdf",
@@ -33,7 +32,6 @@
     "2eso-ud4-7.pdf",
     "2eso-ud4-8.pdf",
     "2eso-ud4-9.pdf",
-    "2eso-ud4-10.pdf",
     "2eso-ud5-1.pdf",
     "2eso-ud5-2.pdf",
     "2eso-ud5-3.pdf",
@@ -46,14 +44,12 @@
     "2eso-ud5-10.pdf",
     "2eso-ud5-11.pdf",
     "2eso-ud5-12.pdf",
-    "2eso-ud5-13.pdf",
     "2eso-ud6-1.pdf",
     "2eso-ud6-2.pdf",
     "2eso-ud6-3.pdf",
     "2eso-ud6-4.pdf",
     "2eso-ud6-5.pdf",
-    "2eso-ud6-6.pdf",
-    "2eso-ud6-7.pdf"
+    "2eso-ud6-6.pdf"
   ],
   "solucions": {
     "2eso-ud1-1.pdf": 4,
@@ -68,7 +64,6 @@
     "2eso-ud1-10.pdf": 5,
     "2eso-ud1-11.pdf": 3,
     "2eso-ud1-12.pdf": 4,
-    "2eso-ud1-13.pdf": 4,
     "2eso-ud2-1.pdf": 6,
     "2eso-ud2-2.pdf": 6,
     "2eso-ud2-3.pdf": 6,
@@ -88,7 +83,6 @@
     "2eso-ud4-7.pdf": 4,
     "2eso-ud4-8.pdf": 4,
     "2eso-ud4-9.pdf": 4,
-    "2eso-ud4-10.pdf": 3,
     "2eso-ud5-1.pdf": 4,
     "2eso-ud5-2.pdf": 5,
     "2eso-ud5-3.pdf": 4,
@@ -101,13 +95,11 @@
     "2eso-ud5-10.pdf": 3,
     "2eso-ud5-11.pdf": 3,
     "2eso-ud5-12.pdf": 3,
-    "2eso-ud5-13.pdf": 3,
     "2eso-ud6-1.pdf": 4,
     "2eso-ud6-2.pdf": 4,
     "2eso-ud6-3.pdf": 4,
     "2eso-ud6-4.pdf": 4,
     "2eso-ud6-5.pdf": 3,
-    "2eso-ud6-6.pdf": 3,
-    "2eso-ud6-7.pdf": 3
+    "2eso-ud6-6.pdf": 3
   }
 }

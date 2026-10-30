@@ -67,11 +67,6 @@
           "num": 12,
           "title": "Repte d'aplicació: el viatge de fi de curs",
           "subtitle": "Fer servir tot el que hem après de la unitat per resoldre una situació real, treballant en equip."
-        },
-        {
-          "num": 13,
-          "title": "Examen de la unitat",
-          "subtitle": "Prova individual sobre tota la unitat, seguida de l'autoavaluació amb la rúbrica."
         }
       ]
     },
@@ -185,11 +180,6 @@
           "num": 9,
           "title": "Reptes en equilibri",
           "subtitle": "Inventar, resoldre i comprovar un enigma propi, i proposar-lo als companys."
-        },
-        {
-          "num": 10,
-          "title": "Examen de la unitat",
-          "subtitle": "Prova individual sobre tota la unitat, seguida de l'autoavaluació amb la rúbrica."
         }
       ]
     },
@@ -256,11 +246,6 @@
           "num": 12,
           "title": "Projecte de maqueta a escala",
           "subtitle": "Dissenyar i construir en grup una maqueta a escala calculant-ne àrees i volums, i optimitzant el material."
-        },
-        {
-          "num": 13,
-          "title": "Examen de la unitat",
-          "subtitle": "Prova individual sobre tota la geometria de la unitat, seguida de l'autoavaluació."
         }
       ]
     },
@@ -297,11 +282,6 @@
           "num": 6,
           "title": "L'estudi estadístic propi",
           "subtitle": "Presentar l'estudi del grup: dades, taules, gràfics, mesures i conclusions amb mirada crítica."
-        },
-        {
-          "num": 7,
-          "title": "Prova de la unitat",
-          "subtitle": "Prova individual sobre tota l'estadística de la unitat, seguida de l'autoavaluació."
         }
       ]
     }

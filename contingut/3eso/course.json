@@ -42,11 +42,6 @@
           "num": 7,
           "title": "Projecte: del virus a la galàxia",
           "subtitle": "Aplicar tot el que hem après per construir una escala de l'univers, de la cosa més petita a la més gran, i comunicar-la en un pòster."
-        },
-        {
-          "num": 8,
-          "title": "Prova de la unitat",
-          "subtitle": "Demostrar de manera individual el domini de les potències, les propietats, les arrels i la notació científica."
         }
       ]
     },
@@ -93,11 +88,6 @@
           "num": 8,
           "title": "Projecte: és una qüestió de sort?",
           "subtitle": "Analitzar diversos jocs d'atzar, calcular la probabilitat de guanyar-hi i decidir, amb arguments, si són justos."
-        },
-        {
-          "num": 9,
-          "title": "Prova de la unitat",
-          "subtitle": "Demostrar de manera individual el domini del recompte, la freqüència relativa i la regla de Laplace en contextos de joc."
         }
       ]
     },
@@ -139,11 +129,6 @@
           "num": 7,
           "title": "Projecte: dossier d'agrimensura de l'institut",
           "subtitle": "Mesurar elements reals del centre: una altura inaccessible amb Tales, i l'àrea i el volum d'objectes reals, amb precisió i comprovació."
-        },
-        {
-          "num": 8,
-          "title": "Prova de la unitat",
-          "subtitle": "Demostrar de manera individual el domini de la semblança, la mesura indirecta i el càlcul d'àrees i volums."
         }
       ]
     },
@@ -180,11 +165,6 @@
           "num": 6,
           "title": "Projecte: taller de mosaics",
           "subtitle": "Recollir i classificar moviments en objectes reals i dissenyar un fris o mosaic propi component moviments."
-        },
-        {
-          "num": 7,
-          "title": "Prova de la unitat",
-          "subtitle": "Demostrar de manera individual el domini de les translacions, els girs i les simetries, també amb coordenades."
         }
       ]
     },
@@ -246,11 +226,6 @@
           "num": 11,
           "title": "Manual de fórmules i detectius de dues incògnites",
           "subtitle": "Aplicar l'aïllament de fórmules reals i la modelització amb sistemes en dos productes autèntics."
-        },
-        {
-          "num": 12,
-          "title": "Prova de la unitat",
-          "subtitle": "Demostrar de manera individual el domini de l'operatòria amb polinomis, les identitats, les equacions, els aïllaments i els sistemes."
         }
       ]
     },
@@ -302,11 +277,6 @@
           "num": 9,
           "title": "La galeria de funcions",
           "subtitle": "Agrupar i contrastar funcions segons el signe del pendent i discutir què significa cada cas en la realitat."
-        },
-        {
-          "num": 10,
-          "title": "Prova de la unitat",
-          "subtitle": "Demostrar de manera individual el domini de la modelització amb funcions afins, el pas entre representacions i la interpretació de m i n."
         }
       ]
     }

@@ -102,14 +102,18 @@ al navegador.
 
 | Curs | Unitats | Activitats |
 |---|---|---|
-| 1r ESO | 8 (UD1–UD8) | 77 + 1 document d'índex |
-| 2n ESO | 6 (UD1–UD6) | 53 + 1 document d'índex |
-| 3r ESO | 6 (UD1–UD6) | 54 + 1 document d'índex |
+| 1r ESO | 8 (UD1–UD8) | 70 + 1 document d'índex |
+| 2n ESO | 6 (UD1–UD6) | 49 + 1 document d'índex |
+| 3r ESO | 6 (UD1–UD6) | 48 + 1 document d'índex |
 | 4t ESO · Acadèmiques | 10 (UD1–UD10) | 67 + 1 document d'índex |
 | 4t ESO · Aplicades | 11 (UD1–UD11) | 72 + 1 document d'índex |
 
 `sync.py` no inclou al manifest ni a `course.json` cap activitat que no tingui PDF
 compilat.
+
+Les **proves escrites** de les unitats no es publiquen a cap curs: el `.tex` no
+porta `\horatitol` i `sync.py` se les salta (decisió del professor, 30/10/2026).
+Per això la numeració d'activitats d'una unitat pot tenir un forat al web.
 
 ## Origen del contingut i com regenerar-lo
 

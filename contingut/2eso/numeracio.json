@@ -10,7 +10,6 @@
  "1.10": {"fi": 131, "q": 0, "e_fi": 12, "llistes": 120, "x": 0, "inici": 119, "e_inici": 9},
  "1.11": {"fi": 137, "q": 0, "e_fi": 13, "llistes": 131, "x": 0, "inici": 131, "e_inici": 12},
  "1.12": {"fi": 147, "q": 0, "e_fi": 13, "llistes": 137, "x": 0, "inici": 137, "e_inici": 13},
- "1.13": {"fi": 147, "q": 23, "e_fi": 13, "llistes": 147, "x": 0, "inici": 147, "e_inici": 13},
  "2.1": {"fi": 11, "q": 0, "e_fi": 2, "llistes": 2, "x": 0, "inici": 0, "e_inici": 0},
  "2.2": {"fi": 24, "q": 0, "e_fi": 4, "llistes": 14, "x": 0, "inici": 11, "e_inici": 2},
  "2.3": {"fi": 38, "q": 0, "e_fi": 6, "llistes": 27, "x": 0, "inici": 24, "e_inici": 4},
@@ -30,7 +29,6 @@
  "4.7": {"fi": 70, "q": 0, "e_fi": 5, "llistes": 61, "x": 0, "inici": 59, "e_inici": 5},
  "4.8": {"fi": 78, "q": 0, "e_fi": 5, "llistes": 70, "x": 0, "inici": 70, "e_inici": 5},
  "4.9": {"fi": 85, "q": 0, "e_fi": 6, "llistes": 78, "x": 0, "inici": 78, "e_inici": 5},
- "4.10": {"fi": 85, "q": 20, "e_fi": 6, "llistes": 85, "x": 1, "inici": 85, "e_inici": 6},
  "5.1": {"fi": 7, "q": 0, "e_fi": 1, "llistes": 0, "x": 0, "inici": 0, "e_inici": 0},
  "5.2": {"fi": 19, "q": 0, "e_fi": 3, "llistes": 9, "x": 0, "inici": 7, "e_inici": 1},
  "5.3": {"fi": 29, "q": 0, "e_fi": 5, "llistes": 20, "x": 0, "inici": 19, "e_inici": 3},
@@ -43,11 +41,9 @@
  "5.10": {"fi": 101, "q": 0, "e_fi": 6, "llistes": 94, "x": 0, "inici": 94, "e_inici": 6},
  "5.11": {"fi": 109, "q": 0, "e_fi": 6, "llistes": 102, "x": 0, "inici": 101, "e_inici": 6},
  "5.12": {"fi": 118, "q": 0, "e_fi": 6, "llistes": 110, "x": 0, "inici": 109, "e_inici": 6},
- "5.13": {"fi": 118, "q": 21, "e_fi": 6, "llistes": 118, "x": 0, "inici": 118, "e_inici": 6},
  "6.1": {"fi": 6, "q": 0, "e_fi": 1, "llistes": 0, "x": 0, "inici": 0, "e_inici": 0},
  "6.2": {"fi": 15, "q": 0, "e_fi": 1, "llistes": 7, "x": 0, "inici": 6, "e_inici": 1},
  "6.3": {"fi": 25, "q": 0, "e_fi": 2, "llistes": 16, "x": 0, "inici": 15, "e_inici": 1},
  "6.4": {"fi": 33, "q": 0, "e_fi": 2, "llistes": 25, "x": 0, "inici": 25, "e_inici": 2},
  "6.5": {"fi": 39, "q": 0, "e_fi": 2, "llistes": 33, "x": 0, "inici": 33, "e_inici": 2},
- "6.6": {"fi": 46, "q": 0, "e_fi": 2, "llistes": 39, "x": 0, "inici": 39, "e_inici": 2},
- "6.7": {"fi": 46, "q": 19, "e_fi": 2, "llistes": 46, "x": 0, "inici": 46, "e_inici": 2}}
+ "6.6": {"fi": 46, "q": 0, "e_fi": 2, "llistes": 39, "x": 0, "inici": 39, "e_inici": 2}}

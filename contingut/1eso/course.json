@@ -45,8 +45,8 @@
         },
         {
           "num": 8,
-          "title": "Examen de la unitat",
-          "subtitle": "Demostrar, de manera individual, que dominem els nombres naturals i les operacions de la unitat."
+          "title": "Repàs de l'examen de la unitat 1",
+          "subtitle": "Practicar, amb un exemple resolt per exercici, el que cal dominar abans de l'examen de la unitat."
         }
       ]
     },
@@ -98,11 +98,6 @@
           "num": 9,
           "title": "El projecte final: caçadors de patrons",
           "subtitle": "Fer servir tot el que hem après de la unitat per estudiar patrons i les seves connexions, treballant en equip."
-        },
-        {
-          "num": 10,
-          "title": "Examen de la unitat",
-          "subtitle": "Demostrar, de manera individual, que dominem la divisibilitat, la factorització, el MCD i el mcm."
         }
       ]
     },
@@ -154,11 +149,6 @@
           "num": 9,
           "title": "Com és de gran Gaza?",
           "subtitle": "Aplicar el mètode de mesura d'àrees per calcular la superfície de Gaza i entendre què signifiquen aquestes xifres."
-        },
-        {
-          "num": 10,
-          "title": "Activitat avaluativa individual",
-          "subtitle": "Demostrar, de manera individual, que dominem les fraccions i el càlcul d'àrees."
         },
         {
           "num": 11,
@@ -220,11 +210,6 @@
           "num": 10,
           "title": "Projecte final: quin percentatge ocupa?",
           "subtitle": "Aplicar tot el que hem après per calcular quina part d'una foto ocupa un objecte que triïs tu."
-        },
-        {
-          "num": 11,
-          "title": "Avaluació individual i autoavaluació",
-          "subtitle": "Demostrar de manera individual que dominem les operacions amb fraccions i els percentatges, i reflexionar sobre el projecte."
         }
       ]
     },
@@ -266,11 +251,6 @@
           "num": 7,
           "title": "Projecte: quantes rajoles per a l'aula?",
           "subtitle": "Aplicar tot el bloc numèric per resoldre un problema real de mesura, triant la representació adequada i aproximant amb criteri."
-        },
-        {
-          "num": 8,
-          "title": "Examen de la unitat",
-          "subtitle": "Demostrar, de manera individual, que dominem els decimals, el pas de fracció a decimal i l'arrel quadrada."
         }
       ]
     },
@@ -322,11 +302,6 @@
           "num": 9,
           "title": "Presentem les Fotomàtiques",
           "subtitle": "Presentar el dossier de fotomàtiques a la classe i valorar la feina dels companys amb criteris justos."
-        },
-        {
-          "num": 10,
-          "title": "Examen i reflexió",
-          "subtitle": "Demostrar de manera individual que dominem la geometria plana bàsica, i reflexionar sobre el que hem après."
         }
       ]
     },
@@ -383,11 +358,6 @@
           "num": 10,
           "title": "Projecte: mesurem el pati",
           "subtitle": "Mesurar un espai real en equip, dibuixar-lo a escala i calcular-ne el perímetre i l'àrea amb criteri."
-        },
-        {
-          "num": 11,
-          "title": "Examen de la unitat",
-          "subtitle": "Demostrar, de manera individual, que dominem les unitats, les escales, els perímetres i les àrees."
         }
       ]
     },

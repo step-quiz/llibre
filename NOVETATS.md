@@ -1,3 +1,21 @@
+# Novetats — Les proves escrites ja no es publiquen
+
+**30/10/2026.** Les proves escrites de les unitats de 1r, 2n i 3r d'ESO eren al
+web, i el botó **SOL** en mostrava les solucions. Ara no es publiquen enlloc, com
+ja passava a 4t:
+
+| Curs | Proves retirades | Activitats publicades |
+|---|---|---|
+| 1r ESO | 7 (una per unitat, de la UD1 a la UD7) | 76 → 70 |
+| 2n ESO | 4 (UD1, UD4, UD5 i UD6) | 53 → 49 |
+| 3r ESO | 6 (una per unitat) | 54 → 48 |
+
+A 1r, a més, la UD1 queda com a l'Overleaf: l'activitat 8 és ara el **«Repàs de
+l'examen de la unitat 1»** (full de treball amb espai per escriure i graella
+«Què he après?»); abans hi havia l'examen.
+
+---
+
 # Novetats — 4t d'ESO Acadèmiques revisat
 
 Aquesta entrega **només toca 4t Acadèmiques** (`contingut/4eso/`). Els altres
