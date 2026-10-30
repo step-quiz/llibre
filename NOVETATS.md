@@ -1,3 +1,39 @@
+# Novetats — 1r d'ESO revisat sencer
+
+**30/10/2026.** Les vuit unitats de 1r s'han revisat una per una amb les
+Situacions d'Aprenentatge (SA1–SA7) i el Repartiment de continguts 2026–27.
+
+| Curs | Abans | Ara |
+|---|---|---|
+| 1r ESO | 8 unitats · 70 activitats | **8 unitats · 76 activitats** + document d'índex |
+
+## Què canvia
+
+- **Un repàs abans de cada prova (UD2–UD7).** Activitat nova «Repàs de l'examen
+  de la unitat N», amb el model de la 1.8: full de treball en blanc i negre, el
+  primer cas de cada exercici resolt com a model i graella «Què he après?». Són la
+  2.10, la 3.10, la 4.11, la 5.8, la 6.10 i la 7.11. La UD3 recupera la
+  coavaluació (3.11). La UD8 no té prova.
+- **Proves noves** (no es publiquen): deu preguntes d'1 punt, set germanes dels
+  exercicis del repàs i tres de més exigents.
+- **Sabers que hi faltaven:** fracció pròpia i impròpia (3.2); decimal → fracció
+  i arrel per defecte i per excés (5.4, 5.5); vocabulari de la circumferència,
+  angles convexos i còncaus, angles de dues rectes secants i els 360° del
+  quadrilàter (UD6); visualitzar el metre quadrat (7.3); Fibonacci i la proporció
+  àuria (8.2); traduir edats i perímetres al llenguatge algebraic (8.3); patrons a
+  partir d'un gràfic (8.5); glossari de traducció al dossier (8.7).
+- **Errors corregits,** entre d'altres: al gràfic del trajecte de la Marta (8.5)
+  el tram «més ràpid» pujava menys dret; a la 7.10, una regla d'arrodoniment deia
+  el contrari del que tocava; a la 1.8, una fila de la taula de potències
+  (3·3·3 = 81, quan havia de ser 3·3·3·3); dades de població actualitzades a la 3.9.
+- **Índex de 1r** reescrit: hores del Repartiment al costat de les sessions del
+  llibre (98 sessions).
+
+Com que cada prova és ara l'última activitat de la seva unitat, la numeració de
+1r al web ja no té forats.
+
+---
+
 # Novetats — Les proves escrites ja no es publiquen
 
 **30/10/2026.** Les proves escrites de les unitats de 1r, 2n i 3r d'ESO eren al
